@@ -36,9 +36,10 @@ function Footer() {
         <div className="footer-column">
           <h2>Company</h2>
           <p>About</p>
-          <p>Press</p>
+          <p>Solution</p>
           <p>Events</p>
           <p>Careers</p>
+          <p>Contact Us</p>
         </div>
       </div>
       <hr />
