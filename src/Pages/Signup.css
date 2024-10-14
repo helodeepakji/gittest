@@ -1,0 +1,121 @@
+body {
+    background-color: #f0f0f0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin:0;
+    padding: 0;
+}
+.signup-container {
+    background-color: white;
+    margin: 60px 0px 0px 500px ;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+    max-width: 500px;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.signup-container img{
+    margin-top: -84px;
+}
+.logo-container {
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.logo {
+    max-width: 100px;
+    height: auto;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+  
+}
+
+.input-group {
+   display: flex;
+    position: relative;
+    margin-bottom: 20px;
+    margin-top: 23px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #666;
+}
+
+.input-group input, select {
+    width: 90%;
+    padding: 7px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.radio-group {
+    margin-bottom: 20px;
+}
+
+.radio-group input[type="radio"] {
+    margin-right: 10px;
+}
+
+.remember-me {
+    margin-top: 20px;
+}
+
+button {
+    text-align: center;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 90px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-right: 10px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+.text span{
+    color: aqua;
+}
+
+#myInput {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #000000;
+  padding: 5px;
+  width: 100%;
+}
+
+.laststep{
+    display: flex;
+    align-items: center;
+   
+    justify-content: space-between;
+}
+.privcy span{
+    color: aqua;
+}
+.rightlaststep a{
+    color: aqua;
+}
+.button{
+    text-align: center;
+    margin-top: 20px;
+}
+.button p span{
+color: aqua;
+}
