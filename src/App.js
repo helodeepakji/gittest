@@ -8,17 +8,15 @@ import Footer from './layouts/Footer';
 
 function App() {
   return (
-    <div>
+    <Router>
       <Header />
-      <Router>
-        <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='/login' element={<Login />} />
-          <Route path='/signup' element={<Signup />} />
-        </Routes>
-      </Router>
+      <Routes>
+        <Route path='/' element={<Home />} />
+        <Route path='/login' element={<Login />} />
+        <Route path='/signup' element={<Signup />} />
+      </Routes>
       <Footer />
-    </div>
+    </Router>
   );
 }
 
