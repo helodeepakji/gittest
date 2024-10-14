@@ -14,7 +14,7 @@ function Header() {
           <li><Link to="/about">About Us</Link></li>
           <li><Link to="/solutions">Solutions</Link></li>
           <li><Link to="/pricing">Pricing</Link></li>
-          <li><Link to="/contact">Contact Us</Link></li>
+          <li><Link to="/Contactpage">Contact Us</Link></li>
         </ul>
         <div className="navbar-buttons">
           <Link to="/login">Log In</Link>

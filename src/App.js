@@ -5,6 +5,7 @@ import Login from './Pages/Login';
 import Signup from './Pages/Signup';
 import Header from './layouts/Header';
 import Footer from './layouts/Footer';
+import Contactpage from './layouts/Contactpage';
 
 function App() {
   return (
@@ -14,7 +15,12 @@ function App() {
         <Route path='/' element={<Home />} />
         <Route path='/login' element={<Login />} />
         <Route path='/signup' element={<Signup />} />
+        <Route path='/Contactpage' element={<Contactpage/>}/>
+        
+      
+      
       </Routes>
+    
       <Footer />
     </Router>
   );
