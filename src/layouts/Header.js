@@ -1,28 +1,38 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import './Header.css';
-import Logo from "../images/image.png";
 
-function Header() {
+const Header = () => {
   return (
-    <header>
-      <nav className="navbar">
-        <div className="navbar-logo">
-          <img src={Logo} alt="logo" />
+    <nav className="navbar bg-dark text-white p-3 rounded-3xl mx-5 mt-4">
+      <div className="container d-flex justify-content-between">
+       
+        <div className="navbar-brand">LOGO</div>
+
+        
+        <div className="d-flex justify-content-center gap-5">
+          <ul className="navbar-nav d-flex flex-row gap-5">
+            <li className="nav-item">
+              <a href="#" className="nav-link text-white">About Us</a>
+            </li>
+            <li className="nav-item">
+              <a href="#" className="nav-link text-white">Solution</a>
+            </li>
+            <li className="nav-item">
+              <a href="#" className="nav-link text-white">Pricing</a>
+            </li>
+            <li className="nav-item">
+              <a href="#" className="nav-link text-white">Contact Us</a>
+            </li>
+          </ul>
         </div>
-        <ul className="navbar-menu">
-          <li><Link to="/about">About Us</Link></li>
-          <li><Link to="/solutions">Solutions</Link></li>
-          <li><Link to="/pricing">Pricing</Link></li>
-          <li><Link to="/Contactpage">Contact Us</Link></li>
-        </ul>
-        <div className="navbar-buttons">
-          <Link to="/login">Log In</Link>
-          <Link to="/signup" className="join-now">Join Now</Link>
+
+        
+        <div className="d-flex gap-4">
+          <a href="#" className="text-white align-self-center">Login</a>
+          <a href="#" className="btn btn-info text-white px-3xl">Join Now</a>
         </div>
-      </nav>
-    </header>
+      </div>
+    </nav>
   );
-}
+};
 
 export default Header;
