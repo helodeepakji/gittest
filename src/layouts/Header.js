@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
   return (
@@ -11,7 +12,7 @@ const Header = () => {
         <div className="d-flex justify-content-center gap-5">
           <ul className="navbar-nav d-flex flex-row gap-5">
             <li className="nav-item">
-              <a href="#" className="nav-link text-white">About Us</a>
+              <Link to="/" className="nav-link text-white">About Us</Link>
             </li>
             <li className="nav-item">
               <a href="#" className="nav-link text-white">Solution</a>
@@ -20,15 +21,15 @@ const Header = () => {
               <a href="#" className="nav-link text-white">Pricing</a>
             </li>
             <li className="nav-item">
-              <a href="#" className="nav-link text-white">Contact Us</a>
+              <Link to="/contact" className="nav-link text-white">Contact Us</Link>
             </li>
           </ul>
         </div>
 
         
         <div className="d-flex gap-4">
-          <a href="#" className="text-white align-self-center">Login</a>
-          <a href="#" className="btn btn-info text-white px-3xl">Join Now</a>
+          <Link to="/login" className="text-white align-self-center">Login</Link>
+          <Link to="/signup" className="btn btn-info text-white px-3xl">Join Now</Link>
         </div>
       </div>
     </nav>
