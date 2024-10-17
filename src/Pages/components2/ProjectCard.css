@@ -1,0 +1,94 @@
+.project-card0 {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 15px;
+    max-width: 600px;
+    margin: auto;
+    box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.1);
+  }
+  .project-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 15px auto;
+  }
+  .profile-info {
+    display: flex;
+    align-items: center;
+  }
+  .profile-info img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin: auto 15px;
+  }
+  .profile-details {
+    font-size: 14px;
+  }
+  .profile-details .name {
+    font-weight: bold;
+    font-size: 16px;
+  }
+  .action-buttons {
+    display: flex;
+    gap: 10px;
+  }
+  .action-buttons .button {
+    padding: 8px 15px;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  .submit-button {
+    background-color: #0b9896;
+    color: white;
+    border: none;
+  }
+  .view-button {
+    background-color: #f0f0f0;
+    color: #333;
+    padding: 8px 15px;
+    font-size: 14px;
+    border: 2px solid #458382;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  .view-button:hover {
+    background-color: #00998f;
+  }
+  
+  .project-description {
+    margin: 15px 0;
+    font-size: 15px;
+    color: #444;
+  }
+  .project-image {
+    width: 100%;
+    border-radius: 5px;
+    box-shadow: 0 30px 30px rgba(0, 0, 0, 0.1);
+    margin: 15px auto;
+  }
+  .engagement {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    color: #777;
+  }
+  .engagement .like,
+  .engagement .comment,
+  .engagement .share .engagement .save {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .engagement img {
+    width: 18px;
+    height: 18px;
+  }
+  .join {
+    color: #458382;
+    text-decoration: none;
+    float: right;
+  }

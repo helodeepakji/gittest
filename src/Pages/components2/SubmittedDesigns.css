@@ -1,0 +1,80 @@
+.submitted-designs {
+    width: 25%;
+    margin: 50px auto;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 15px;
+  }
+  
+  .submitted-designs h2 {
+    font-size: 20px;
+    font-weight: 600;
+    margin: 15px aut0;
+    color: #333;
+  }
+  
+  .design-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  
+  .design-card:last-child {
+    border-bottom: none;
+  }
+  
+  .design-info {
+    display: flex;
+    align-items: center;
+    height: 80px;
+  }
+  
+  .design-info img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin: auto 15px;
+  }
+  
+  .design-details {
+    font-size: 12px;
+  }
+  .desc {
+    margin-top: 5px;
+  }
+  .design-details .name {
+    font-weight: bold;
+    font-size: 14px;
+  }
+  
+  .view-button1 {
+    background-color: #f0f0f0;
+    color: #333;
+    padding: 8px 15px;
+    font-size: 14px;
+    border: 2px solid #458382;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  .view-button1:hover {
+    background-color: #00998f;
+  }
+  
+  .view-all-link {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 14px;
+  }
+  
+  .view-all-link a {
+    color: #00998f;
+    text-decoration: none;
+    font-weight: 500;
+  }
+  
+  .view-all-link a:hover {
+    text-decoration: underline;
+  }
