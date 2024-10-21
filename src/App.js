@@ -7,6 +7,7 @@ import Header from './layouts/Header';
 import Footer from './layouts/Footer';
 import Contactpage from './layouts/Contactpage';
 import Designerpage from "./Pages/components2/Designerpage"
+import Wallet from './layouts/Wallet';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path='/signup' element={<Signup />} />
         <Route path='/contact' element={<Contactpage/>}/>
         <Route path='/design' element={<Designerpage/>}/>
+        <Route path ='/wallet' element={<Wallet/>}/>
       </Routes>
     
       <Footer />
