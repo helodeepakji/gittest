@@ -1,12 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./Header.css";
+import logo from '../images/image.png';
 
 const Header = () => {
   return (
     <nav className="navbar bg-dark text-white p-3 rounded-3xl mx-5 mt-4">
       <div className="container d-flex justify-content-between">
-        <div className="navbar-brand">LOGO</div>
+        <div className="navbar-brand"><img src={logo}/></div>
 
         <div className="d-flex justify-content-center gap-5">
           <ul className="navbar-nav d-flex flex-row gap-5">
