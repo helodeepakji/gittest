@@ -1,0 +1,117 @@
+.project-card-new0 {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 15px;
+  max-width: 600px;
+  margin: auto;
+}
+
+.message-container-new {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.profile-container-new {
+  position: relative;
+  width: 70px;
+  height: 70px;
+}
+
+.profile-pic-new {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.camera-icon-new {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  width: 25px;
+  height: 25px;
+  background-color: black;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.camera-icon-new img {
+  width: 15px;
+  height: 15px;
+}
+
+.message-text-new {
+  font-size: 15px;
+  color: #333;
+}
+
+.project-header-new {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 15px auto;
+}
+
+.profile-info-new {
+  display: flex;
+  align-items: center;
+}
+
+.profile-info-new img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin: auto 15px;
+}
+
+.profile-details-new {
+  font-size: 14px;
+}
+
+.profile-details-new .name-new {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.project-description-new {
+  margin: 15px 0;
+  font-size: 15px;
+  color: #444;
+}
+
+.project-image-new {
+  width: 100%;
+  border-radius: 5px;
+  box-shadow: 0 30px 30px rgba(0, 0, 0, 0.1);
+  margin: 15px auto;
+}
+
+.engagement-new {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  color: #777;
+}
+
+.engagement-new .like-new,
+.engagement-new .comment-new,
+.engagement-new .share-new,
+.engagement-new .save-new {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.engagement-new img {
+  width: 18px;
+  height: 18px;
+}
+
+.join-new {
+  color: #458382;
+  text-decoration: none;
+  float: right;
+}

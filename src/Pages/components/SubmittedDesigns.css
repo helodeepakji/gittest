@@ -1,0 +1,82 @@
+.submitted-designs-alt {
+  width: 40%;
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 15px;
+}
+
+.submitted-designs-alt h2 {
+  font-size: 20px;
+  font-weight: 600;
+  margin: 15px auto;
+  color: #333;
+}
+
+.design-card-alt {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.design-card-alt:last-child {
+  border-bottom: none;
+}
+
+.design-info-alt {
+  display: flex;
+  align-items: center;
+  height: 80px;
+}
+
+.design-info-alt img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin: auto 15px;
+}
+
+.design-details-alt {
+  font-size: 12px;
+}
+
+.desc-alt {
+  margin-top: 5px;
+}
+
+.design-details-alt .name-alt {
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.view-button-alt {
+  background-color: #f0f0f0;
+  color: #333;
+  padding: 8px 15px;
+  font-size: 14px;
+  border: 2px solid #458382;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.view-button-alt:hover {
+  background-color: #00998f;
+}
+
+.view-all-link-alt {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 14px;
+}
+
+.view-all-link-alt a {
+  color: #00998f;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.view-all-link-alt a:hover {
+  text-decoration: underline;
+}
