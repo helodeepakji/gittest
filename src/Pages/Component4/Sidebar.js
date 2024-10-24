@@ -43,7 +43,7 @@ function Sidebar() {
               <img src={Groupone} alt='group-one'/>
             </div> */}
       <div className="group">
-        <img src={Group} style={{ marginTop: '500px' }} alt="Group" />
+        <img src={Group} style={{ marginTop: '400px' }} alt="Group" />
       </div>
     </div>
   );

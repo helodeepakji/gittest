@@ -1,6 +1,7 @@
 * {
   margin: 0px;
   padding: 0px;
+  box-sizing: border-box;
 }
 .main-div {
   width: 100%;
@@ -25,7 +26,6 @@ h1 {
   font-family: Poppins;
   font-size: 27px;
   font-weight: 600;
-  line-height: 36px;
   text-align: left;
   padding-left: 55px;
 }
@@ -43,8 +43,8 @@ hr {
   box-shadow: 5px 6px 17px 0px #5c5c5c1a;
   justify-self: center;
   background-color: #ffffff;
+  line-height: 0;
 }
-
 .card-img {
   width: 50%;
   /* border: 2px solid green; */
@@ -53,62 +53,60 @@ hr {
   width: 90%;
   /* border: 2px solid green; */
   border-radius: 10px;
-  margin: 20px;
+  margin: 15px;
 }
 .card-details {
   /* float: right; */
   width: 50%;
-  padding: 30px;
-
-  /* border: 2px solid red; */
 }
 .card-details > h4 {
   font-family: Roboto;
   font-size: 18px;
   font-weight: 600;
-  line-height: 23.44px;
 }
 .card-details > p {
+  font-family: Roboto;
   font-weight: 400;
   color: #1d1d1dd1;
+  line-height: 0.5;
 }
 .card-details > h5 {
   font-family: Roboto;
   font-size: 24px;
   font-weight: 600;
-  line-height: 28.13px;
   text-align: left;
-  margin-top: 10px;
 }
-button {
+.button {
+  width: 70%;
   display: flex;
-  gap: 5px;
   border: none;
   background-color: white;
   cursor: pointer;
 }
 .btn1 {
+  width: 50%;
+  padding: 18px 0;
   background-color: #248f98;
   color: white;
-  font-weight: 600;
+  font-weight: 500;
   border-radius: 5px;
   border: none;
   box-shadow: 2px 3px 7px 0px #3a74721a;
-  
 }
 
 .btn2 {
+  width: 50%;
   background-color: white;
   color: #248f98;
-  font-weight: 600;
+  font-weight: 500;
   border-radius: 5px;
   border: 1px solid #248f98;
   box-shadow: 2px 3px 7px 0px #357a781a;
 }
-.card-ryt-icon{
+/* .card-ryt-icon{
   margin-bottom:  220px;
   margin-right:  80px;
-}
+} */
 h2 {
   color: #248f98;
 }
