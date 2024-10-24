@@ -10,7 +10,8 @@ import Contactpage from './layouts/Contactpage';
 import Designerpage from "./Pages/components2/Designerpage"
 import Wallet from './layouts/Wallet';
 import Bussiness from './Pages/components/Bussiness'
-import Business from './Pages/components3/Business'
+import Buisness from './Pages/components3/Buisness';
+
 
 function App() {
   return (
@@ -26,7 +27,7 @@ function App() {
         <Route path='/design' element={<Designerpage/>}/>
         <Route path ='/wallet' element={<Wallet/>}/>
         <Route path ='/bussiness' element={<Bussiness/>}/>
-        <Route path ='/business' element={<Business/>}/>
+        <Route path ='/business' element={<Buisness/>}/>
   
      
       </Routes>
