@@ -1,10 +1,10 @@
 import React from 'react';
 import './Sidebar.css';
-import Project from "./image/project.png"
-import Transactions from "./image/transactions.png"
-import Completed from "./image/completed.png"
-import Messaging from "./image/messaging.png"
-import Wallet from "./image/wallet.jpg"
+import Graph from "./image/Graph.png"
+import Activity from "./image/Activity.png"
+import Chart from "./image/Chart.png"
+import Category from "./image/Category.png"
+import Discovery from "./image/Discovery.png"
 import Experience from "./image/experience-1.jpg"
 import Profile from "./image/profile-picture.webp"
 import Group from "./image/Group.png"
@@ -13,23 +13,23 @@ function Sidebar() {
   return (
     <div className="sidebar">
       <div className="sidebar-item">
-        <img src={Project} alt="Projects Icon" className="sidebar-item-icon" />
+        <img src={Graph} alt="Projects Icon" className="sidebar-item-icon" />
         <span className="sidebar-item-text">Projects</span>
       </div>
       <div className="sidebar-item">
-        <img src={Transactions} alt="Transactions Icon" className="sidebar-item-icon" />
+        <img src={Activity} alt="Transactions Icon" className="sidebar-item-icon" />
         <span className="sidebar-item-text">Transactions</span>
       </div>
       <div className="sidebar-item">
-        <img src={Completed} alt="Completed Designs Icon" className="sidebar-item-icon" />
+        <img src={Chart} alt="Completed Designs Icon" className="sidebar-item-icon" />
         <span className="sidebar-item-text">Completed Designs</span>
       </div>
       <div className="sidebar-item">
-        <img src={Messaging} alt="Messaging Icon" className="sidebar-item-icon" />
+        <img src={Category} alt="Messaging Icon" className="sidebar-item-icon" />
         <span className="sidebar-item-text">Messaging</span>
       </div>
       <div className="sidebar-item">
-        <img src={Wallet} alt="Wallet Icon" className="sidebar-item-icon" />
+        <img src={Discovery} alt="Wallet Icon" className="sidebar-item-icon" />
         <span className="sidebar-item-text">Wallet</span>
       </div>
       <div className="image">
@@ -41,7 +41,7 @@ function Sidebar() {
         <button className="profile-button">Designer's Profile</button>
       </div>
       <div className="group">
-        <img src={Group} style={{ marginTop: '600px' }} alt="Group" />
+        <img src={Group} style={{ marginTop: ' 600px' }} alt="Group" />
       </div>
     </div>
   );
