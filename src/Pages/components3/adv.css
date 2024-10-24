@@ -1,0 +1,31 @@
+
+  .scard{
+    align-items: center;
+    background-color: #248F98;
+    height: 18vh;
+  }
+
+  .scard-line{
+    margin-right: 4px;
+  }
+  
+  .round{
+    border-radius: 15px;
+  }
+
+  .head{
+    font-size: 48px;
+    margin-bottom: 10px;
+    font-weight: 700;
+  }
+  
+  .lead{
+    font-weight: 400;
+    font-size: 16px;
+    width: 65vh;
+  }
+
+  .order{
+    font-size: 35px;
+    font-weight: 600;
+}
