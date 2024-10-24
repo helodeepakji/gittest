@@ -7,11 +7,13 @@ import Comment from "./image/comment.png"
 import Share from "./image/share.png"
 import Save from "./image/save.png"
 import Sensory from "./image/sensory.jpg"
+import Group1 from "./image/Group (1).png"
 
 const ProjectCard = () => {
   return (
     <div class="project-card0">
       <div class="project-card">
+      <img src={Group1} alt='Group1 png' />
         <h3>
           Ready to create amazing designs ? Check out the latest project and
           start earing today.

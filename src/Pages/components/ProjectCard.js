@@ -14,6 +14,7 @@ import Post from "./images/post.png"
 import Camera from "./images/camera.png"
 
 
+
 const ProjectCard = () => {
   return (
     <div class="project-card-new0">
@@ -31,12 +32,12 @@ const ProjectCard = () => {
         </div>
       </div>
   
-      <br />
+      
       <hr />
-      <br />
+      
       <div class="engagement-new">
-        <div class="like-new">
-          <img src={Photo} alt="Comment Icon" /> <span>Photo</span>
+      <div class="like-new">
+          <img src={Photo} alt="Comment Icon" />  <span>Photo</span>
         </div>
         <div class="comment-new">
           <img src={Video} alt="Comment Icon" /> <span>Video</span>
@@ -46,13 +47,13 @@ const ProjectCard = () => {
         </div>
         <div class="save-new">
           <img src={Post} alt="Save Icon" /> <span>Write a post</span>
-        </div>
+        </div> 
+       
       </div>
   
       <br />
       <h3>Posted Project</h3>
-      <br />
-  
+     <br />  
       <div class="project-header-new">
         <div class="profile-info-new">
           <img src={Profile} alt="Profile Picture" />
