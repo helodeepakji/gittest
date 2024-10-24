@@ -10,7 +10,7 @@ import Contactpage from './layouts/Contactpage';
 import Designerpage from "./Pages/components2/Designerpage"
 import Wallet from './layouts/Wallet';
 import Bussiness from './Pages/components/Bussiness'
-import Buisness from './Pages/components3/Buisness';
+import Adv from './Pages/components3/Adv';
 
 
 function App() {
@@ -27,7 +27,7 @@ function App() {
         <Route path='/design' element={<Designerpage/>}/>
         <Route path ='/wallet' element={<Wallet/>}/>
         <Route path ='/bussiness' element={<Bussiness/>}/>
-        <Route path ='/business' element={<Buisness/>}/>
+        <Route path ='/adv' element={<Adv/>}/>
   
      
       </Routes>

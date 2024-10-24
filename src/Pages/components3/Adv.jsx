@@ -1,8 +1,8 @@
 import React from 'react';
-import './business.css'; 
+import './adv.css'; 
 
 
-const Buisness = () => {
+const Adv = () => {
     return (
         <div className="container mt-5 w-2/3 text-white">
           {/* Header Section */}
@@ -88,5 +88,5 @@ const Buisness = () => {
       );
 };
 
-export default Buisness;
+export default Adv;
 
