@@ -9,6 +9,7 @@ import Footer from './layouts/Footer';
 import Contactpage from './layouts/Contactpage';
 import Designerpage from "./Pages/components2/Designerpage"
 import Wallet from './layouts/Wallet';
+import Bussiness from './Pages/components/Bussiness'
 
 function App() {
   return (
@@ -23,6 +24,8 @@ function App() {
         <Route path='/contact' element={<Contactpage/>}/>
         <Route path='/design' element={<Designerpage/>}/>
         <Route path ='/wallet' element={<Wallet/>}/>
+        <Route path ='/bussiness' element={<Bussiness/>}/>
+     
       </Routes>
     
       <Footer />

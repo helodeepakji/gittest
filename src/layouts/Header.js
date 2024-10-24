@@ -17,12 +17,12 @@ const Header = () => {
               </Link>
             </li>
             <li className="nav-item">
-              <a href="#" className="nav-link text-white">
-                Solution
-              </a>
+              <Link to="/bussiness" className="nav-link text-white">
+                Bussiness Page
+              </Link>
             </li>
             <li className="nav-item">
-              <Link to="design" className="nav-link text-white">
+              <Link to="/design" className="nav-link text-white">
                 Designer Page
               </Link>
             </li>
