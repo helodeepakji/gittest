@@ -1,0 +1,349 @@
+
+   
+ .container{
+          width: 100%;
+          height: 100%;
+          /* box-sizing: border-box; */
+      }
+      .proceed_section .sec-1{
+          width: 100%;
+          height: fit-content;
+      
+      }
+      navbar{
+          display: flex;
+          justify-content: center;
+          align-items: center;
+         
+      }
+      navbar a{
+          color: white;
+          text-decoration: none;
+      }
+      navbar a:hover{
+        text-decoration: underline;
+        text-underline-offset: 10px;
+      }
+      .proceed_section .sec-1 ul{
+          width: 48%;
+          background-color: black;
+          border-radius: 10px;
+          display: flex;  
+      }
+      .proceed_section .sec-1 ul li{
+          
+          list-style-type: none;
+          padding: 30px 0 0 20px;
+          color: aliceblue;
+      }
+      /* ADJERRY SVG LOGO 1 */
+      .proceed_section .logo{
+      width: 94px;
+      height: 90px;
+      margin: -10px 0 -10px -30px;
+      }
+      .proceed_section .sec-1 ul li:nth-child(2){
+          padding-left: 50px;
+      }
+      
+      .proceed_section .sec-1 ul li:nth-child(6){
+          margin-left: 130px;
+      }
+      .proceed_section .sec-1 ul li button{
+          width: 80px;
+          height: 30px;
+          border-radius: 10px;
+          background-color: lightskyblue;
+          color: black;
+          border: none;   
+          margin: -20px 0 0 0;
+          cursor: pointer;
+         transition-duration: 0.proceed_section .3s;
+         transition-timing-function: ease-out;
+      }
+      .proceed_section .sec-1 .proceed_section .button:hover{
+          transform: scale(1.proceed_section .2);
+          background-color: yellow;
+          color: black;
+      }
+      
+      .proceed_section .sec-1 i{
+          font-size: 50px;
+          color: #1EBEC4;
+          margin: 30px 0 0 0;
+      }
+      .proceed_section .sec-1 i:nth-child(2){
+          margin: 0 0 0 700px;
+      }
+      .proceed_section .sec-1 h1{
+          text-align: center;
+          font-size: 30px;
+         
+      }
+      
+      .proceed_section .span{
+          color: #1EBEC4;
+      }
+      
+      .proceed_section .sec-2{
+          width: 100%;
+          height: fit-content;
+          display: flex;
+          margin: 20px 0 0 0;
+          justify-content: space-evenly;
+          /* cursor: pointer; */
+         
+      }
+      
+      
+      .proceed_section .sec-2 li{
+          text-transform: capitalize;
+      }
+      .proceed_section .article{
+          cursor: pointer;
+          width: 300px;
+          height: 550px;
+          border-radius: 20px;
+          box-shadow: 20px 20px 50px rgb(218, 221, 224);
+          padding-left: 20px;
+          padding-right: 20px;
+          text-wrap: wrap;
+          background-color: white;
+      }
+      .proceed_section .sec-2 h3{
+          font-size:30px ;
+          font-weight: lighter;
+          margin: -10px 0 0 0;
+          
+      }
+      /* .proceed_section .sec-2 .proceed_section .i{
+          width: 100px;
+          height: 50px;
+          border-radius: 50%;
+          background-color: #1EBEC4;
+      } */
+      .proceed_section .sec-2 p{
+          margin: 10px 0 0 0;
+          color:#1EBEC4 ;
+          font-size: larger;
+      }
+      .proceed_section .sec-2 h5{
+          text-align: center;
+          font-weight: normal;
+          font-size: large;
+      }
+      .proceed_section .sec-2 button{
+          width: fit-content;
+          height: fit-content;
+          padding: 10px 30px;
+          font-size: larger;
+          background-color: rgb(27, 27, 61);
+          color:white;
+          border: none;
+          margin: 0 0 0 70px;
+          border-radius: 10px;
+      }
+      .proceed_section .article img{
+          width: 100px;
+          height: 80px;
+          margin: -30px 0 0 200px;
+      }
+      .proceed_section .img{
+          height: 100px;
+          float: right;
+      }
+      .proceed_section .sec-3{
+          width: 92%;
+          height: 600px;
+          border-radius:50px ;
+          margin: 50px auto;
+          background: linear-gradient(220.proceed_section .47deg, #F0AEFF -10.proceed_section .24%, #d9bbf2 -0.proceed_section .79%, #4797a8 18.proceed_section .61%, #54C4FF 45.proceed_section .99%, #2f6475 78.proceed_section .93%, #1CE8B5 110.proceed_section .94%, #19FC80 124.proceed_section .34%);
+      }
+      .proceed_section .circle-img{
+          float: right;
+          width: 200px;
+          height: 200px;
+          margin: -50px 0 0 0;
+      }
+      header h1{
+          font-size: 40px;
+          text-align: center;
+          margin: 20px 0 0 0;
+      }
+      .proceed_section .sec-6{
+          width: 80%;
+          margin: 40px auto;
+          height: fit-content;
+      }
+      .proceed_section .sec-6 i{
+          float: right;
+      }
+      .proceed_section .sec-6 hr{
+          border-color: #4EC7E1;
+          opacity: 20%;
+      }
+      .proceed_section .sec-7{
+          width: 100%;
+          height: 250px;
+          background-color:#3EA9B8;
+          margin: 40px 0 0 0;
+          padding-top:20px ;
+          text-align: center;
+          color: antiquewhite;
+      }
+      .proceed_section .sec-7 h1{
+          color: aliceblue;
+          font-weight: bolder;
+          font-size: 40px;
+      }
+      .proceed_section .sec-7 p{
+          font-size: 25px;
+      }
+      .proceed_section .sec-7 button{
+          width: 200px;
+          height: 50px;
+          background-color:rgb(18, 18, 52);
+          color: antiquewhite;
+          font-size: 20px;
+          border: none;
+          border-radius: 5px;
+      }
+      footer{
+          width: 100%;
+          height: 400px;
+          margin: 100px 0 0 0;
+      }
+      .proceed_section .footer-menu{
+          display: flex;
+          margin: 20px auto;
+          justify-content: space-evenly;
+      }
+      .proceed_section .menu-box{
+          width: fit-content;
+          height: fit-content;
+      }
+      .proceed_section .menu-box h2{
+          color: #38383840;
+          text-transform: uppercase;
+      }
+      footer hr{
+          width: 90%;
+          border-color: #4EC7E1;
+          opacity: 20%;
+      }
+      .proceed_section .i{
+          margin: 0 0 0 900px;
+          font-size: 20px;
+      }
+      .proceed_section .figure{
+          display: flex;
+          width: 100%;
+          height: auto;
+      }
+      .proceed_section .fig-img1{
+          margin: 30px 0 0 150px;
+      }
+      .proceed_section .fig-img2{
+          width: 120px;
+          height: 150px;
+          margin: 150px  0 0 -20px;
+      }
+      .proceed_section .fig-img3{
+          height: 250px;
+          margin: 100px 0 0 40px;
+      }
+      .proceed_section .fig-img4{
+          height: 300px;
+          margin: 150px 0 0 40px;
+      }
+      .proceed_section .figcaption{
+          text-align: center;
+          margin: 70px 0 0 -40px;
+      }
+      .proceed_section .figcaption h1{
+          font-size: 40px;
+          font-weight: bold;
+          color: aliceblue;
+          
+      }
+      .proceed_section .h1{
+          color: black;
+          text-decoration:wavy;
+          text-decoration-line: black;
+      }
+      .proceed_section .figcaption p{
+          color: white;
+          font-size: larger;
+          
+      }
+      .proceed_section .figcaption-box{
+          width: fit-content;
+          height: fit-content;
+          text-align: center;
+          margin: -150px 0 0 300px;
+         
+      }
+      .proceed_section .figcaption-box h1{
+          font-size: 30px;
+      }
+      .proceed_section .figcaption-box button{
+          width: fit-content;
+          height: fit-content;
+          padding: 10px 25px 10px 25px;
+          background-color: rgb(26, 26, 46);
+          color: aliceblue;
+         font-size: 15px;
+         border: none;
+         border-radius: 5px;
+         
+      }
+      .proceed_section .figcaption-box2{
+          width: 450px;
+          height: 250px;
+          text-align: center;
+          margin: -150px 0 0 0;
+          border: 2px solid black;
+          border-bottom: none;
+          border-top: none;
+          border-right: none;
+         margin-left: 20px;
+      
+          
+      }
+      .proceed_section .figcaption-box2 h1{
+          font-size: 30px;
+      }
+      .proceed_section .figcaption-box2 button{
+          width: fit-content;
+          height: fit-content;
+          padding: 10px 25px 10px 25px;
+          background-color: rgb(26, 26, 46);
+          color: aliceblue;
+         font-size: 15px;
+         border: none;
+         border-radius: 5px;
+      }
+      .proceed_section .pic7{
+          margin-top: -350px; 
+          position: absolute; 
+          z-index: -1; 
+          width: 100%;
+      }
+      .proceed_section .pic13{
+           margin-left: 10px; 
+           height: 50px; 
+           margin-top: -10px;
+      }
+      .proceed_section .pic12{
+          margin-top: -60px; 
+          margin-left: -1080px; 
+          height: 50px;
+      }
+      .proceed_section .pi13{
+          margin-left: 1080px; 
+          height: 80px;
+      }
+      
+      .proceed_section .size{
+          font-size: 20px;
+      }
