@@ -3,7 +3,7 @@ import "./SubmittedDesigns.css"
 import Profile2 from "./image/img 2.jpeg"
 import Profile3 from "./image/img 3.jpg"
 import Profile4 from "./image/img 4.jpg" 
-import Group1 from "./image/Group (1).png"
+
 
 
 const SubmittedDesigns = () => {
@@ -55,7 +55,7 @@ const SubmittedDesigns = () => {
             <a href="#">View all recommendations</a>
           </div>
           <hr/>
-          <img src={Group1} alt="Group1 png"  className='group'/>
+        
         </div>
 
     </>
