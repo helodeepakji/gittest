@@ -8,22 +8,18 @@ const Join = () => {
   <div className="container proceed_section">
     <section className="sec-1">
       <center>
-        <i className="fa-solid fa-angle-right">
-          <i className="fa-solid fa-angle-right">
-            <i className="fa-solid fa-angle-right"></i>
-          </i>
-        </i>
+        <img src="/images/pic1.png"/>
       </center>
       <h1>
         "Choose <span className="span">Your Role</span> and Get Started"
       </h1>
-      <img src="pic2.png" />
-      <img src="pic3.png" className="img" />
+      <img src="/images/pic2.png" />
+      <img src="/images/pic3.png" className="img" />
     </section>
 
     <section className="sec-2">
       <article className="article">
-        <img src="pic4.png" />
+        <img src="/images/pic4.png" />
         <h3>Business</h3>
         <p>Advertise your brand on Everyday disposables</p>
         <ul>
@@ -42,7 +38,7 @@ const Join = () => {
         </a>
       </article>
       <article className="article">
-        <img src="pic5.png" />
+        <img src="/images/pic5.png" />
         <h3>Designer</h3>
         <p>Create an eye-catching designs for top brands</p>
         <ul>
@@ -61,7 +57,7 @@ const Join = () => {
         </a>
       </article>
       <article className="article">
-        <img src="pic6.png" />
+        <img src="/images/pic6.png" />
         <h3>Retailer</h3>
         <p>Print and deliver ads on a variety of disposables</p>
         <ul>
@@ -80,58 +76,39 @@ const Join = () => {
         </a>
       </article>
     </section>
-    <img src="pic7.png" className="pic7" />
+    <img src="/images/pic7.png" className="pic7" />
 
-    <section className="sec-3">
-      <figure className="figure">
-        <img src="pic8.png" className="fig-img1" />
-        <img src="pic9.png" className="fig-img2" />
-        <aside className="figcaption">
-          <h1>
-            Easily grow your <span className="h1">brand</span>
-          </h1>
-          <p>
-            Lorem ipsum dolor sit amet,consectetur adispiscing elit,
-            <br />
-            sed do eiusmod tempor incididunt ut labore et dolore
-            <br /> magna aliqua.
-          </p>
-        </aside>
-        <img src="pic10.png" className="fig-img3" />
-        <img src="pic11.png" className="fig-img4" />
-      </figure>
-      <figcaption className="figure">
-        <div className="figcaption-box">
-          <h1>Advertisement</h1>
-          <p>
-            Lorem ipsum dolor sit amet,consectetur adispiscing elit,
-            <br />
-            sed do eiusmod tempor incididunt ut labore et dolore
-            <br /> magna aliqua.
-          </p>
-          <a href="#">
-            <button>Learn More</button>
-          </a>
+    <section className="proceed_section sec-3">
+        <div>
+            <div className="sec-3_upper">
+                <img src="/images/pic8.png" className="fig-img1"/>
+                <img src="/images/pic9.png" className="fig-img2"/>
+                <div className="text">
+                <h1>Easily grow your <span className="span1">brand</span></h1>
+                <p>Lorem ipsum dolor sit amet,consectetur adispiscing elit,<br/>
+                sed do eiusmod tempor incididunt ut labore et dolore<br/> magna aliqua.</p>
+                </div>
+                <img src="/images/pic10.png" className="fig-img3"/>
+                <img src="/images/pic11.png" className="fig-img4"/>
+
+            </div>
+            <div className="sec-3_upper">
+                <img src="/images/pic12.png" className="pic12"/>
+                <div className="add_box">
+                    <h1>Advertisement</h1>
+                    <p className="p">Lorem ipsum dolor sit amet,consectetur adispiscing elit,<br/>
+                    sed do eiusmod tempor incididunt ut labore et dolore<br/> magna aliqua.</p>
+                    <a href="#"><button>Learn More</button></a>
+                </div>
+                <img src="/images/pic13.png" className="pic13"/>
+                
+
+            </div>
         </div>
-        <img src="pic13.png" className="pic13" />
-        <div className="figcaption-box2">
-          <h1>Branding</h1>
-          <p>
-            Lorem ipsum dolor sit amet,consectetur adispiscing elit,
-            <br />
-            sed do eiusmod tempor incididunt ut labore et dolore
-            <br /> magna aliqua.
-          </p>
-          <a href="#">
-            <button>Learn More</button>
-          </a>
-        </div>
-        <img src="pic12.png" className="pic12" />
-        <img src="pic13.png" className="pi13" />
-      </figcaption>
+    
     </section>
 
-    <img src="pic14.png" className="circle-img" />
+    <img src="/images/pic14.png" className="circle-img" />
     <Feq />
 
   </div>
