@@ -101,6 +101,13 @@ const Join = () => {
                     <a href="#"><button>Learn More</button></a>
                 </div>
                 <img src="/images/pic13.png" className="pic13"/>
+                <div className="add_box2">
+                    <h1>Branding</h1>
+                    <p className="p">Lorem ipsum dolor sit amet,consectetur adispiscing elit,<br/>
+                    sed do eiusmod tempor incididunt ut labore et dolore<br/> magna aliqua.</p>
+                    <a href="#"><button>Learn More</button></a>
+                </div>
+                <img src="/images/pic13.png" className="pic13a"/>
                 
 
             </div>

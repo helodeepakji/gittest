@@ -256,6 +256,12 @@
           height: 80px;
           
       }
+      .proceed_section .pi13a{
+          margin-left: 1080px; 
+          height: 100px;
+         
+          
+      }
       
       .proceed_section .size{
           font-size: 20px;
@@ -283,7 +289,9 @@
       width: fit-content;
           height: fit-content;
           text-align: center;
-          margin: -150px 0 0 210px;}
+          margin: -200px 0 0 250px;
+      }
+          
 .proceed_section .sec-3_upper .add_box button{
                     width: fit-content;
                     height: fit-content;
@@ -294,14 +302,50 @@
                    border: none;
                    border-radius: 5px;
           }
+         
 
 .proceed_section .sec-3_upper .add_box h1{
           font-size: 30px;
           color: black;
+          margin-left: 3px;
 }
+
 .proceed_section .sec-3_upper .add_box .p{
           color: black;
           font-size: small;
           margin: 20px 0 20px -20px;
           
 }
+
+.proceed_section .sec-3_upper .add_box2{
+          width: fit-content;
+              height: fit-content;
+              text-align: center;
+              margin: -200px 0 0 40px;
+              /* border-left: 2px solid black;
+              height: 250px; */
+              padding-left: 50px;
+              /* padding-top: -100px; */
+    
+              }
+.proceed_section .sec-3_upper .add_box2 button{
+                    width: fit-content;
+                    height: fit-content;
+                    padding: 10px 25px 10px 25px;
+                    background-color: rgb(26, 26, 46);
+                    color: aliceblue;
+                   font-size: 15px;
+                   border: none;
+                   border-radius: 5px;
+          }
+          .proceed_section .sec-3_upper .add_box2 h1{
+                    font-size: 30px;
+                    color: black;
+                    margin-left: 5px;
+          }
+          .proceed_section .sec-3_upper .add_box2 .p{
+                    color: black;
+                    font-size: small;
+                    margin: 20px 0 20px -20px;
+                    
+          }
