@@ -1,26 +1,27 @@
 
-  .main-div{
+  .custom-main-div{
+    width: 90%;
     background-color: #ffffff;
     margin: 20px auto;
     display: flex;
     flex-direction: column;
     box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.2);
   }
-  .heading {
+  .custom-heading{
     width: 100%;
     width: 1px solid green;
     display: flex;
     align-items: center;
     justify-content: space-between;
   }
-  .heading > h1 {
+  .custom-heading > h1 {
     margin: 20px 80px ;
   }
-  .sideIMG > img {
+  .custom-side-img > img {
     width: 100%;
     align-items: end;
   }
-  .second-div {
+  .custom-second-div {
     width: 80%;
     margin: auto;
     padding: 20px;
@@ -38,60 +39,58 @@
     );
   }
   
-  .third-div {
+  .custom-third-div{
     width: 95%;
     margin: auto;
     display: flex;
     justify-content: space-between;
-    /* margin: 10px 0; */
+   
   }
-  .men {
+  .custom-men {
     display: flex;
     gap: 8px;
   }
-  .men {
+  .custom-men {
     display: flex;
     width: 50%;
   }
-  .men > img {
+  .custom-men > img {
     width: 40px;
     height: 40px;
     border-radius: 50%;
   }
-  .goBack {
+  .custom-go-back{
     width: 50%;
     justify-content: flex-end;
     display: flex;
     gap: 4px;
   }
-  .goBack > p {
+  .custom-go-back> p {
     color: #000000;
     font-size: 18px;
     font-weight: 600;
   }
   
-  .fourth-div {
+  .custom-fourth-div{
     width: 95%;
     margin: 0px auto;
     display: flex;
-    /* align-items: center;
-    justify-content: space-between;
-    gap: 70px; */
+    
   }
-  .image-section {
+  .custom-image-section {
     width: 55%;
   }
-  .image-section > img {
+  .custom-image-section > img {
     width: 500px;
     height: 350px;
     border-radius: 20px;
   }
-  .chat-section {
+  .custom-chat-section{
     width: 40%;
    height: auto;
     background-color: white;
   }
-  .chat-header {
+  .custom-chat-header {
     padding: 10px;
     width: 100%;
     display: flex;
@@ -99,24 +98,24 @@
     justify-content: space-between;
     border-bottom: 2px solid #e3eaf8;
   }
-  .chat-info {
+  .custom-chat-info {
     display: flex;
     gap: 8px;
     align-items: center;
   }
-  .calls-icon {
+  .custom-calls-icon {
     display: flex;
     gap: 10px;
   }
-  .chat-msg {
+  .custom-chat-msg{
     width: 100%;
     padding: 20px;
   }
-  .msg-reciever {
+  .custom-msg-receiver {
     width: 100%;
     margin: 20px 0;
   }
-  .msg-reciever > p {
+  .custom-msg-receiver > p {
     background-color: #f1f1f1;
     color: black;
     border-radius: 4px 13px 13px 4px;
@@ -124,13 +123,13 @@
     font-size: 20px;
     font-weight: 500;
   }
-  .msg-sender {
+  .custom-msg-sender {
     width: 100%;
     display: flex;
     align-items: flex-end;
     justify-content: flex-end;
   }
-  .msg-sender > p {
+  .custom-msg-sender> p {
     background-color: #248f98;
     color: white;
     width: 100px;
@@ -139,7 +138,7 @@
     border-top-right-radius: 60px;
     padding: 5px;
   }
-  .chat-footer {
+  .custom-chat-footer {
     width: 100%;
     display: flex;
     align-items: center;
@@ -148,30 +147,30 @@
     box-shadow: 0 -5px 10px rgba(170, 167, 167, 0.5);
     padding: 10px;
   }
-  .footer-icon {
+  .custom-footer-icon {
     display: flex;
     gap: 8px;
   }
-  .input-sec {
+  .custom-input-sec {
     border-radius: 13px;
     display: flex;
     align-items: center;
     width: 80%;
     position: relative;
   }
-  .input-sec > input {
+  .custom-input-sec > input {
     width: 100%;
     border: none;
     background-color: #f1f1f1;
     border-radius: 20px;
     padding: 10px;
   }
-  .thumb {
+  .custom-thumb {
     position: absolute;
     left: 90%;
     top: 10%;
   }
-  .profile-picture > img {
+  .custom-profile-picture > img {
     width: 40px;
     height: 40px;
     border-radius: 50%;
@@ -187,7 +186,7 @@
     );
   }
   
-  .btnSection {
+  .custom-btn-section {
     width: 40%;
     display: flex;
     float: left;
@@ -197,7 +196,7 @@
   button {
     cursor: pointer;
   }
-  .btn1 {
+  .custom-btn1 {
     font-size: 18px;
     font-weight: 500;
     background-color: #0b5258;
@@ -206,7 +205,7 @@
     padding: 10px;
     border: none;
   }
-  .btn2 {
+  .custom-btn2 {
     font-size: 18px;
     font-weight: 600;
     background-color: #f8f8f8;
@@ -215,11 +214,11 @@
     padding: 10px;
     border: 1px solid #0b5258;
   }
-  .btnSection > button {
+  .custom-btn-section > button {
     margin: 10px 10px;
   }
   
-  .next {
+  .custom-next {
     width: 80%;
     display: flex;
     align-items: end;
@@ -227,61 +226,61 @@
      margin: 10px auto; 
     position: relative;
   }
-  .next > h1 {
+  .custom-next > h1 {
     color: #0b5258;
   }
  
   @media screen and (max-width: 750px) {
-    .third-div {
+    .custom-third-div {
       width: 100%;
     }
-    .second-div {
+    .custom-second-div {
       width: 100%;
       margin: auto;
       padding: 0 20px;
     }
   
-    .men {
+    .custom-men {
       display: flex;
       width: 100%;
     }
-    .heading > h1 {
+    .custom-heading > h1 {
       margin-left: 10px;
       margin-bottom: 20px;
     }
-    .fourth-div {
+    .custom-fourth-div {
       width: 100%;
       flex-direction: column;
     }
-    .image-section {
+    .custom-image-section {
       width: 100%;
       margin-bottom: 10px;
     }
-    .image-section > img {
+    .custom-image-section > img {
       width: 100%;
       height: auto;
     }
-    .chat-section {
+    .custom-chat-section {
       width: 100%;
     }
-    .btnSection {
+    .custom-btnSection {
       width: 100%;
       align-items: center;
       justify-content: space-between;
     }
   
-    .btn1,
-    .btn2 {
+    .custom-btn1,
+    .custom-btn2 {
       padding: 5px;
       font-size: 15px;
     }
   
-    .btnSection > button {
+    .custom-btnSection > button {
       margin: 0;
     }
   
-    .next {
+    .custom-next {
       width: 100%;
-      /* border: 1px solid blue; */
+      
     }
   } 
