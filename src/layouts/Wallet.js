@@ -1,8 +1,8 @@
 import React from "react";
 import "./Wallet.css";
-import Cupimg from "../Assests/cup.png";
-import menimg from "../Assests/men.png";
-import topImg from "../Assests/Group (3).png";
+import Cupimg from "./images/cup.png";
+import menimg from "./images/men.png";
+import topImg from "./images/Group (3).png";
 import { IoCall } from "react-icons/io5";
 import { IoVideocam } from "react-icons/io5";
 import { FaCamera } from "react-icons/fa";
@@ -12,7 +12,8 @@ import { TiArrowBackOutline } from "react-icons/ti";
 import { IoIosArrowForward } from "react-icons/io";
 const Wallet = () => {
   return (
-    <div className="main-div">
+    <div className="container all section ">  
+      <div className="main-div">
       <div className="heading">
         <h1>Designs</h1>
         <div className="sideIMG">
@@ -104,6 +105,8 @@ const Wallet = () => {
         </p>
       </div>
     </div>
+    </div>
+   
   );
 };
 
