@@ -1,4 +1,4 @@
-.navbar {
+ .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -22,6 +22,7 @@
     margin: 0;
 }
 
+
 .navbar-menu li {
     margin: 0 20px;
 }
@@ -33,9 +34,10 @@
     transition: color 0.3s ease;
 }
 
-.navbar-menu a:hover {
+.nav-item a:hover {
     color: #00bcd4;
 }
+
 
 .navbar-buttons {
     display: flex;
@@ -59,4 +61,7 @@
 
 .navbar-buttons a.join-now:hover {
     background-color: #008c9e;
-}
+} 
+
+
+

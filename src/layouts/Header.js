@@ -1,15 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./Header.css";
-import logo from '../images/image.png';
+import logo from './images/image.png';
 
 const Header = () => {
   return (
-    <nav className="navbar bg-dark text-white p-3 rounded-3xl mx-5 mt-4">
-      <div className="container d-flex justify-content-between">
+    <nav className="navbar bg-dark text-white p-1 rounded-3xl mx-6 mt-3">
+      <div className="container d-flex justify-content-between" style={{ height: '100px' }}>
         <div className="navbar-brand"><img src={logo}/></div>
 
-        <div className="d-flex justify-content-center gap-5">
+        <div className="d-flex justify-content-center gap-5" >
           <ul className="navbar-nav d-flex flex-row gap-5">
             <li className="nav-item">
               <Link to="/" className="nav-link text-white">
@@ -48,7 +48,7 @@ const Header = () => {
           <Link to="/login" className="text-white align-self-center">
             Login
           </Link>
-          <Link to="/proceed" className="btn btn-info text-white px-3xl">
+          <Link to="/proceed" className="btn btn-info text-white px-3xl" >
             Join Now
           </Link>
         </div>
