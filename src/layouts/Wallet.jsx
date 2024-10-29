@@ -1,6 +1,6 @@
 import React from "react";
 import "./Wallet.css";
-import Cupimg from "./images/cup.png";
+import Cupimg from "./images/cup.png"
 import menimg from "./images/men.png";
 import topImg from "./images/Group (3).png";
 import { IoCall } from "react-icons/io5";
@@ -12,8 +12,7 @@ import { TiArrowBackOutline } from "react-icons/ti";
 import { IoIosArrowForward } from "react-icons/io";
 const Wallet = () => {
   return (
-    <div className="container all section ">  
-      <div className="main-div">
+    <div className="wallectContainer">
       <div className="heading">
         <h1>Designs</h1>
         <div className="sideIMG">
@@ -92,21 +91,19 @@ const Wallet = () => {
           </div>
         </div>
 
-        <div className="btnSection">
-          <button className="btn1">Accept Design</button>
-          <button className="btn2">Not Satisfied</button>
+        <div className="WallectButton">
+          <button className="Wallectbtn1">Accept Design</button>
+          <button className="Wallectbtn2">Not Satisfied</button>
         </div>
       </div>
 
-      <div className="next">
+      <div className="Wallectnext">
         <h1>Next</h1>
         <p className="arrow">
           <IoIosArrowForward color="#0b5258" fontSize={25} />
         </p>
       </div>
     </div>
-    </div>
-   
   );
 };
 

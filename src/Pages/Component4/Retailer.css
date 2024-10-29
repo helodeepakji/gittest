@@ -76,15 +76,15 @@ hr {
   font-weight: 600;
   text-align: left;
 }
-.button {
+.Retailerbutton {
   width: 70%;
   display: flex;
   border: none;
   background-color: white;
   cursor: pointer;
 }
-.btn1 {
-  width: 50%;
+.Retailerbtn1 {
+  width: 100%;
   padding: 18px 0;
   background-color: #248f98;
   color: white;
@@ -94,8 +94,9 @@ hr {
   box-shadow: 2px 3px 7px 0px #3a74721a;
 }
 
-.btn2 {
-  width: 50%;
+.Retailerbtn2 {
+  width: 100%;
+  padding: 18px 0;
   background-color: white;
   color: #248f98;
   font-weight: 500;
