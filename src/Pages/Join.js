@@ -6,7 +6,7 @@ import './Join.css';
 const Join = () => {
     return(
   <div className="container proceed_section">
-    <section className="sec-1">
+    <section className="sec_1">
       <center>
         <img src="/images/pic1.png"/>
       </center>

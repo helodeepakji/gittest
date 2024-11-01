@@ -4,81 +4,131 @@
     margin: auto;
     
 }
-body{
-    font-family: Arial, Helvetica, sans-serif;
-    background-color: white;
-    
+
+
+.sec-1{
+    background-color: lightskyblue;
+    /* width: 100%; */
+    height: 900px;
+    --mask:
+    radial-gradient(178.89px at 50% calc(100% - 240px),#000 99%,#0000 101%) calc(50% - 160px) 0/320px 100%,
+    radial-gradient(178.89px at 50% calc(100% + 160px),#0000 99%,#000 101%) 50% calc(100% - 80px)/320px 100% repeat-x;
+  -webkit-mask: var(--mask);
+          mask: var(--mask);
+          margin-top: -150px;
+          position: relative;
+          z-index: -1;
+}
+.sec-1 h1{
+    padding: 250px 0 0 20px;
+    text-align: center;
+    font-size: 40px;
+}
+.sec-1 h2{
+    text-align: center;
+    font-size: 40px;
+    font-family: 'Times New Roman', Times, serif;
+}
+.h1span{
+    color: aliceblue;
+}
+.sec-1 p{
+   padding: 10px 250px 0 200px;
+    font-size: 20px;
+    text-align: center;
+    color: whitesmoke;
+}
+.sec-1 button{
+    width: 200px;
+    margin: 20px 0 0 650px;
+    font-size: 20px;
+}
+.but{
+    width: fit-content;
+          height: fit-content;
+          padding: 10px 25px 10px 25px;
+          background-color: rgb(26, 26, 46);
+          color: aliceblue;
+         font-size: 15px;
+         border: none;
+         border-radius: 5px;
+         
+}
+.sec-1 .vector1{
+    width: 100%;
+    margin-top: 50px;
+}
+.hero{
+    width: 700px;
+    margin-left: 400px;
+    position: absolute;
+    z-index: 1;
+    margin-top: -350px;
 }
 
-.auth-buttons {
+
+.hero-section {
+    background-color: rgb(0, 204, 255);
+    color: #111;
+    text-align: center;
+    padding: 100px 20px;
+    font-family:'Times New Roman', Times, serif;
+}
+
+.hero-section h1 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+.hero-section p {
+    font-size: 1.2em;
+    margin-bottom: 40px;
+    color: #f0f0f0;
+    text-wrap: wrap;
+}
+.hero-section .heading{
     display: flex;
-    align-items: center;
+    justify-content: space-around;
+    color: white;
+}
+.hero-section .span{
+  color: #111;
 }
 
-.auth-buttons .login-btn,
-.auth-buttons .join-btn {
-    font-size: 16px;
-    padding: 8px 20px;
+.cta-btn {
+    background-color: #111;
+    color: white;
+    padding: 12px 25px;
     border: none;
     border-radius: 5px;
     text-decoration: none;
-    margin: 15px;
+    font-size: 1.1em;
     font-weight: bold;
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-.auth-buttons a{
-    color: white;
-    text-decoration: none;
-}
-.auth-buttons .login-btn {
-    background-color: transparent;
-    color: white;
-    border: 2px solid black;
+    transition: background-color 0.3s ease;
 }
 
-.auth-buttons .login-btn:hover {
-    background-color: rgb(0, 204, 255);
-    color: white;
-}
-
-.auth-buttons .join-btn {
-    background-color: rgb(0, 204, 255);
-    color: white;
-}
-
-.auth-buttons .join-btn:hover {
-    background-color: #45a049;
+.cta-btn:hover {
+    background-color: #333;
 }
 
 
+/* .illustration{
+  position: absolute;
+} */
+ .vector{
+  /* position: absolute;
+  z-index: -1; */
+  width: 80px;
+  height: 150px;
+}
 
-.navbar.active nav ul {
-        display: flex;
-        flex-direction: column;
-        position: absolute;
-        top: 60px;
-        right: 0;
-        background-color: white;
-        /* width: 100%; */
-        padding: 10px 0;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    }
-
-    .navbar.active nav ul li {
-        margin: 10px 0;
-    }
-
-    .navbar.active .auth-buttons {
-        display: flex;
-        flex-direction: column;
-        margin-top: 15px;
-    }
-
-/* ADJERRY SVG LOGO 1 */
-.logo{
-width: 94px;
-height: 90px;
-margin: 5px 0 -10px 10px;
+.heroimg {
+    /* max-width: 80%; */
+    height: 650px;
+    padding-top: -270px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
 }
 
 
@@ -151,6 +201,8 @@ margin: 5px 0 -10px 10px;
 .aside h1{
     font-size: 30px;
     margin-top: -15px;
+    margin-left: -55px;
+ 
 }
 .number{
     width: 110px;
@@ -160,14 +212,15 @@ margin: 5px 0 -10px 10px;
     border-color:#4EC7E1;
     margin-top: 20px;
 }
+
 .aside button{
-    width: 150px;
-    height: 40px;
+    width: fit-content;
+    height: fit-content;
     background-color: #0E162AED;
     border-radius: 5px;
     color: aliceblue;
     font-size: 20px;
-    margin-left: 70px;
+    margin-left: 120px;
 }
 .aside i{
     margin-left: 5px;
@@ -261,7 +314,7 @@ header h1{
     border-color: #4EC7E1;
     opacity: 20%;
 }
-.sec-7{
+ .sec-7{
     /* width: 100%; */
     height: 250px;
     background-color:#3EA9B8;
@@ -270,22 +323,25 @@ header h1{
     text-align: center;
     color: antiquewhite;
 }
-.sec-7 h1{
+ .sec-7 h1{
     color: aliceblue;
     font-weight: bolder;
     font-size: 40px;
+    text-align: center;
 }
 .sec-7 p{
     font-size: 25px;
+    text-align: center;
 }
-.sec-7 button{
-    width: 200px;
+ .sec-7 button{
+    width: fit-content;
     height: 50px;
     background-color:rgb(18, 18, 52);
     color: antiquewhite;
     font-size: 20px;
     border: none;
     border-radius: 5px;
+    text-align: left;
 }
 footer{
     /* width: 100%; */
@@ -363,7 +419,9 @@ footer hr{
 }
 .d2{
     display: flex;
+    padding-top: 40px;
 }
+
 .s1{
     margin-left: -12px; 
     font-family: 'Times New Roman';
@@ -373,7 +431,7 @@ footer hr{
 }
 .d4{
     display: flex; 
-    margin-top: -30px;
+    margin-top: 20px;
 }
 .d5{
     font-size: 50px; 
@@ -388,7 +446,7 @@ footer hr{
     margin-top: -20px;
 }
 .d6{
-    margin-left: 20px;
+    margin-left: 15px;
 }
 .d7{
     margin-left: -20px; 
@@ -399,8 +457,20 @@ footer hr{
     margin-top: 10px; 
     color: #4EC7E1;
 }
+.num1{
+    height: 60px;
+    width: 70px;
+}
+
+.circle1{
+    height: 80px;
+    width: 80px;
+    margin-left: -20px;
+   
+}
+
 .s3{
-    margin-left: -12px; 
+    margin-left: -20px; 
     font-family: 'Times New Roman';
 }
 .d8{

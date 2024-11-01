@@ -7,6 +7,29 @@ const Home = () => {
   return (
     <div>
       <div>
+        <section className="sec-1">
+        
+          
+          <h1>
+          
+           <span className="h1span">Advertise</span> Your Brand <span className="h1span">on</span> Everyday <br/><span className="h1span">Essentials!</span>
+          </h1>
+          <p>Reach Your Target Audience with eye-catching designs on disposables that stand out. 
+            Transform ordinary cups, bottles, and plates into powerful marketing tools that leave a lasting impression.
+          </p>
+          <NavLink to="/join">
+            <button className='but'>Join Now</button>
+          </NavLink>
+          <figure>
+          <img src="/images/Vector 32 (1).png" />
+          </figure>
+          
+         
+        </section>
+        <figure>
+          <img src="/images/Hero section Image.png" className="hero" alt="image 5" />
+          </figure>
+       
         <img src="/images/Group.png" className="circle" alt="circle" />
         <section className="sec-2">
           <figure className="figure">
@@ -27,27 +50,21 @@ const Home = () => {
               <span className="spanhead">Business Users</span> Post Their Requirements:
             </h1>
             <div className="d2">
-              <h2 className="number n1">
-                <span className="s3">1</span>
-              </h2>
+            <img src="/images/num1.png" className='num1'/><img src="/images/circle1.png" className='circle1'/>
               <p className="d6">
                 Sign up as a business user and share your brand's message, LOGO, and design preferences.
               </p>
             </div>
 
             <div className="d4">
-              <h2 className="number d8">
-                <span className="n2">2</span>
-              </h2>
-              <p className="d6">
+            <img src="/images/num2.png" className='num1'/><img src="/images/circle2.png" className='circle1'/>
+              <p className="d6" >
                 Our platform connects you with talented designers who will create stunning ad concepts tailored to your brand.
               </p>
             </div>
 
             <NavLink to="/join">
-              <button>
-                Join now <i className="fa-solid fa-arrow-right"></i>
-              </button>
+              <button>Join now</button>
             </NavLink>
           </aside>
         </section>
@@ -68,26 +85,22 @@ const Home = () => {
           </h1>
 
           <div className="d2">
-            <h2 className="number n1">
-              <span className="s3">1</span>
-            </h2>
+          <img src="/images/num1.png" className='num1'/><img src="/images/circle1.png" className='circle1'/>
             <p className="d3">
               Designers receive your brief and create eye-catching advertisements that match your requirements.
             </p>
           </div>
 
           <div className="d4">
-            <h2 className="number d5">
-              <span className="s2">2</span>
-            </h2>
+          <img src="/images/num2.png" className='num1'/><img src="/images/circle2.png" className='circle1'/>
             <p className="d6">
               Once the designs are ready, Business Users can browse and select their favorite concept.
             </p>
           </div>
 
           <NavLink to="/join">
-            <button>
-              Join now <i className="fa-solid fa-arrow-right"></i>
+            <button >
+              Join now 
             </button>
           </NavLink>
         </aside>
@@ -99,34 +112,30 @@ const Home = () => {
         </figure>
 
         <aside className="aside d7">
-          <h3>Final touch</h3>
+          <h3>THE FINAL TOUCH</h3>
           <h1>
             <span className="spanhead">Retailers</span> Make it Real
           </h1>
 
           <div className="d2">
-            <h2 className="number n3">
-              <span className="s3">1</span>
-            </h2>
+           <img src="/images/num1.png" className='num1'/><img src="/images/circle1.png" className='circle1'/>
             <p style={{ marginLeft: '30px' }}>
               The selected design is sent directly to our retailers, who print your advertisement
               on cups, water bottles, plates, or any other disposables.
             </p>
           </div>
 
-          <div style={{ display: 'flex', marginTop: '-30px' }}>
-            <h2 className="number s4">
-              <span className="s2">2</span>
-            </h2>
-            <p style={{ marginLeft: '20px' }}>
+          <div style={{ display: 'flex', marginTop: '-30px',paddingTop:'30px' }}>
+          <img src="/images/num2.png" className='num1'/><img src="/images/circle2.png" className='circle1'/>
+            <p style={{ marginLeft: '15px' }}>
               Your custom-printed products are ready to be distributed, ensuring your brand reaches
               a wider audience in a unique and memorable way.
             </p>
           </div>
 
           <NavLink to="/join">
-            <button>
-              Join now <i className="fa-solid fa-arrow-right"></i>
+            <button className='lstbtn'>
+              Join now 
             </button>
           </NavLink>
         </aside>
