@@ -16,21 +16,7 @@ const Header = () => {
                 About Us
               </Link>
             </li>
-            <li className="nav-item">
-              <Link to="/bussiness" className="nav-link text-white">
-                Bussiness Page
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link to="/design" className="nav-link text-white">
-                Designer Page
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link to="/retailer" className="nav-link text-white">
-                Retailer Page
-              </Link>
-            </li>
+        
             <li className="nav-item">
               <Link to="/contact" className="nav-link text-white">
                 Contact Us
@@ -58,3 +44,20 @@ const Header = () => {
 };
 
 export default Header;
+
+
+// <li className="nav-item">
+//               <Link to="/bussiness" className="nav-link text-white">
+//                 Bussiness Page
+//               </Link>
+//             </li>
+//             <li className="nav-item">
+//               <Link to="/design" className="nav-link text-white">
+//                 Designer Page
+//               </Link>
+//             </li>
+//             <li className="nav-item">
+//               <Link to="/retailer" className="nav-link text-white">
+//                 Retailer Page
+//               </Link>
+//             </li>

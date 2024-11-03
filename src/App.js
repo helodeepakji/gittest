@@ -24,13 +24,11 @@ function App() {
         <Route path='/signup' element={<Signup />} />
         <Route path='/proceed' element={<Join />} />
         <Route path='/contact' element={<Contactpage/>}/>
+        <Route path ='/bussiness' element={<Bussiness/>}/>
+        <Route path='/retailer' element={<Retailer/>}/>
         <Route path='/design' element={<Designerpage/>}/>
         <Route path ='/wallet' element={<Wallet/>}/>
-        <Route path ='/bussiness' element={<Bussiness/>}/>
-        <Route path ='/adv' element={<Adv/>}/>
-        <Route path='/retailer' element={<Retailer/>}/>
-  
-     
+        <Route path ='/adv' element={<Adv/>}/>     
       </Routes>
     
       <Footer />

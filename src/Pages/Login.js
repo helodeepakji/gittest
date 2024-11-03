@@ -2,6 +2,7 @@ import React from 'react'
 import './Login.css';
 import loginImg from './Assests/pic.png'
 import { FaGoogle } from "react-icons/fa";
+import { NavLink } from 'react-router-dom';
 
 const Login = () => {
     return (
@@ -42,7 +43,7 @@ const Login = () => {
                     </form>
                     <div className="dont-have-account">
                         <span>Don't have an account?</span>
-                        <a href="#" className="create-account">Create</a>
+                        <NavLink to="/signup" className="create-account">Create</NavLink>
 
                     </div>
                 </div>

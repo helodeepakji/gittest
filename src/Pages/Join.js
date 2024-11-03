@@ -31,11 +31,11 @@ const Join = () => {
           <li>Manage your budget and payment via wallet section</li>
         </ul>
         <h5>Select and Proceed as Business User </h5>
-        <a href="#">
+        <NavLink to="/signup">
           <button>
             Proceed <i className="fa-solid fa-right-long"></i>
           </button>
-        </a>
+        </NavLink>
       </article>
       <article className="article">
         <img src="/images/pic5.png" />
@@ -50,11 +50,11 @@ const Join = () => {
           <li>Track your earnings in the wallet section</li>
         </ul>
         <h5>Select and Proceed as Designer</h5>
-        <a href="#">
+        <NavLink to="/signup">
           <button>
             Proceed <i className="fa-solid fa-right-long"></i>
           </button>
-        </a>
+        </NavLink>
       </article>
       <article className="article">
         <img src="/images/pic6.png" />
@@ -69,11 +69,11 @@ const Join = () => {
           <li>Track payments through the wallet section</li>
         </ul>
         <h5>Select and Proceed as Retailer</h5>
-        <a href="#">
+        <NavLink to="/signup">
           <button>
             Proceed <i className="fa-solid fa-right-long"></i>
           </button>
-        </a>
+        </NavLink>
       </article>
     </section>
     <img src="/images/pic7.png" className="pic7" />

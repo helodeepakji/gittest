@@ -1,6 +1,8 @@
 
 import React from 'react'
+import { NavLink } from "react-router-dom";
 import './Signup.css'
+
 function Signup() {
   return (
     <div className="signup-container">
@@ -79,7 +81,7 @@ function Signup() {
         
        <div className="button">
         <button type="button" onclick="showCreateAccountForm()">Create Account</button>
-        <p>Does't have an Account? <span>Log in</span></p>
+        <p>Does't have an Account? <NavLink to="/login">Log in</NavLink></p>
        </div>
     </form>
 </div>
