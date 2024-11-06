@@ -1,6 +1,8 @@
 const express = require('express');
+const jwt = require('jsonwebtoken');
 const route = express.Router();
 const User = require('../modal/User');
+const JWT_SECRET = 'your_jwt_secret_key';
 
 route.get('/getAllUser',(req,res) => {
     User.allUser((err,results)=>{
@@ -9,7 +11,6 @@ route.get('/getAllUser',(req,res) => {
         }
     });
 });
-
 
 // Route to create a new user
 route.post('/createUser', (req, res) => {
@@ -48,6 +49,31 @@ route.delete('/deleteUser/:id', (req, res) => {
             return res.status(404).json({ message: 'User not found' });
         }
         res.json({ message: 'User deleted successfully' });
+    });
+});
+
+route.post('/login', (req, res) => {
+    const { email, password } = req.body;
+
+    if (!email || !password) {
+        return res.status(400).json({ message: 'Email and password are required' });
+    }
+    User.findUserByEmail(email, (err, user) => {
+        if (err || !user) {
+            return res.status(400).json({ message: 'Invalid credentials' });
+        }
+
+        if (user.password !== password) {
+            return res.status(400).json({ message: 'Invalid credentials' });
+        }
+
+        // Generate JWT token
+        const token = jwt.sign({ id: user.id, email: user.email , user_type: user.user_type }, JWT_SECRET, {
+            expiresIn: '1h'
+        });
+
+        res.json({ token });
+        
     });
 });
 

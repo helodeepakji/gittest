@@ -1,10 +1,37 @@
-import React from 'react'
+import {React , useState} from 'react'
 import './Login.css';
 import loginImg from './Assests/pic.png'
 import { FaGoogle } from "react-icons/fa";
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 const Login = () => {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
+    const navigate = useNavigate();
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            const response = await fetch('/api/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, password })
+            });
+            const data = await response.json();
+
+            if (response.ok) {
+                localStorage.setItem('token', data.token);
+                navigate('/bussiness');
+            } else {
+                setError(data.message || 'Login failed');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            setError('An error occurred');
+        }
+    };
+
     return (
         <div>
             <div className="login-container">
@@ -12,24 +39,27 @@ const Login = () => {
                     <img src={loginImg} alt={loginImg} />
                 </div>
                 <div className="right-side">
+                    {error && <p style={{ color: 'red' }}>{error}</p>}
                     <h2>Login in to your account</h2>
                     <div className="google-login">
-                        <FaGoogle  size={20}/>
-                        
-                        <p style={{marginLeft:'10px'}}>Sign in with Google</p>
+                        <FaGoogle size={20} />
+
+                        <p style={{ marginLeft: '10px' }}>Sign in with Google</p>
                     </div>
                     <div className='or-divider'>
                         <span>or</span>
                     </div>
-                    <form>
+                    <form onSubmit={handleSubmit}>
                         <div className="form-group">
                             <label>Email</label>
-                            <input type="email" placeholder="Enter your email" />
+                            <input type="email" value={email} onChange={(e) => setEmail(e.target.value)}
+                            placeholder="Enter your email" />
                         </div>
 
                         <div className="form-group">
                             <label>Password</label>
-                            <input type="password" placeholder="Enter your password" />
+                            <input type="password" value={password} onChange={(e) => setPassword(e.target.value)}
+                            placeholder="Enter your password" />
                         </div>
                         <div className="checkBox">
                             <div className="remember-me">

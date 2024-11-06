@@ -9,18 +9,36 @@ User.allUser = (callback) => {
     });
 };
 
-// Create a new user
+
+// Create a new user with duplicate email check
 User.createUser = (userData, callback) => {
     const { first_name, last_name, email, phone, password, user_type } = userData;
-    const query = 'INSERT INTO `users` (`first_name`, `last_name`, `email`, `phone`, `password`, `user_type`) VALUES (?, ?, ?, ?, ?, ?)';
     
-    connection.query(query, [first_name, last_name, email, phone, password, user_type], (err, results) => {
-        if (err) {
-            console.error('Error creating user:', err.message);
+    // Check if user with the same email already exists
+    const checkQuery = 'SELECT * FROM `users` WHERE `email` = ?';
+    connection.query(checkQuery, [email], (checkErr, checkResults) => {
+        if (checkErr) {
+            console.error('Error checking for existing user:', checkErr.message);
+            return callback(checkErr);
         }
-        callback(err, results);
+        
+        if (checkResults.length > 0) {
+            // User already exists
+            return callback(new Error('User with this email already exists'));
+        }
+        
+        // If user does not exist, proceed with insertion
+        const insertQuery = 'INSERT INTO `users` (`first_name`, `last_name`, `email`, `phone`, `password`, `user_type`) VALUES (?, ?, ?, ?, ?, ?)';
+        connection.query(insertQuery, [first_name, last_name, email, phone, password, user_type], (insertErr, insertResults) => {
+            if (insertErr) {
+                console.error('Error creating user:', insertErr.message);
+                return callback(insertErr);
+            }
+            callback(null, insertResults);
+        });
     });
 };
+
 
 // Update an existing user
 User.updateUser = (id, userData, callback) => {
@@ -44,6 +62,23 @@ User.deleteUser = (id, callback) => {
             console.error('Error deleting user:', err.message);
         }
         callback(err, results);
+    });
+};
+
+
+User.findUserByEmail = (email, callback) => {
+    const query = 'SELECT * FROM `users` WHERE `email` = ?';
+    
+    connection.query(query, [email], (err, results) => {
+        if (err) {
+            console.error('No user found:', err.message);
+            return callback(err);
+        }
+        if (results.length > 0) {
+            callback(null, results[0]);
+        } else {
+            callback(null, null); // No matching user found
+        }
     });
 };
 
