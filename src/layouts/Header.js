@@ -30,7 +30,7 @@ const Header = ({ user, setUser }) => {
               </Link>
             </li>
             <li className="nav-item">
-              <Link to="/wallet" className="nav-link text-white">
+              <Link to="/adv" className="nav-link text-white">
                 Wallet page
               </Link>
             </li>
