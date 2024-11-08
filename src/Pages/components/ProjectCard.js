@@ -27,9 +27,8 @@ const ProjectCard = () => {
             <img src={Camera} alt="Camera Icon" />
           </div>
         </div>
-        <div class="message-text-new">
-          Do you want an advertisement ?
-        </div>
+        <input class="message-text-new cardin" placeholder='Do you want an advertisement ?' />
+       
       </div>
   
       
@@ -48,7 +47,6 @@ const ProjectCard = () => {
         <div class="save-new">
           <img src={Post} alt="Save Icon" /> <span>Write a post</span>
         </div> 
-       
       </div>
   
       <br />
