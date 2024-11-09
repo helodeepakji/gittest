@@ -82,4 +82,21 @@ User.findUserByEmail = (email, callback) => {
     });
 };
 
+
+User.findById = (id, callback) => {
+    const query = 'SELECT * FROM `users` WHERE `id` = ?';
+    
+    connection.query(query, [id], (err, results) => {
+        if (err) {
+            console.error('No user found:', err.message);
+            return callback(err);
+        }
+        if (results.length > 0) {
+            callback(null, results[0]);
+        } else {
+            callback(null, null); // No matching user found
+        }
+    });
+};
+
 module.exports = User;
