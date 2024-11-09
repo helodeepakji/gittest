@@ -1,321 +1,140 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-.wallectContainer {
-  width: 100%;
-}
-.wallectContainer>.heading {
-  width: 100%;
-  width: 1px solid green;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.wallectContainer>.heading > h1 {
-  margin: 10px 30px;
-  font-size: 40px;
-}
-.sideIMG > img {
-  width: 100%;
-  align-items: end;
-}
-.wallectContainer>.second-div {
-  width: 95%;
-  margin: auto;
-  padding:  20px;
-  border-radius: 10px;
-  background-image: linear-gradient(
-    210deg,
-    #ebcaf3 0%,
-    #dcb1ff 7.02%,
-    #bbc5f0 21.44%,
-    #aed7ec 41.78%,
-    #c4e3ec 53.63%,
-    #98f8e0 79.81%,
-    #90d6b0 100%
-  );
-}
-
-  .custom-main-div{
-    width: 90%;
-    background-color: #ffffff;
-    margin: 20px auto;
+ .wallet-container-all{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    background-color: #f4f4f4;
+  }
+  
+  .wallet-container {
+    width: 60%;
+    padding: 0px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+    height: 600px;
+    background-image: url("./images/diamond.png"), url("./images/triangle.png");
+    background-size: 200px, 200px;
+    background-position: 290px center, 520px 410px;
+    background-repeat: no-repeat;
+  }
+  
+  .wallet-header {
     display: flex;
     flex-direction: column;
-    box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.2);
+    margin: 20px 60px;
   }
-  .custom-heading{
-    width: 100%;
-    width: 1px solid green;
+  
+  .wallet-search-bar {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-  }
-  .custom-heading > h1 {
-    margin: 20px 80px ;
-  }
-  .custom-side-img > img {
+    padding: 8px 12px;
+    border: 1px solid black;
+    border-radius: 5px;
     width: 100%;
-    align-items: end;
   }
-  .custom-second-div {
-    width: 80%;
-    margin: auto;
-    padding: 20px;
+  
+  .wallet-search-bar input {
+    border: none;
+    outline: none;
+    width: 100%;
+    font-size: 14px;
+  }
+  
+  .wallet-columns {
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: space-around;
+  }
+  
+  .wallet-column {
+    padding: 15px;
     border-radius: 10px;
-    height: 550px;
-    background-image: linear-gradient(
-      210deg,
-      #ebcaf3 0%,
-      #dcb1ff 7.02%,
-      #bbc5f0 21.44%,
-      #aed7ec 41.78%,
-      #c4e3ec 53.63%,
-      #98f8e0 79.81%,
-      #90d6b0 100%
-    );
-  }
-  
-  .custom-third-div{
-    width: 95%;
-    margin: auto;
-    display: flex;
-    justify-content: space-between;
-   
-  }
-  .custom-men {
-    display: flex;
-    width: 100%;
-  }
-  .custom-men {
-    display: flex;
-    width: 50%;
-  }
-  .custom-men > img {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-  }
-  .custom-go-back{
-    width: 50%;
-    justify-content: flex-end;
-    display: flex;
-    gap: 4px;
-  }
-  .custom-go-back> p {
-    color: #000000;
-    font-size: 18px;
-    font-weight: 600;
-  }
-  
-  .custom-fourth-div{
-    width: 95%;
-    margin: 0px auto;
-    display: flex;
-    
-  }
-  .custom-image-section {
-    width: 55%;
-  }
-  .custom-image-section > img {
-    width: 500px;
-    height: 350px;
-    border-radius: 20px;
-  }
-  .custom-chat-section{
-    width: 40%;
-   height: auto;
-    background-color: white;
-  }
-  .custom-chat-header {
-    padding: 10px;
-    width: 100%;
-  }
-  .custom-chat-info {
-    display: flex;
-    gap: 8px;
+    text-align: center;
     align-items: center;
+    justify-content: center;
+    color: white;
   }
-  .custom-calls-icon {
+  
+  .wallet-project-column {
+    background-color: #b3e5fc;
+    width: 30%;
+    box-shadow: 8px 8px 10px rgba(0, 0, 0, 0.1);
+    height: 400px;
+  }
+  
+  .wallet-column h3 {
+    margin: 10px;
+  }
+  
+  .wallet-project-item {
     display: flex;
-    gap: 10px;
+    align-items: center;
+    margin: 10px 0;
+    color: black;
+    padding: 6px;
   }
-  .custom-chat-msg{
-    width: 100%;
+  
+  .wallet-project-item i {
+    background-color: #29b6f6;
+    border-radius: 50%;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 20px;
+    margin-right: 10px;
+  }
+  
+  .wallet-budget-column {
+    background-color: #ff8a80;
+    width: 15%;
+    box-shadow: 8px 8px 10px rgba(0, 0, 0, 0.1);
+    height: 400px;
+    color: black;
+  }
+  
+  .wallet-budget-column p {
     padding: 20px;
   }
-  .custom-msg-receiver {
-    width: 100%;
-    margin: 20px 0;
-  }
-  .custom-msg-receiver > p {
-    background-color: #f1f1f1;
+  
+  .wallet-spend-column {
+    background-color: #a5d6a7;
+    position: relative;
+    width: 15%;
+    box-shadow: 8px 8px 10px rgba(0, 0, 0, 0.1);
+    height: 400px;
     color: black;
-    border-radius: 4px 13px 13px 4px;
-    padding: 5px;
-    font-size: 20px;
-    font-weight: 500;
   }
-  .custom-msg-sender {
-    width: 100%;
+  
+  .wallet-spend-column p {
+    padding: 20px;
+  }
+  
+  .wallet-dropdown {
     display: flex;
-    align-items: flex-end;
-    justify-content: flex-end;
-  }
-  .custom-msg-sender> p {
-    background-color: #248f98;
-    color: white;
-    width: 100px;
-    border-top-left-radius: 20px;
-    border-bottom-left-radius: 20px;
-    border-top-right-radius: 60px;
-    padding: 5px;
-  }
-  .custom-chat-footer {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-top: 10px;
-    box-shadow: 0 -5px 10px rgba(170, 167, 167, 0.5);
-    padding: 10px;
-  }
-  .custom-footer-icon {
-    display: flex;
-    gap: 8px;
-  }
-  .custom-input-sec {
-    border-radius: 13px;
-    display: flex;
-    align-items: center;
-    width: 80%;
-    position: relative;
-  }
-  .custom-input-sec > input {
-    width: 100%;
-    border: none;
-    background-color: #f1f1f1;
-    border-radius: 20px;
-    padding: 10px;
-  }
-  .custom-thumb {
+    flex-direction: row;
+    gap: 20px;
+    width: 110%;
+    margin: 5px;
+    color: black;
+    background-color: white;
+    padding: 8px;
+    border-radius: 5px;
+    border: 2px solid black;
     position: absolute;
-    left: 90%;
-    top: 10%;
-  }
-  .custom-profile-picture > img {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    border-image-source: linear-gradient(
-      210deg,
-      #f0aeff 0%,
-      #dcb1ff 7.02%,
-      #a8b8ff 21.44%,
-      #54c4ff 41.78%,
-      #21cbff 53.63%,
-      #1ce8b5 79.81%,
-      #19fc80 100%
-    );
+    top: 25%;
+    left: 15%;
+    transform: translate(-50%, -50%);
+    box-shadow: 8px 8px 10px rgba(0, 0, 0, 0.1);
   }
   
-  .custom-btn-section {
-    width: 40%;
-    display: flex;
-    float: left;
-    margin: auto 20px;
-
-  }
-  button {
-    cursor: pointer;
-  }
-  .custom-btn1 {
-    font-size: 18px;
-    font-weight: 500;
-    background-color: #0b5258;
-    color: white;
-    border-radius: 8px;
-    padding: 10px;
-    border: none;
-  }
-  .custom-btn2 {
-    font-size: 18px;
-    font-weight: 600;
-    background-color: #f8f8f8;
-    color: #248f98;
-    border-radius: 8px;
-    padding: 10px;
-    border: 1px solid #0b5258;
-  }
-  .custom-btn-section > button {
-    margin: 10px 10px;
+  .wallet-dropdown span {
+    display: block;
+    gap: 20px;
   }
   
-  .custom-next {
-    width: 80%;
-    display: flex;
-    align-items: end;
-    justify-content: end;
-     margin: 10px auto; 
-    position: relative;
-  }
-  .custom-next > h1 {
-    color: #0b5258;
-  }
- 
-  @media screen and (max-width: 750px) {
-    .custom-third-div {
-      width: 100%;
-    }
-    .custom-second-div {
-      width: 100%;
-      margin: auto;
-      padding: 0 20px;
-    }
-  
-    .custom-men {
-      display: flex;
-      width: 100%;
-    }
-    .custom-heading > h1 {
-      margin-left: 10px;
-      margin-bottom: 20px;
-    }
-    .custom-fourth-div {
-      width: 100%;
-      flex-direction: column;
-    }
-    .custom-image-section {
-      width: 100%;
-      margin-bottom: 10px;
-    }
-    .custom-image-section > img {
-      width: 100%;
-      height: auto;
-    }
-    .custom-chat-section {
-      width: 100%;
-    }
-    .custom-btnSection {
-      width: 100%;
-      align-items: center;
-      justify-content: space-between;
-    }
-  
-    .custom-btn1,
-    .custom-btn2 {
-      padding: 5px;
-      font-size: 15px;
-    }
-  
-    .custom-btnSection > button {
-      margin: 0;
-    }
-  
-    .custom-next {
-      width: 100%;
-      
-    }
-  } 
