@@ -4,7 +4,7 @@ const Business = {};
 
 // Fetch all media records
 Business.getAllMedia = (callback) => {
-    const query = 'SELECT * FROM `business`';
+    const query = 'SELECT * FROM `business` ORDER BY `business`.`created_at` DESC';
     connection.query(query, (err, results) => {
         callback(err, results);
     });
@@ -12,7 +12,7 @@ Business.getAllMedia = (callback) => {
 
 // Fetch media records by user ID
 Business.getMediaByUserId = (userId, callback) => {
-    const query = 'SELECT * FROM `business` WHERE `user_id` = ?';
+    const query = 'SELECT * FROM `business` WHERE `user_id` = ? ORDER BY `business`.`created_at` DESC';
     connection.query(query, [userId], (err, results) => {
         if (err) {
             console.error('Error fetching media by user ID:', err.message);

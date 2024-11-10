@@ -182,4 +182,15 @@ route.get('/getMyRequirement', authenticateToken , (req, res) => {
     });
 });
 
+route.get('/getRequirement', authenticateToken , (req, res) => {
+    const user_id = req.user.id;
+    Business.getAllMedia((err, results) => {
+        if (err) {
+            return res.status(500).json({ message: 'Error fetching media by user ID', error: err.message });
+        }
+        res.json(results);
+    });
+});
+
+
 module.exports = route;
