@@ -2,6 +2,7 @@ const express = require('express');
 const jwt = require('jsonwebtoken');
 const multer = require('multer');
 const route = express.Router();
+const path = require('path');
 const User = require('../modal/User');
 const Business = require('../modal/Business');
 const JWT_SECRET = 'your_jwt_secret_key';
@@ -126,22 +127,45 @@ route.get('/profile', authenticateToken, (req, res) => {
 
 // business users
 
-route.post('/uploadRequirement',authenticateToken , (req, res) => {
-    const user_id = req.user.id;
-    const { caption } = req.body;
+// route.post('/uploadRequirement',authenticateToken , upload.single('media') , (req, res) => {
+//     const user_id = req.user.id;
+//     const { caption } = req.body;
 
-    if (!req.file || !caption) {
-        return res.status(400).json({ message: 'Media file and caption are required' });
+//     if (!req.file || !caption) {
+//         return res.status(400).json({ message: 'Media file and caption are required' });
+//     }
+
+//     // Get the relative path for the uploaded file
+//     const media = `/upload/${req.file.filename}`;
+
+//     Business.createMedia({ user_id, media, caption }, (err, result) => {
+//         if (err) {
+//             return res.status(500).json({ message: 'Error uploading media', error: err.message });
+//         }
+
+//         res.json({ message: 'Media uploaded successfully', mediaId: result.insertId });
+//     });
+// });
+
+route.post('/uploadRequirement', authenticateToken, upload.array('media[]', 10), (req, res) => {
+    const user_id = req.user.id;
+    const caption = req.body.caption;
+
+    if (!req.files || req.files.length === 0) {
+        return res.status(400).json({ message: 'At least one file is required' });
     }
 
-    // Get the relative path for the uploaded file
-    const media = `/upload/${req.file.filename}`;
+    // Map through req.files to get the file paths
+    const mediaPaths = req.files.map(file => `/upload/${file.filename}`);
+    
+    // Ensure no duplicates
+    const uniqueMediaPaths = [...new Set(mediaPaths)];
 
-    Business.createMedia({ user_id, media, caption }, (err, result) => {
+    // Save media information to the database
+    Business.createMedia({ user_id, media: uniqueMediaPaths, caption }, (err, result) => {
         if (err) {
             return res.status(500).json({ message: 'Error uploading media', error: err.message });
         }
-
         res.json({ message: 'Media uploaded successfully', mediaId: result.insertId });
     });
 });
@@ -157,6 +181,5 @@ route.get('/getMyRequirement', authenticateToken , (req, res) => {
         res.json(results);
     });
 });
-
 
 module.exports = route;
