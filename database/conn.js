@@ -1,11 +1,19 @@
 const mysql = require('mysql2');
 
+// const connection = mysql.createConnection({
+//     host : 'sql.freedb.tech',
+//     user: 'freedb_adjerry_admin',
+//     port : 3306,
+//     password : 'YeGn3Bc%dQ#Q5Am',
+//     database: 'freedb_adjerry'
+// });
+
 const connection = mysql.createConnection({
-    host : 'sql.freedb.tech',
-    user: 'freedb_adjerry_admin',
+    host : 'bjgjmnhzwl31g6tj7hlt-mysql.services.clever-cloud.com',
+    user: 'uxcvrbvt3f3khyvd',
     port : 3306,
-    password : 'YeGn3Bc%dQ#Q5Am',
-    database: 'freedb_adjerry'
+    password : 'hgzPERwH75ceKcZEld86',
+    database: 'bjgjmnhzwl31g6tj7hlt'
 });
 
 connection.connect(function(err){
