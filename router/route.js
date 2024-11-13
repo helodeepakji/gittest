@@ -178,6 +178,9 @@ route.get('/getMyRequirement', authenticateToken , (req, res) => {
             return res.status(500).json({ message: 'Error fetching media by user ID', error: err.message });
         }
 
+        console.log(results);
+        
+
         res.json(results);
     });
 });
