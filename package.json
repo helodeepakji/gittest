@@ -25,7 +25,8 @@
     "test": "react-scripts test",
     "backend": "node index.js",
     "eject": "react-scripts eject",
-    "run": "npm run build && npm run backend"
+    "run": "npm run build && npm run backend",
+    "project": "npm start && nodemon index.js"
   },
   "eslintConfig": {
     "extends": [
