@@ -20,6 +20,7 @@ const ProjectCard = () => {
   const [files, setFiles] = useState([]);
   const [requirements, setRequirements] = useState([]);
   const [error, setError] = useState(null);
+  const [run, setRun] = useState(0);
 
   const handleFileChange = (event) => {
     setFiles([...event.target.files]);
@@ -76,9 +77,10 @@ const ProjectCard = () => {
     }
   };
 
-  useEffect(() => {
+  if(run == 0){
+    setRun(1);
     fetchRequirements();
-  }, []);
+  }
 
   return (
     <div className="project-card-new0">

@@ -23,21 +23,28 @@ function App() {
     const token = localStorage.getItem('token');
     if (token) {
       const decodedToken = JSON.parse(atob(token.split('.')[1]));
-      setUser(decodedToken);
-      if(decodedToken.user_type === 'business'){
-        navigate('/bussiness');
-      }else if (decodedToken.user_type === 'designer') {
-        navigate('/design');
-      } else if (decodedToken.user_type === 'retailer') {
-        navigate('/retailer');
-      }else {
-        navigate('/'); 
-      }
 
+      const currentTime = Date.now() / 1000;
+      if (decodedToken.exp < currentTime) {
+        localStorage.removeItem('token');
+        setUser(null);
+        navigate('/login');
+      } else {
+        setUser(decodedToken);
+        if (decodedToken.user_type === 'business') {
+          navigate('/bussiness');
+        } else if (decodedToken.user_type === 'designer') {
+          navigate('/design');
+        } else if (decodedToken.user_type === 'retailer') {
+          navigate('/retailer');
+        } else {
+          navigate('/');
+        }
+      }
     } else {
       setUser(null);
     }
-  }, [location,navigate]);
+  }, [location, navigate]);
 
   const ProtectedRoute = ({ element }) => {
     const isAuthenticated = localStorage.getItem('token');
