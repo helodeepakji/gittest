@@ -1,18 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import "./ProjectCard.css";
 import Profile from "./images/profile-picture.webp";
-import Project from './images/project-sample.png';
 import Like from "./images/like.png";
 import Comment from "./images/comment.png";
 import Share from "./images/share.png";
 import Save from "./images/save.png";
-import Sensory from "./images/sensory.jpg";
 import Photo from './images/photo.png';
 import Video from "./images/video.png";
 import Event from "./images/event.png";
-import Post from "./images/post.png";
 import Camera from "./images/camera.png";
-
 import axios from 'axios';
 
 const ProjectCard = () => {
@@ -20,10 +16,39 @@ const ProjectCard = () => {
   const [files, setFiles] = useState([]);
   const [requirements, setRequirements] = useState([]);
   const [error, setError] = useState(null);
-  const [run, setRun] = useState(0);
 
   const handleFileChange = (event) => {
     setFiles([...event.target.files]);
+  };
+
+  const fetchRequirements = async (controller) => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      setError('Authentication token is missing');
+      return;
+    }
+
+    try {
+      const response = await fetch('/api/getRequirement', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        },
+        signal: controller.signal,
+      });
+
+      if (!response.ok) {
+        throw new Error(`Error: ${response.status} - ${response.statusText}`);
+      }
+
+      const data = await response.json();
+      setRequirements(data);
+    } catch (err) {
+      if (err.name !== 'AbortError') {
+        setError(err.message);
+      }
+    }
   };
 
   const handleSubmit = async () => {
@@ -43,44 +68,22 @@ const ProjectCard = () => {
         }
       });
       console.log('Response:', response.data);
+      const controller = new AbortController();
+      fetchRequirements(controller);
     } catch (error) {
       console.error('Error uploading files:', error);
     }
-    fetchRequirements();
   };
 
-  const fetchRequirements = async () => {
-    const token = localStorage.getItem('token');
+  useEffect(() => {
+    const controller = new AbortController();
+    fetchRequirements(controller);
 
-    if (!token) {
-      setError('Authentication token is missing');
-      return;
-    }
-
-    try {
-      const response = await fetch('/api/getMyRequirement', {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}` // Include token in Authorization header
-        }
-      });
-
-      if (!response.ok) {
-        throw new Error(`Error: ${response.status} - ${response.statusText}`);
-      }
-
-      const data = await response.json();
-      setRequirements(data);
-    } catch (err) {
-      setError(err.message);
-    }
-  };
-
-  if(run == 0){
-    setRun(1);
-    fetchRequirements();
-  }
+    // Cleanup to abort fetch if component unmounts
+    return () => {
+      controller.abort();
+    };
+  }, []);
 
   return (
     <div className="project-card-new0">

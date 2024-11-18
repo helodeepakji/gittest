@@ -1,57 +1,61 @@
 import React, { useState, useEffect } from 'react';
 import "./ProjectCard.css";
 import Profile from "./image/profile-picture.webp";
-import Project from './image/project-sample.png';
 import Like from "./image/like.png";
 import Comment from "./image/comment.png";
 import Share from "./image/share.png";
 import Save from "./image/save.png";
-import Sensory from "./image/sensory.jpg";
 import Group1 from "./image/Group (1).png";
 
 const ProjectCard = () => {
   const [requirements, setRequirements] = useState([]);
   const [error, setError] = useState(null);
 
-  const fetchRequirements = async () => {
-    const token = localStorage.getItem('token');
+  useEffect(() => {
+    const controller = new AbortController();
 
-    if (!token) {
-      setError('Authentication token is missing');
-      return;
-    }
-
-    try {
-      const response = await fetch('/api/getRequirement', {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`, // Include token in Authorization header
-        },
-      });
-
-      if (!response.ok) {
-        throw new Error(`Error: ${response.status} - ${response.statusText}`);
+    const fetchRequirements = async () => {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        setError('Authentication token is missing');
+        return;
       }
 
-      const data = await response.json();
-      setRequirements(data);
-    } catch (err) {
-      setError(err.message);
-    }
-  };
+      try {
+        const response = await fetch('/api/getRequirement', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+          },
+          signal: controller.signal, // Pass the AbortController signal here
+        });
 
-  // useEffect(() => {
+        if (!response.ok) {
+          throw new Error(`Error: ${response.status} - ${response.statusText}`);
+        }
+
+        const data = await response.json();
+        setRequirements(data);
+      } catch (err) {
+        if (err.name !== 'AbortError') {
+          setError(err.message);
+        }
+      }
+    };
+
     fetchRequirements();
-  // }, []); // Empty dependency array ensures it runs only once on mount
+
+    // Cleanup to abort fetch if component unmounts
+    return () => {
+      controller.abort();
+    };
+  }, []);
 
   return (
     <div className="project-card0">
       <img src={Group1} alt="Group1 png" />
-      <h3>
-        Ready to create amazing designs? Check out the latest project and
-        start earning today.
-      </h3>
+      <h3>Ready to create amazing designs? Check out the latest project and start earning today.</h3>
       <hr />
       {requirements && requirements.length > 0 ? (
         requirements.map((req, index) => (
