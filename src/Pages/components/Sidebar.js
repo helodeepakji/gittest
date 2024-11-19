@@ -55,7 +55,7 @@ function Sidebar() {
         <button className="user-button">Business Profile</button>
       </div>
       <div className="sidebar-group">
-        <img src={Group} style={{ marginTop: "600px" }} alt="Group" />
+        <img src={Group} style={{marginTop:'100px'} } alt="Group" />
       </div>
     </div>
   );

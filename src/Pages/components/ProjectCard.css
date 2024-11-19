@@ -1,10 +1,16 @@
 .project-card-new0 {
   background-color: #ffffff;
   padding: 20px;
+  padding-bottom: 50px; /* add this */
   border-radius: 15px;
   max-width: 600px;
   margin: auto;
+  overflow-y: auto; /* add this */
+  max-height: 90vh; /* adjust height according to your needs */
+  box-sizing: border-box; /* add this */
+  /* border: 2px solid red; */
 }
+
 
 .message-container-new {
   display: flex;
