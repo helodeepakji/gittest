@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import "./ProjectCard.css";
+import axios from 'axios';
 import Profile from "./image/profile-picture.webp";
 import Like from "./image/like.png";
 import Comment from "./image/comment.png";
@@ -9,7 +10,47 @@ import Group1 from "./image/Group (1).png";
 
 const ProjectCard = () => {
   const [requirements, setRequirements] = useState([]);
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [uploadedImage, setUploadedImage] = useState(null);
   const [error, setError] = useState(null);
+  
+
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      setSelectedImage(URL.createObjectURL(file));
+    }
+  };
+  const handlePhotoClick = () => {
+    document.getElementById("inputImage").click();
+  };
+
+
+  const handleSubmit = async () => {
+    if (!selectedImage) {
+      alert("Please select a photo before submitting!");
+      return;
+    }
+
+    // Simulate API submission (e.g., uploading to a server)
+    try {
+      // Example: Simulating a submission
+      const response = await axios.post("/api/submitProject", {
+        image: selectedImage,
+      });
+
+      if (response.status === 200) {
+        setUploadedImage(selectedImage); // Set the submitted image for viewing
+        alert("Project submitted successfully!");
+      } else {
+        alert("Failed to submit the project.");
+      }
+    } catch (err) {
+      console.error(err);
+      alert("An error occurred while submitting the project.");
+    }
+  };
+
 
   useEffect(() => {
     const controller = new AbortController();
@@ -50,6 +91,7 @@ const ProjectCard = () => {
     return () => {
       controller.abort();
     };
+
   }, []);
 
   return (
@@ -70,8 +112,22 @@ const ProjectCard = () => {
                 </div>
               </div>
               <div className="action-buttons">
-                <button className="button submit-button">Submit Project</button>
-                <button className="button view-button">View</button>
+              <input
+                  type="file"
+                  id="inputImage"
+                  accept="image/*"
+                  name="images[]"
+                  style={{ display: "none" }}
+                  onChange={handleFileChange}
+                />
+                <button
+                  className="button submit-button"
+                  onClick={handlePhotoClick}
+                >
+                  Select Photo
+                </button>
+                <button className="button submit-button"  onClick={handleSubmit} >Submit Project</button>
+                <button className="button view-button" >View</button>
               </div>
             </div>
 
