@@ -36,6 +36,9 @@
   display: flex;
   gap: 10px;
 }
+.function-buttons{
+  margin-top: 26px;
+}
 .action-buttons .button {
   padding: 8px 15px;
   font-size: 14px;

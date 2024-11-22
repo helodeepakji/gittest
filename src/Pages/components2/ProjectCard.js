@@ -14,6 +14,7 @@ const ProjectCard = () => {
   const [requirements, setRequirements] = useState([]);
   const [error, setError] = useState(null);
   const [image, setImage] =useState("");
+  const [selectedProject, setSelectedProject] = useState(null);
   const inputRef =useRef(null);
 
   const handleImageClick =() =>{
@@ -25,7 +26,41 @@ const ProjectCard = () => {
     console.log(file);
     setImage(e.target.files[0]); 
     };
-
+    const handleSubmit = async (project) => {
+      if (!project || !image) {
+        alert('Please upload an image and select a project to submit.');
+        return;
+      }
+  
+      const token = localStorage.getItem('token');
+      if (!token) {
+        setError('Authentication token is missing');
+        return;
+      }
+  
+      try {
+        const formData = new FormData();
+        formData.append('media', image);
+        formData.append('caption', project.caption);
+  
+        const response = await axios.post('/uploadRequirement', formData, {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'multipart/form-data',
+          },
+        });
+  
+        if (response.status === 200) {
+          alert('Project submitted successfully!');
+          setImage(null); // Reset the image state
+        } else {
+          alert(`Submission failed: ${response.statusText}`);
+        }
+      } catch (err) {
+        alert(`An error occurred: ${err.message}`);
+      }
+    };
+  
 
 
   useEffect(() => {
@@ -88,7 +123,7 @@ const ProjectCard = () => {
                 </div>
               </div>
               <div className="action-buttons" >
-                  <div onClick={handleImageClick}>
+                <div onClick={handleImageClick} className="function-buttons">
                 {image ? <img src={URL.createObjectURL(image)} alt=' '/> :<img src={Photo} alt="" /> }
                 <input 
                 type="file"
@@ -96,10 +131,12 @@ const ProjectCard = () => {
                 onChange={handleImageChange}
                 style={{display:"none"}}
                 />
-                  </div>
+               
+               </div>
 
-                <button className="button submit-button" > Submit Project</button>
-                <button className="button view-button" >View</button>
+                <button className="button submit-button"  onClick={() => handleSubmit(req)} > Submit Project</button>
+                <button className="button view-button"  onClick={() => setSelectedProject(req)}>View</button>
+               
               </div>
             </div>
 
