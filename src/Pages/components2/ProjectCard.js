@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect , useRef} from 'react';
 import "./ProjectCard.css";
 import axios from 'axios';
 import Profile from "./image/profile-picture.webp";
@@ -7,49 +7,25 @@ import Comment from "./image/comment.png";
 import Share from "./image/share.png";
 import Save from "./image/save.png";
 import Group1 from "./image/Group (1).png";
+import Photo from './image/photo.png';
+
 
 const ProjectCard = () => {
   const [requirements, setRequirements] = useState([]);
-  const [selectedImage, setSelectedImage] = useState(null);
-  const [uploadedImage, setUploadedImage] = useState(null);
   const [error, setError] = useState(null);
-  
+  const [image, setImage] =useState("");
+  const inputRef =useRef(null);
 
-  const handleFileChange = (event) => {
-    const file = event.target.files[0];
-    if (file) {
-      setSelectedImage(URL.createObjectURL(file));
-    }
-  };
-  const handlePhotoClick = () => {
-    document.getElementById("inputImage").click();
+  const handleImageClick =() =>{
+    inputRef.current.click();
   };
 
+  const handleImageChange =(e) =>{
+    const file=e.target.files[0];
+    console.log(file);
+    setImage(e.target.files[0]); 
+    };
 
-  const handleSubmit = async () => {
-    if (!selectedImage) {
-      alert("Please select a photo before submitting!");
-      return;
-    }
-
-    // Simulate API submission (e.g., uploading to a server)
-    try {
-      // Example: Simulating a submission
-      const response = await axios.post("/api/submitProject", {
-        image: selectedImage,
-      });
-
-      if (response.status === 200) {
-        setUploadedImage(selectedImage); // Set the submitted image for viewing
-        alert("Project submitted successfully!");
-      } else {
-        alert("Failed to submit the project.");
-      }
-    } catch (err) {
-      console.error(err);
-      alert("An error occurred while submitting the project.");
-    }
-  };
 
 
   useEffect(() => {
@@ -111,22 +87,18 @@ const ProjectCard = () => {
                   <div>25 Nov at 12:44 PM</div>
                 </div>
               </div>
-              <div className="action-buttons">
-              <input
-                  type="file"
-                  id="inputImage"
-                  accept="image/*"
-                  name="images[]"
-                  style={{ display: "none" }}
-                  onChange={handleFileChange}
+              <div className="action-buttons" >
+                  <div onClick={handleImageClick}>
+                {image ? <img src={URL.createObjectURL(image)} alt=' '/> :<img src={Photo} alt="" /> }
+                <input 
+                type="file"
+                ref={inputRef}
+                onChange={handleImageChange}
+                style={{display:"none"}}
                 />
-                <button
-                  className="button submit-button"
-                  onClick={handlePhotoClick}
-                >
-                  Select Photo
-                </button>
-                <button className="button submit-button"  onClick={handleSubmit} >Submit Project</button>
+                  </div>
+
+                <button className="button submit-button" > Submit Project</button>
                 <button className="button view-button" >View</button>
               </div>
             </div>
