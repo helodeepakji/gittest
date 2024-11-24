@@ -22,6 +22,39 @@ Business.getMediaByUserId = (userId, callback) => {
     });
 };
 
+Business.getMediaByUserIdPaginated = (userId, limit, offset, callback) => {
+    const query = `
+        SELECT * 
+        FROM business 
+        WHERE user_id = ? 
+        ORDER BY created_at DESC 
+        LIMIT ? OFFSET ?;
+    `;
+    const countQuery = `
+        SELECT COUNT(*) AS totalCount 
+        FROM business 
+        WHERE user_id = ?;
+    `;
+
+    connection.query(query, [userId, limit, offset], (err, results) => {
+        if (err) {
+            console.error('Error fetching media by user ID:', err.message);
+            return callback(err);
+        }
+
+        connection.query(countQuery, [userId], (countErr, countResults) => {
+            if (countErr) {
+                console.error('Error fetching media count by user ID:', countErr.message);
+                return callback(countErr);
+            }
+
+            const totalCount = countResults[0].totalCount;
+            callback(null, results, totalCount);
+        });
+    });
+};
+
+
 // Upload new media record
 Business.createMedia = (mediaData, callback) => {
     const { user_id, media, caption } = mediaData;

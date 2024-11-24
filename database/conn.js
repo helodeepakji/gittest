@@ -9,11 +9,11 @@ const mysql = require('mysql2');
 // });
 
 const connection = mysql.createConnection({
-    host : 'bjgjmnhzwl31g6tj7hlt-mysql.services.clever-cloud.com',
-    user: 'uxcvrbvt3f3khyvd',
+    host : '54.164.178.165',
+    user: 'remote_ads',
     port : 3306,
-    password : 'hgzPERwH75ceKcZEld86',
-    database: 'bjgjmnhzwl31g6tj7hlt'
+    password : 'Admin@2024!',
+    database: 'ads'
 });
 
 connection.connect(function(err){

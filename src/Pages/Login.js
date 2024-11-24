@@ -1,4 +1,4 @@
-import {React , useState} from 'react'
+import { React, useState } from 'react'
 import './Login.css';
 import loginImg from './Assests/pic.png'
 import { FaGoogle } from "react-icons/fa";
@@ -22,7 +22,15 @@ const Login = () => {
 
             if (response.ok) {
                 localStorage.setItem('token', data.token);
-                navigate('/bussiness');
+                if (data.user_type === 'business') {
+                    navigate('/bussiness');
+                } else if (data.user_type === 'designer') {
+                    navigate('/design');
+                } else if (data.user_type === 'retailer') {
+                    navigate('/retailer');
+                } else {
+                    navigate('/');
+                }
             } else {
                 setError(data.message || 'Login failed');
             }
@@ -53,13 +61,13 @@ const Login = () => {
                         <div className="form-group">
                             <label>Email</label>
                             <input type="email" value={email} onChange={(e) => setEmail(e.target.value)}
-                            placeholder="Enter your email" />
+                                placeholder="Enter your email" />
                         </div>
 
                         <div className="form-group">
                             <label>Password</label>
                             <input type="password" value={password} onChange={(e) => setPassword(e.target.value)}
-                            placeholder="Enter your password" />
+                                placeholder="Enter your password" />
                         </div>
                         <div className="checkBox">
                             <div className="remember-me">

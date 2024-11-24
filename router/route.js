@@ -104,8 +104,7 @@ route.post('/login', (req, res) => {
             expiresIn: '1h'
         });
 
-        res.json({ token });
-        
+        res.json({ token, user_type: user.user_type });        
     });
 });
 
@@ -170,20 +169,45 @@ route.post('/uploadRequirement', authenticateToken, upload.array('media[]', 10),
     });
 });
 
-route.get('/getMyRequirement', authenticateToken , (req, res) => {
+// route.get('/getMyRequirement', authenticateToken , (req, res) => {
+//     const user_id = req.user.id;
+
+//     Business.getMediaByUserId(user_id, (err, results) => {
+//         if (err) {
+//             return res.status(500).json({ message: 'Error fetching media by user ID', error: err.message });
+//         }
+
+//         console.log(results);
+        
+
+//         res.json(results);
+//     });
+// });
+
+route.get('/getMyRequirement', authenticateToken, (req, res) => {
     const user_id = req.user.id;
 
-    Business.getMediaByUserId(user_id, (err, results) => {
+    // Retrieve `page` and `limit` query parameters
+    const page = parseInt(req.query.page) || 1; // Default to page 1
+    const limit = parseInt(req.query.limit) || 5; // Default to 10 items per page
+
+    const offset = (page - 1) * limit;
+
+    Business.getMediaByUserIdPaginated(user_id, limit, offset, (err, results, totalCount) => {
         if (err) {
             return res.status(500).json({ message: 'Error fetching media by user ID', error: err.message });
         }
 
-        console.log(results);
-        
-
-        res.json(results);
+        res.json({
+            page,
+            limit,
+            totalCount,
+            totalPages: Math.ceil(totalCount / limit),
+            data: results,
+        });
     });
 });
+
 
 route.get('/getRequirement', authenticateToken , (req, res) => {
     const user_id = req.user.id;

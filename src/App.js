@@ -1,15 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { Routes, Route, Navigate, useLocation, useNavigate } from 'react-router-dom'; // No Router here
+
+// layout page
+import Header from './layouts/Header';
+import Footer from './layouts/Footer';
+
+// comman page
 import Home from './Pages/Home';
 import Login from './Pages/Login';
 import Signup from './Pages/Signup';
 import Join from './Pages/Join';
-import Header from './layouts/Header';
-import Footer from './layouts/Footer';
+
+// business user page
 import Contactpage from './layouts/Contactpage';
 import Designerpage from "./Pages/components2/Designerpage";
 import Wallet from './layouts/Wallet';
-import Bussiness from './Pages/components/Bussiness';
+import Bussiness from './Pages/Business';
 import Adv from './Pages/components3/Adv';
 import Retailer from './Pages/Component4/Retailer';
 import Viewpost from './layouts/Viewpost';
@@ -19,41 +25,27 @@ function App() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (token) {
-      const decodedToken = JSON.parse(atob(token.split('.')[1]));
-
-      const currentTime = Date.now() / 1000;
-      if (decodedToken.exp < currentTime) {
-        localStorage.removeItem('token');
-        setUser(null);
-        navigate('/login');
-      } else {
-        setUser(decodedToken);
-        if (decodedToken.user_type === 'business') {
-          navigate('/bussiness');
-        } else if (decodedToken.user_type === 'designer') {
-          navigate('/design');
-        } else if (decodedToken.user_type === 'retailer') {
-          navigate('/retailer');
-        } else {
-          navigate('/');
-        }
-      }
-    } else {
-      setUser(null);
-    }
-  }, [location, navigate]);
-
   const ProtectedRoute = ({ element }) => {
-    const isAuthenticated = localStorage.getItem('token');
-    return isAuthenticated ? element : <Navigate to="/login" />;
+    // const token = localStorage.getItem('token');
+    // if (token) {
+      // const decodedToken = JSON.parse(atob(token.split('.')[1]));
+      // // const currentTime = Date.now() / 1000;
+      // // if (decodedToken.exp < currentTime) {
+      // //   localStorage.removeItem('token');
+      // //   setUser(null);
+      // //   navigate('/login');
+      // // } else {
+        // setUser(decodedToken);
+        return element;
+      // }
+    // } else {
+    //   return <Navigate to="/login" />;
+    // }
   };
 
   return (
     <div>
-      <Header user={user} />
+      <Header />
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/login' element={<Login />} />
