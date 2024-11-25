@@ -196,7 +196,7 @@ route.get('/getRequirement', authenticateToken , (req, res) => {
 });
 
 // upload designs
-route.get('/uploadDesign', authenticateToken , upload.array('media[]', 10) , (req, res) => {
+route.post('/uploadDesign', authenticateToken , upload.array('media[]', 10) , (req, res) => {
     const user_id = req.user.id;
     const ads_id = req.body.ads_id;
    
@@ -210,7 +210,7 @@ route.get('/uploadDesign', authenticateToken , upload.array('media[]', 10) , (re
      // Ensure no duplicates
     const uniqueMediaPaths = [...new Set(mediaPaths)];
 
-    Designs.uploadDesign( {ads_id, user_id , media: uniqueMediaPaths},(err, results) => {
+    Designs.uploadDesign( {ads_id, user_id , media: uniqueMediaPaths},(err, result) => {
         if (err) {
             return res.status(500).json({ message: 'Error uploading media', error: err.message });
         }

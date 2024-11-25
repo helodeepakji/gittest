@@ -12,8 +12,9 @@ import Photo from './image/photo.png';
 
 const ProjectCard = () => {
   const [requirements, setRequirements] = useState([]);
-  const [error, setError] = useState(null);
   const [image, setImage] = useState("");
+  const [error, setError] = useState(null);
+  const [files, setFiles] = useState([]);
   const [selectedProject, setSelectedProject] = useState(null);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
@@ -24,13 +25,12 @@ const ProjectCard = () => {
   };
 
   const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    console.log(file);
+    setFiles([...e.target.files]);
     setImage(e.target.files[0]);
   };
 
-  const handleSubmit = async (project) => {
-    if (!project || !image) {
+  const handleSubmit = async (ads_id) => {
+    if (!ads_id || !files) {
       alert('Please upload an image and select a project to submit.');
       return;
     }
@@ -43,10 +43,12 @@ const ProjectCard = () => {
 
     try {
       const formData = new FormData();
-      formData.append('media', image);
-      formData.append('caption', project.caption);
+      formData.append('ads_id', ads_id);
+      files.forEach((file) => {
+        formData.append("media[]", file);
+      });
 
-      const response = await axios.post('/uploadRequirement', formData, {
+      const response = await axios.post('/api/uploadDesign', formData, {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'multipart/form-data',
@@ -63,7 +65,6 @@ const ProjectCard = () => {
       alert(`An error occurred: ${err.message}`);
     }
   };
-
 
   const fetchRequirements = async (currentPage = 1) => {
     const token = localStorage.getItem("token");
@@ -111,7 +112,7 @@ const ProjectCard = () => {
               </div>
               <div className="action-buttons" >
                 <div onClick={handleImageClick} className="function-buttons">
-                  {image ? <img src={URL.createObjectURL(image)} alt=' ' /> : <img src={Photo} alt="" />}
+                  {image ? <img src={URL.createObjectURL(image)} alt='' style={{ width: "50px" }} /> : <img src={Photo} alt="" />}
                   <input
                     type="file"
                     ref={inputRef}
@@ -121,7 +122,7 @@ const ProjectCard = () => {
 
                 </div>
 
-                <button className="button submit-button" onClick={() => handleSubmit(req)} > Submit Project</button>
+                <button className="button submit-button" onClick={() => handleSubmit(req.id)} > Submit Project</button>
                 <button className="button view-button" onClick={() => setSelectedProject(req)}>View</button>
 
               </div>
