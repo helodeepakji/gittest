@@ -23,11 +23,11 @@ const Login = () => {
             if (response.ok) {
                 localStorage.setItem('token', data.token);
                 if (data.user_type === 'business') {
-                    navigate('/bussiness');
+                    navigate('/business/home');
                 } else if (data.user_type === 'designer') {
-                    navigate('/design');
+                    navigate('/desiger/home');
                 } else if (data.user_type === 'retailer') {
-                    navigate('/retailer');
+                    navigate('/retailer/home');
                 } else {
                     navigate('/');
                 }

@@ -1,4 +1,4 @@
-import React, { useState, useEffect , useRef} from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import "./ProjectCard.css";
 import axios from 'axios';
 import Profile from "./image/profile-picture.webp";
@@ -12,98 +12,86 @@ import Photo from './image/photo.png';
 
 const ProjectCard = () => {
   const [requirements, setRequirements] = useState([]);
+  const [image, setImage] = useState("");
   const [error, setError] = useState(null);
-  const [image, setImage] =useState("");
+  const [files, setFiles] = useState([]);
   const [selectedProject, setSelectedProject] = useState(null);
-  const inputRef =useRef(null);
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const inputRef = useRef(null);
 
-  const handleImageClick =() =>{
+  const handleImageClick = () => {
     inputRef.current.click();
   };
 
-  const handleImageChange =(e) =>{
-    const file=e.target.files[0];
-    console.log(file);
-    setImage(e.target.files[0]); 
-    };
-    const handleSubmit = async (project) => {
-      if (!project || !image) {
-        alert('Please upload an image and select a project to submit.');
-        return;
-      }
-  
-      const token = localStorage.getItem('token');
-      if (!token) {
-        setError('Authentication token is missing');
-        return;
-      }
-  
-      try {
-        const formData = new FormData();
-        formData.append('media', image);
-        formData.append('caption', project.caption);
-  
-        const response = await axios.post('/uploadRequirement', formData, {
-          headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'multipart/form-data',
-          },
-        });
-  
-        if (response.status === 200) {
-          alert('Project submitted successfully!');
-          setImage(null); // Reset the image state
-        } else {
-          alert(`Submission failed: ${response.statusText}`);
-        }
-      } catch (err) {
-        alert(`An error occurred: ${err.message}`);
-      }
-    };
-  
+  const handleImageChange = (e) => {
+    setFiles([...e.target.files]);
+    setImage(e.target.files[0]);
+  };
 
+  const handleSubmit = async (ads_id) => {
+    if (!ads_id || !files) {
+      alert('Please upload an image and select a project to submit.');
+      return;
+    }
+
+    const token = localStorage.getItem('token');
+    if (!token) {
+      setError('Authentication token is missing');
+      return;
+    }
+
+    try {
+      const formData = new FormData();
+      formData.append('ads_id', ads_id);
+      files.forEach((file) => {
+        formData.append("media[]", file);
+      });
+
+      const response = await axios.post('/api/uploadDesign', formData, {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+
+      if (response.status === 200) {
+        alert('Project submitted successfully!');
+        setImage(null); // Reset the image state
+      } else {
+        alert(`Submission failed: ${response.statusText}`);
+      }
+    } catch (err) {
+      alert(`An error occurred: ${err.message}`);
+    }
+  };
+
+  const fetchRequirements = async (currentPage = 1) => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      setError("Authentication token is missing");
+      return;
+    }
+
+    try {
+      const response = await axios.get(`/api/getRequirement?page=${currentPage}&limit=5`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      const { data, totalPages } = response.data;
+
+      setRequirements(data); // Set the array of requirements
+      setTotalPages(totalPages); // Update totalPages state
+    } catch (err) {
+      setError(err.message);
+    }
+  };
 
   useEffect(() => {
-    const controller = new AbortController();
-
-    const fetchRequirements = async () => {
-      const token = localStorage.getItem('token');
-      if (!token) {
-        setError('Authentication token is missing');
-        return;
-      }
-
-      try {
-        const response = await fetch('/api/getRequirement', {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`,
-          },
-          signal: controller.signal, // Pass the AbortController signal here
-        });
-
-        if (!response.ok) {
-          throw new Error(`Error: ${response.status} - ${response.statusText}`);
-        }
-
-        const data = await response.json();
-        setRequirements(data);
-      } catch (err) {
-        if (err.name !== 'AbortError') {
-          setError(err.message);
-        }
-      }
-    };
-
-    fetchRequirements();
-
-    // Cleanup to abort fetch if component unmounts
-    return () => {
-      controller.abort();
-    };
-
-  }, []);
+    fetchRequirements(page);
+  }, [page]);
 
   return (
     <div className="project-card0">
@@ -124,19 +112,19 @@ const ProjectCard = () => {
               </div>
               <div className="action-buttons" >
                 <div onClick={handleImageClick} className="function-buttons">
-                {image ? <img src={URL.createObjectURL(image)} alt=' '/> :<img src={Photo} alt="" /> }
-                <input 
-                type="file"
-                ref={inputRef}
-                onChange={handleImageChange}
-                style={{display:"none"}}
-                />
-               
-               </div>
+                  {image ? <img src={URL.createObjectURL(image)} alt='' style={{ width: "50px" }} /> : <img src={Photo} alt="" />}
+                  <input
+                    type="file"
+                    ref={inputRef}
+                    onChange={handleImageChange}
+                    style={{ display: "none" }}
+                  />
 
-                <button className="button submit-button"  onClick={() => handleSubmit(req)} > Submit Project</button>
-                <button className="button view-button"  onClick={() => setSelectedProject(req)}>View</button>
-               
+                </div>
+
+                <button className="button submit-button" onClick={() => handleSubmit(req.id)} > Submit Project</button>
+                <button className="button view-button" onClick={() => setSelectedProject(req)}>View</button>
+
               </div>
             </div>
 
@@ -169,6 +157,24 @@ const ProjectCard = () => {
       ) : (
         <p>No requirements available</p>
       )}
+      {/* Pagination Controls */}
+      <div className="pagination">
+        <button
+          onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
+          disabled={page === 1}
+        >
+          Previous
+        </button>
+        <span>
+          Page {page} of {totalPages}
+        </span>
+        <button
+          onClick={() => setPage((prev) => Math.min(prev + 1, totalPages))}
+          disabled={page === totalPages}
+        >
+          Next
+        </button>
+      </div>
     </div>
   );
 };
