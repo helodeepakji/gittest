@@ -5,6 +5,7 @@ const route = express.Router();
 const path = require('path');
 const User = require('../modal/User');
 const Business = require('../modal/Business');
+const Designs = require('../modal/Designs');
 const JWT_SECRET = 'your_jwt_secret_key';
 
 const storage = multer.diskStorage({
@@ -125,27 +126,6 @@ route.get('/profile', authenticateToken, (req, res) => {
 });
 
 // business users
-
-// route.post('/uploadRequirement',authenticateToken , upload.single('media') , (req, res) => {
-//     const user_id = req.user.id;
-//     const { caption } = req.body;
-
-//     if (!req.file || !caption) {
-//         return res.status(400).json({ message: 'Media file and caption are required' });
-//     }
-
-//     // Get the relative path for the uploaded file
-//     const media = `/upload/${req.file.filename}`;
-
-//     Business.createMedia({ user_id, media, caption }, (err, result) => {
-//         if (err) {
-//             return res.status(500).json({ message: 'Error uploading media', error: err.message });
-//         }
-
-//         res.json({ message: 'Media uploaded successfully', mediaId: result.insertId });
-//     });
-// });
-
 route.post('/uploadRequirement', authenticateToken, upload.array('media[]', 10), (req, res) => {
     const user_id = req.user.id;
     const caption = req.body.caption;
@@ -168,21 +148,6 @@ route.post('/uploadRequirement', authenticateToken, upload.array('media[]', 10),
         res.json({ message: 'Media uploaded successfully', mediaId: result.insertId });
     });
 });
-
-// route.get('/getMyRequirement', authenticateToken , (req, res) => {
-//     const user_id = req.user.id;
-
-//     Business.getMediaByUserId(user_id, (err, results) => {
-//         if (err) {
-//             return res.status(500).json({ message: 'Error fetching media by user ID', error: err.message });
-//         }
-
-//         console.log(results);
-        
-
-//         res.json(results);
-//     });
-// });
 
 route.get('/getMyRequirement', authenticateToken, (req, res) => {
     const user_id = req.user.id;
@@ -208,14 +173,48 @@ route.get('/getMyRequirement', authenticateToken, (req, res) => {
     });
 });
 
-
 route.get('/getRequirement', authenticateToken , (req, res) => {
     const user_id = req.user.id;
-    Business.getAllMedia((err, results) => {
+    const page = parseInt(req.query.page) || 1; // Default to page 1
+    const limit = parseInt(req.query.limit) || 5; // Default to 10 items per page
+
+    const offset = (page - 1) * limit;
+
+    Business.getAllMediaPaginated(limit, offset, (err, results, totalCount) => {
         if (err) {
             return res.status(500).json({ message: 'Error fetching media by user ID', error: err.message });
         }
-        res.json(results);
+
+        res.json({
+            page,
+            limit,
+            totalCount,
+            totalPages: Math.ceil(totalCount / limit),
+            data: results,
+        });
+    });
+});
+
+// upload designs
+route.get('/uploadDesign', authenticateToken , upload.array('media[]', 10) , (req, res) => {
+    const user_id = req.user.id;
+    const ads_id = req.body.ads_id;
+   
+    if (!req.files || req.files.length === 0) {
+        return res.status(400).json({ message: 'At least one file is required' });
+    }
+
+     // Map through req.files to get the file paths
+    const mediaPaths = req.files.map(file => `/upload/${file.filename}`);
+    
+     // Ensure no duplicates
+    const uniqueMediaPaths = [...new Set(mediaPaths)];
+
+    Designs.uploadDesign( {ads_id, user_id , media: uniqueMediaPaths},(err, results) => {
+        if (err) {
+            return res.status(500).json({ message: 'Error uploading media', error: err.message });
+        }
+        res.json({ message: 'Media uploaded successfully', mediaId: result.insertId });
     });
 });
 

@@ -10,12 +10,15 @@ import Home from './Pages/Home';
 import Login from './Pages/Login';
 import Signup from './Pages/Signup';
 import Join from './Pages/Join';
+import Contactpage from './layouts/Contactpage';
 
 // business user page
-import Contactpage from './layouts/Contactpage';
-import Designerpage from "./Pages/components2/Designerpage";
-import Wallet from './layouts/Wallet';
 import Bussiness from './Pages/Business';
+
+
+// designer user page
+import Designerpage from "./Pages/Designer";
+import Wallet from './layouts/Wallet';
 import Adv from './Pages/components3/Adv';
 import Retailer from './Pages/Component4/Retailer';
 import Viewpost from './layouts/Viewpost';
@@ -52,11 +55,15 @@ function App() {
         <Route path='/signup' element={<Signup />} />
         <Route path='/proceed' element={<Join />} />
         <Route path='/contact' element={<Contactpage />} />
-        <Route path='/bussiness' element={<ProtectedRoute element={<Bussiness />} />} />
+
+        <Route path='/business/home' element={<ProtectedRoute element={<Bussiness />} />} />
         <Route path='/viewpost' element={<ProtectedRoute element={<Viewpost />} />} />
-        <Route path='/retailer' element={<ProtectedRoute element={<Retailer />} />} />
+
+
+        <Route path='/retailer/home' element={<ProtectedRoute element={<Retailer />} />} />
         <Route path='/wallet' element={<ProtectedRoute element={<Wallet />} />} />
-        <Route path='/design' element={<ProtectedRoute element={<Designerpage />} />} />
+
+        <Route path='/desiger/home' element={<ProtectedRoute element={<Designerpage />} />} />
         <Route path='/adv' element={<ProtectedRoute element={<Adv />} />} />
       </Routes>
       <Footer />

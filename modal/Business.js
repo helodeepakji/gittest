@@ -54,6 +54,38 @@ Business.getMediaByUserIdPaginated = (userId, limit, offset, callback) => {
     });
 };
 
+Business.getAllMediaPaginated = (limit, offset, callback) => {
+    const query = `
+        SELECT * 
+        FROM business 
+        ORDER BY created_at DESC 
+        LIMIT ? OFFSET ?;
+    `;
+    const countQuery = `
+        SELECT COUNT(*) AS totalCount 
+        FROM business;
+    `;
+
+    const handleQuery = (sql, params = []) => {
+        return new Promise((resolve, reject) => {
+            connection.query(sql, params, (err, results) => {
+                if (err) reject(err);
+                else resolve(results);
+            });
+        });
+    };
+
+    // Execute the main query and the count query
+    Promise.all([handleQuery(query, [limit, offset]), handleQuery(countQuery)])
+        .then(([results, countResults]) => {
+            const totalCount = countResults[0].totalCount;
+            callback(null, results, totalCount);
+        })
+        .catch((err) => {
+            console.error("Error fetching paginated media:", err.message);
+            callback(err);
+        });
+};
 
 // Upload new media record
 Business.createMedia = (mediaData, callback) => {
