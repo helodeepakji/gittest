@@ -22,36 +22,6 @@ Designs.uploadDesign = (mediaData, callback) => {
     });
 };
 
-Designs.getAllPaginated = (limit, offset, callback) => {
-    const query = `
-        SELECT * 
-        FROM designs 
-        ORDER BY created_at DESC 
-        LIMIT ? OFFSET ?;
-    `;
-    const countQuery = `
-        SELECT COUNT(*) AS totalCount 
-        FROM designs;
-    `;
-
-    connection.query(query, [limit, offset], (err, results) => {
-        if (err) {
-            console.error('Error fetching designs:', err.message);
-            return callback(err);
-        }
-
-        connection.query(countQuery, (countErr, countResults) => {
-            if (countErr) {
-                console.error('Error fetching total count of designs:', countErr.message);
-                return callback(countErr);
-            }
-
-            const totalCount = countResults[0].totalCount;
-            callback(null, { results, totalCount });
-        });
-    });
-};
-
 // Get a design by ID
 Designs.getById = (id, callback) => {
     const query = `
@@ -65,6 +35,73 @@ Designs.getById = (id, callback) => {
             return callback(err);
         }
         callback(null, results[0]);
+    });
+};
+
+// Get a design by UserID
+Designs.getByUserId = (userId, limit, offset, callback) => {
+    const query = `
+        SELECT designs.*, business.caption, business.media AS business_media
+        FROM designs
+        JOIN business ON designs.ads_id = business.id
+        WHERE designs.user_id = ?
+        ORDER BY designs.created_at DESC
+        LIMIT ? OFFSET ?;
+    `;
+
+    const countQuery = `
+        SELECT COUNT(*) AS totalCount
+        FROM designs
+        WHERE designs.user_id = ?;
+    `;
+
+    connection.query(query, [userId, limit, offset], (err, results) => {
+        if (err) {
+            console.error('Error fetching designs:', err.message);
+            return callback(err);
+        }
+
+        connection.query(countQuery, [userId], (countErr, countResults) => {
+            if (countErr) {
+                console.error('Error fetching design count:', countErr.message);
+                return callback(countErr);
+            }
+
+            const totalCount = countResults[0].totalCount;
+            callback(null, { results, totalCount });
+        });
+    });
+};
+
+// Get a design by business ID
+Designs.getByBusinessUser = (userId, limit, offset, callback) => {
+    const query = `
+        SELECT designs.*, business.caption, business.media AS business_media
+        FROM designs
+        JOIN business ON designs.ads_id = business.id
+        WHERE business.user_id = ?
+        ORDER BY designs.created_at DESC
+        LIMIT ? OFFSET ?;
+    `;
+
+    const countQuery = `
+        SELECT COUNT(*) AS totalCount FROM designs JOIN business ON designs.ads_id = business.id WHERE business.user_id = ?`;
+
+    connection.query(query, [userId, limit, offset], (err, results) => {
+        if (err) {
+            console.error('Error fetching designs:', err.message);
+            return callback(err);
+        }
+
+        connection.query(countQuery, [userId], (countErr, countResults) => {
+            if (countErr) {
+                console.error('Error fetching design count:', countErr.message);
+                return callback(countErr);
+            }
+
+            const totalCount = countResults[0].totalCount;
+            callback(null, { results, totalCount });
+        });
     });
 };
 
@@ -98,7 +135,6 @@ Designs.delete = (id, callback) => {
         callback(null, results);
     });
 };
-
 
 module.exports = Designs;
 

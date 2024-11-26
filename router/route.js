@@ -173,16 +173,21 @@ route.get('/getMyRequirement', authenticateToken, (req, res) => {
     });
 });
 
-route.get('/getRequirement', authenticateToken , (req, res) => {
-    const user_id = req.user.id;
-    const page = parseInt(req.query.page) || 1; // Default to page 1
-    const limit = parseInt(req.query.limit) || 5; // Default to 10 items per page
-
+route.get('/getRequirement', authenticateToken, (req, res) => {
+    const user_id = req.user.id; // Get user ID from the token
+    const page = parseInt(req.query.page, 10) || 1; // Default to page 1
+    const limit = parseInt(req.query.limit, 10) || 5; // Default to 5 items per page
     const offset = (page - 1) * limit;
 
-    Business.getAllMediaPaginated(limit, offset, (err, results, totalCount) => {
+    console.log('Fetching requirements for user:', { user_id, page, limit, offset });
+
+    Business.getAllMediaPaginated(user_id, limit, offset, (err, results, totalCount) => {
         if (err) {
-            return res.status(500).json({ message: 'Error fetching media by user ID', error: err.message });
+            console.error('Error fetching requirements:', err.message);
+            return res.status(500).json({
+                message: 'Error fetching requirements',
+                error: err.message,
+            });
         }
 
         res.json({
@@ -218,5 +223,56 @@ route.post('/uploadDesign', authenticateToken , upload.array('media[]', 10) , (r
     });
 });
 
+route.get('/getMyDesigns', authenticateToken, (req, res) => {
+    const userId = req.user.id; // Extract user ID from authenticated token
+    const page = parseInt(req.query.page) || 1; // Default to page 1
+    const limit = parseInt(req.query.limit) || 5; // Default to 5 items per page
+    const offset = (page - 1) * limit;
+
+    Designs.getByUserId(userId, limit, offset, (err, result) => {
+        if (err) {
+            return res.status(500).json({
+                message: 'Error fetching designs',
+                error: err.message,
+            });
+        }
+
+        const { results, totalCount } = result;
+
+        res.json({
+            page,
+            limit,
+            totalCount,
+            totalPages: Math.ceil(totalCount / limit),
+            data: results,
+        });
+    });
+});
+
+route.get('/getAllDesigns', authenticateToken, (req, res) => {
+    const userId = req.user.id; // Extract user ID from authenticated token
+    const page = parseInt(req.query.page) || 1; // Default to page 1
+    const limit = parseInt(req.query.limit) || 5; // Default to 5 items per page
+    const offset = (page - 1) * limit;
+
+    Designs.getByBusinessUser(userId, limit, offset, (err, result) => {
+        if (err) {
+            return res.status(500).json({
+                message: 'Error fetching designs',
+                error: err.message,
+            });
+        }
+
+        const { results, totalCount } = result;
+
+        res.json({
+            page,
+            limit,
+            totalCount,
+            totalPages: Math.ceil(totalCount / limit),
+            data: results,
+        });
+    });
+});
 
 module.exports = route;
