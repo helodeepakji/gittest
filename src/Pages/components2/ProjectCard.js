@@ -58,6 +58,7 @@ const ProjectCard = () => {
       if (response.status === 200) {
         alert('Project submitted successfully!');
         setImage(null); // Reset the image state
+        fetchRequirements(page);
       } else {
         alert(`Submission failed: ${response.statusText}`);
       }
@@ -105,27 +106,43 @@ const ProjectCard = () => {
               <div className="profile-info">
                 <img src={Profile} alt="Profile Picture" />
                 <div className="profile-details">
-                  <div className="name">Mickelson Klus</div>
+                  <div className="name">{req.first_name} {req.last_name}</div>
                   <div>Business owner of D House</div>
-                  <div>25 Nov at 12:44 PM</div>
+                  <div>{new Date(req.created_at).toLocaleDateString('en-US', {
+                    day: 'numeric',
+                    month: 'long',
+                    year: 'numeric'
+                  })}
+                    ,
+                    {new Date(req.created_at).toLocaleTimeString('en-US', {
+                      hour: '2-digit',
+                      minute: '2-digit',
+                      hour12: true
+                    })}</div>
                 </div>
               </div>
-              <div className="action-buttons" >
-                <div onClick={handleImageClick} className="function-buttons">
-                  {image ? <img src={URL.createObjectURL(image)} alt='' style={{ width: "50px" }} /> : <img src={Photo} alt="" />}
-                  <input
-                    type="file"
-                    ref={inputRef}
-                    onChange={handleImageChange}
-                    style={{ display: "none" }}
-                  />
+              {req.is_submitted === 0 ? (
+
+                <div className="action-buttons" >
+                  <div onClick={handleImageClick} className="function-buttons">
+                    {image ? <img src={URL.createObjectURL(image)} alt='' style={{ width: "50px" }} /> : <img src={Photo} alt="" />}
+                    <input
+                      type="file"
+                      ref={inputRef}
+                      onChange={handleImageChange}
+                      style={{ display: "none" }}
+                    />
+
+                  </div>
+
+                  <button className="button submit-button" onClick={() => handleSubmit(req.id)} > Submit Project</button>
+                </div>
+              ) : (
+                <div className="action-buttons" >
+                  <button className="button view-button" onClick={() => setSelectedProject(req)}>Project already submitted</button>
 
                 </div>
-
-                <button className="button submit-button" onClick={() => handleSubmit(req.id)} > Submit Project</button>
-                <button className="button view-button" onClick={() => setSelectedProject(req)}>View</button>
-
-              </div>
+              )}
             </div>
 
             <div className="project-description">

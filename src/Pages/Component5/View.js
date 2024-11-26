@@ -6,6 +6,8 @@ import { Link } from "react-router-dom";
 const DesignTable = () => {
   // State to store data
   const [designs, setDesigns] = useState([]);
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(5);
 
   // Fetch data from API when the component is mounted
   useEffect(() => {
@@ -61,6 +63,23 @@ const DesignTable = () => {
           )}
         </tbody>
       </table>
+      <div className="pagination00">
+          <button 
+            onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
+            disabled={page === 1}
+          >
+            Previous
+          </button>
+          <span>
+            Page {page} of {totalPages}
+          </span>
+          <button
+            onClick={() => setPage((prev) => Math.min(prev + 1, totalPages))}
+            disabled={page === totalPages}
+          >
+            Next
+          </button>
+        </div>
     </div>
     </div>
    

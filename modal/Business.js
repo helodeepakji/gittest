@@ -54,13 +54,27 @@ Business.getMediaByUserIdPaginated = (userId, limit, offset, callback) => {
     });
 };
 
-Business.getAllMediaPaginated = (limit, offset, callback) => {
+
+Business.getAllMediaPaginated = (userId, limit, offset, callback) => {
     const query = `
-        SELECT * 
-        FROM business 
-        ORDER BY created_at DESC 
-        LIMIT ? OFFSET ?;
-    `;
+        SELECT 
+            b.*, 
+            u.first_name AS first_name, 
+            u.last_name AS last_name, 
+            u.profile AS user_profile, 
+            u.company AS company_name,
+            CASE 
+                WHEN d.id IS NOT NULL THEN true 
+                ELSE false 
+            END AS is_submitted 
+        FROM business AS b
+        LEFT JOIN designs AS d 
+            ON b.id = d.ads_id AND d.user_id = ?
+        LEFT JOIN users AS u
+            ON b.user_id = u.id
+        ORDER BY b.created_at DESC
+        LIMIT ? OFFSET ?;`;
+
     const countQuery = `
         SELECT COUNT(*) AS totalCount 
         FROM business;
@@ -75,8 +89,10 @@ Business.getAllMediaPaginated = (limit, offset, callback) => {
         });
     };
 
-    // Execute the main query and the count query
-    Promise.all([handleQuery(query, [limit, offset]), handleQuery(countQuery)])
+    Promise.all([
+        handleQuery(query, [userId, limit, offset]),
+        handleQuery(countQuery),
+    ])
         .then(([results, countResults]) => {
             const totalCount = countResults[0].totalCount;
             callback(null, results, totalCount);

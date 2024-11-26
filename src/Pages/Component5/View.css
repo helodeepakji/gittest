@@ -72,3 +72,41 @@
   .view-button00:hover {
     background-color: #008ecc;
   }
+
+
+  .pagination00 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin: 50px 0 0 0;
+  }
+  
+  .pagination00 button {
+    background-color: #458382;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: Arial, sans-serif;
+  }
+  
+  .pagination00 button:hover {
+    background-color: #356b69;
+  }
+  
+  .pagination00 button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  .pagination00 span {
+    font-size: 16px;
+    color: #444;
+    font-weight: bold;
+  }
+  
+  
