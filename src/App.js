@@ -68,7 +68,7 @@ function App() {
         <Route path='/retailer/home' element={<ProtectedRoute element={<Retailer />} />} />
         <Route path='/wallet' element={<ProtectedRoute element={<Wallet />} />} />
 
-        <Route path='/desiger/home' element={<ProtectedRoute element={<Designerpage />} />} />
+        <Route path='/designer/home' element={<ProtectedRoute element={<Designerpage />} />} />
         <Route path='/adv' element={<ProtectedRoute element={<Adv />} />} />
       </Routes>
 

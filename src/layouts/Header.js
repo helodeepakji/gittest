@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate , useLocation } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import "./Header.css";
 import logo from "./images/image.png";
 
 const Header = () => {
   const [user, setUser] = useState(null);
-  const location = useLocation(); 
+  const location = useLocation();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -48,46 +48,59 @@ const Header = () => {
 
         <div className="d-flex justify-content-center gap-5">
           <ul className="navbar-nav d-flex flex-row gap-5">
+          {user ? (
+            <li className="nav-item">
+              <Link to={`/${user.user_type}/home`} className="nav-link text-white">
+                Dashboard
+              </Link>
+            </li>
+          ) : (
             <li className="nav-item">
               <Link to="/" className="nav-link text-white">
-                About Us
+                Home
               </Link>
             </li>
-            <li className="nav-item">
-              <Link to="/contact" className="nav-link text-white">
-                Contact Us
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link to="/adv" className="nav-link text-white">
-                Wallet Page
-              </Link>
-            </li>
-          </ul>
-        </div>
-
-        {user ? (
-          <div className="d-flex gap-4 align-items-center">
-            <span>Welcome, {user.email}</span>
-            <Link to="/profile" className="text-white align-self-center">
-              Profile
+          )}          
+          <li className="nav-item">
+            <Link to="/about" className="nav-link text-white">
+              About Us
             </Link>
-            <button onClick={handleLogout} className="btn btn-info text-white px-3xl">
-              Logout
-            </button>
-          </div>
-        ) : (
-          <div className="d-flex gap-4 align-items-center">
-            <Link to="/login" className="text-white align-self-center">
-              Login
+          </li>
+          <li className="nav-item">
+            <Link to="/contact" className="nav-link text-white">
+              Contact Us
             </Link>
-            <Link to="/proceed" className="btn btn-info text-white px-3xl">
-              Join Now
+          </li>
+          <li className="nav-item">
+            <Link to="/adv" className="nav-link text-white">
+              Wallet Page
             </Link>
-          </div>
-        )}
+          </li>
+        </ul>
       </div>
-    </nav>
+
+      {user ? (
+        <div className="d-flex gap-4 align-items-center">
+          <span>Welcome, {user.email}</span>
+          <Link to="/profile" className="text-white align-self-center">
+            Profile
+          </Link>
+          <button onClick={handleLogout} className="btn btn-info text-white px-3xl">
+            Logout
+          </button>
+        </div>
+      ) : (
+        <div className="d-flex gap-4 align-items-center">
+          <Link to="/login" className="text-white align-self-center">
+            Login
+          </Link>
+          <Link to="/proceed" className="btn btn-info text-white px-3xl">
+            Join Now
+          </Link>
+        </div>
+      )}
+    </div>
+    </nav >
   );
 };
 
