@@ -50,8 +50,8 @@ const SubmittedDesigns = () => {
               <div class="design-info">
                 <img src={req.business_media[0]} alt="Designer LIrofile" />
                 <div class="design-details">
-                  <div class="name">{req.caption}</div>
-                  <div class="desc">Business @ Technology</div>
+                  <div class="name">{req.company}</div>
+                  <div class="desc">{req.caption}</div>
                   <div class="desc">{new Date(req.created_at).toLocaleDateString('en-US', {
                     day: 'numeric',
                     month: 'long',

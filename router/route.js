@@ -128,10 +128,15 @@ route.get('/profile', authenticateToken, (req, res) => {
 // business users
 route.post('/uploadRequirement', authenticateToken, upload.array('media[]', 10), (req, res) => {
     const user_id = req.user.id;
+    const user_type = req.user.user_type;
     const caption = req.body.caption;
 
     if (!req.files || req.files.length === 0) {
         return res.status(400).json({ message: 'At least one file is required' });
+    }
+
+    if(user_type != 'business'){
+        return res.status(400).json({ message: 'This is only for Business User' });
     }
 
     // Map through req.files to get the file paths
@@ -204,6 +209,11 @@ route.get('/getRequirement', authenticateToken, (req, res) => {
 route.post('/uploadDesign', authenticateToken , upload.array('media[]', 10) , (req, res) => {
     const user_id = req.user.id;
     const ads_id = req.body.ads_id;
+    const user_type = req.user.user_type;
+
+    if(user_type != 'designer'){
+        return res.status(400).json({ message: 'This is only for Designer User' });
+    }
    
     if (!req.files || req.files.length === 0) {
         return res.status(400).json({ message: 'At least one file is required' });

@@ -41,9 +41,9 @@ Designs.getById = (id, callback) => {
 // Get a design by UserID
 Designs.getByUserId = (userId, limit, offset, callback) => {
     const query = `
-        SELECT designs.*, business.caption, business.media AS business_media
+        SELECT designs.*, business.caption, business.media AS business_media , users.company
         FROM designs
-        JOIN business ON designs.ads_id = business.id
+        JOIN business ON designs.ads_id = business.id JOIN users ON users.id = business.user_id
         WHERE designs.user_id = ?
         ORDER BY designs.created_at DESC
         LIMIT ? OFFSET ?;

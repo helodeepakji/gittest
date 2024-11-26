@@ -47,6 +47,7 @@ const ProjectCard = () => {
       }
     } catch (err) {
       setError(err.message);
+      alert(err.message);
     }
   };
 
