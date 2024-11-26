@@ -10,6 +10,7 @@ import Video from "./images/video.png";
 import Event from "./images/event.png";
 import Camera from "./images/camera.png";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const ProjectCard = () => {
   const [message, setMessage] = useState("Do you want an advertisement?");
@@ -83,12 +84,12 @@ const ProjectCard = () => {
       <div className="project-card-new">
         {/* Input Section */}
         <div className="message-container-new">
-          <div className="profile-container-new">
+          <Link to ="/editprofile" className="profile-container-new">
             <img src={Profile} alt="Profile Picture" className="profile-pic-new" />
             <div className="camera-icon-new">
               <img src={Camera} alt="Camera Icon" />
             </div>
-          </div>
+          </Link>
           <textarea
             className="message-text-new cardin"
             style={{ width: "100%" }}
