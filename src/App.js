@@ -14,6 +14,8 @@ import Contactpage from './layouts/Contactpage';
 
 // business user page
 import Bussiness from './Pages/Business';
+import View from "./Pages/Component5/View"
+
 
 
 // designer user page
@@ -60,6 +62,7 @@ function App() {
         <Route path='/contact' element={<Contactpage />} />
 
         <Route path='/business/home' element={<ProtectedRoute element={<Bussiness />} />} />
+        <Route path='/view' element={<ProtectedRoute element={<View />} />} />
         <Route path='/editprofile' element={<ProtectedRoute element={<EditProfile />} />} />
 
         <Route path='/viewpost' element={<ProtectedRoute element={<Viewpost />} />} />

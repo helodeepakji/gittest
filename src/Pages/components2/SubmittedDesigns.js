@@ -28,7 +28,7 @@ const SubmittedDesigns = () => {
 
       setsubmit(data);
     } catch (err) {
-      setSubmit([]);
+      setsubmit([]);
       setError(err.message);
     }
   };
