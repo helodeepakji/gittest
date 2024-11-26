@@ -14,6 +14,8 @@ import Contactpage from './layouts/Contactpage';
 
 // business user page
 import Bussiness from './Pages/Business';
+import View from "./Pages/Component5/View"
+
 
 
 // designer user page
@@ -22,6 +24,8 @@ import Wallet from './layouts/Wallet';
 import Adv from './Pages/components3/Adv';
 import Retailer from './Pages/Component4/Retailer';
 import Viewpost from './layouts/Viewpost';
+import EditProfile from './Pages/Component5/EditProfile';
+
 
 function App() {
   const [user, setUser] = useState(null);
@@ -49,6 +53,7 @@ function App() {
   return (
     <div>
       <Header />
+      
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/login' element={<Login />} />
@@ -57,6 +62,9 @@ function App() {
         <Route path='/contact' element={<Contactpage />} />
 
         <Route path='/business/home' element={<ProtectedRoute element={<Bussiness />} />} />
+        <Route path='/view' element={<ProtectedRoute element={<View />} />} />
+        <Route path='/editprofile' element={<ProtectedRoute element={<EditProfile />} />} />
+
         <Route path='/viewpost' element={<ProtectedRoute element={<Viewpost />} />} />
 
 
@@ -66,6 +74,7 @@ function App() {
         <Route path='/desiger/home' element={<ProtectedRoute element={<Designerpage />} />} />
         <Route path='/adv' element={<ProtectedRoute element={<Adv />} />} />
       </Routes>
+
       <Footer />
     </div>
   );
