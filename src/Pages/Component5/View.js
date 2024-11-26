@@ -63,14 +63,32 @@ const DesignTable = () => {
                   <td>
                     <div className="designer00">
                       <img
-                        src={design.designerImageUrl}
+                        src={design.profile}
                         alt="Designer"
                       />
-                      {design.designerName}
+                      {design.first_name} {design.last_name}
                     </div>
                   </td>
-                  <td>{design.projectName}</td>
-                  <td>{design.dateSubmitted}</td>
+                  <td>
+                    <div className="designer00">
+                      <img
+                        src={design.business_media[0]}
+                        alt="Designer"
+                      />
+                      {design.caption}
+                    </div>
+                  </td>
+                  <td>{new Date(design.created_at).toLocaleDateString('en-US', {
+                    day: 'numeric',
+                    month: 'long',
+                    year: 'numeric'
+                  })}
+                    ,
+                    {new Date(design.created_at).toLocaleTimeString('en-US', {
+                      hour: '2-digit',
+                      minute: '2-digit',
+                      hour12: true
+                    })}</td>
                   <td>
                     <Link to="/viewpost">
                       <button className="view-button00">View</button>
