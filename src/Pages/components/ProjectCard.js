@@ -144,6 +144,11 @@ const ProjectCard = () => {
                     <div>25 Nov at 12:44 PM</div>
                   </div>
                 </div>
+                
+    <button className="button view-button-view">
+        View Proposal
+      </button>
+      
               </div>
               <div className="project-description-new">
                 <p>{req.caption}</p>
