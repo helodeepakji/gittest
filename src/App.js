@@ -62,16 +62,18 @@ function App() {
         <Route path='/contact' element={<Contactpage />} />
 
         <Route path='/business/home' element={<ProtectedRoute element={<Bussiness />} />} />
-        <Route path='/view' element={<ProtectedRoute element={<View />} />} />
-        <Route path='/editprofile' element={<ProtectedRoute element={<EditProfile />} />} />
+        <Route path='/business/view' element={<ProtectedRoute element={<View />} />} />
 
+        <Route path='/designer/home' element={<ProtectedRoute element={<Designerpage />} />} />
+        <Route path='/designer/view' element={<ProtectedRoute element={<View />} />} />
+
+        <Route path='/editprofile' element={<ProtectedRoute element={<EditProfile />} />} />
         <Route path='/viewpost' element={<ProtectedRoute element={<Viewpost />} />} />
 
 
         <Route path='/retailer/home' element={<ProtectedRoute element={<Retailer />} />} />
         <Route path='/wallet' element={<ProtectedRoute element={<Wallet />} />} />
 
-        <Route path='/designer/home' element={<ProtectedRoute element={<Designerpage />} />} />
         <Route path='/adv' element={<ProtectedRoute element={<Adv />} />} />
       </Routes>
 

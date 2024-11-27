@@ -1,59 +1,80 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import { Link } from "react-router-dom";
 import "./SubmittedDesigns.css"
-import Profile2 from "./images/img 2.jpeg"
-import Profile3 from "./images/img 3.jpg"
-import Profile4 from "./images/img 4.jpg" 
+import axios from 'axios';
 
 
 const SubmittedDesigns = () => {
-  return (
-    <>
-    <div class="submitted-designs-alt">
-    <h2>Designer's shared Their design file</h2>
-    <div class="design-card-alt">
-        <div class="design-info-alt">
-            <img src={Profile2} alt="Designer LIrofile" />
-            <div class="design-details-alt">
-                <div class="name-alt">Vishnu Kumar Agrawal</div>
-                <div class="desc-alt">Graphic Designer at D Technology</div>
-                <div class="desc-alt">25 Nov at 12:24 PM</div>
+    const [designs, setDesigns] = useState([]);
+    const [error, setError] = useState('');
+
+    const fetchRequirements = async () => {
+        const token = localStorage.getItem("token");
+        if (!token) {
+            setError("Authentication token is missing");
+            return;
+        }
+
+        try {
+            const response = await axios.get(`/api/getAllDesigns?page=$1&limit=5`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+
+            const { data, totalPages } = response.data;
+
+            setDesigns(data);
+        } catch (err) {
+            setDesigns([]);
+            setError(err.message);
+        }
+    };
+
+    useEffect(() => {
+        fetchRequirements();
+    }, []);
+
+    return (
+        <>
+            <div class="submitted-designs-alt">
+                <h2>Designer's shared Their design file</h2>
+                {designs.length > 0 ? (
+                    designs.map((design) => (
+                        <div class="design-card-alt">
+                            <div class="design-info-alt">
+                                <img src={design.profile} alt="Designer LIrofile" />
+                                <div class="design-details-alt">
+                                    <div class="name-alt">{design.company}</div>
+                                    <div class="desc-alt">{design.caption}</div>
+                                    <div class="desc-alt">{new Date(design.created_at).toLocaleDateString('en-US', {
+                                        day: 'numeric',
+                                        month: 'long',
+                                        year: 'numeric'
+                                    })}
+                                        ,
+                                        {new Date(design.created_at).toLocaleTimeString('en-US', {
+                                            hour: '2-digit',
+                                            minute: '2-digit',
+                                            hour12: true
+                                        })}</div>
+                                </div>
+                            </div>
+                            <button class="view-button-alt">View</button>
+                        </div>
+                    ))) : (
+                    <tr>
+                        <td colSpan="4">No designs available.</td>
+                    </tr>
+                )}
+                <div class="view-all-link-alt">
+                    <Link to="/business/view">View all designs</Link>
+                </div>
             </div>
-        </div>
-        <button class="view-button-alt">View</button>
-    </div>
-
-    <div class="design-card-alt">
-        <div class="design-info-alt">
-            <img src={Profile3} alt="Designer LIrofile" />
-            <div class="design-details-alt">
-                <div class="name-alt">Vishnu Kumar Agrawal</div>
-                <div class="desc-alt">Ux Designer at D Technology</div>
-                <div class="desc-alt">25 Nov at 12:24 PM</div>
-            </div>
-        </div>
-        <button class="view-button-alt">View</button>
-    </div>
-
-    <div class="design-card-alt">
-        <div class="design-info-alt">
-            <img src={Profile4} alt="Designer LIrofile" />
-            <div class="design-details-alt">
-                <div class="name-alt">Vishnu Kumar Agrawal</div>
-                <div class="desc-alt">Ux Designer at D Technology</div>
-                <div class="desc-alt">25 Nov at 12:24 PM</div>
-            </div>
-        </div>
-        <button class="view-button-alt">View</button>
-    </div>
-
-    <div class="view-all-link-alt">
-        <a href="#">View all recommendations</a>
-    </div>
-</div>
 
 
-    </>
-  )
+        </>
+    )
 }
 
 export default SubmittedDesigns

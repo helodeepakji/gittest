@@ -260,29 +260,51 @@ route.get('/getMyDesigns', authenticateToken, (req, res) => {
 });
 
 route.get('/getAllDesigns', authenticateToken, (req, res) => {
-    const userId = req.user.id; // Extract user ID from authenticated token
+    const userId = req.user.id;
+    const userType = req.user.user_type;
     const page = parseInt(req.query.page) || 1; // Default to page 1
     const limit = parseInt(req.query.limit) || 5; // Default to 5 items per page
     const offset = (page - 1) * limit;
 
-    Designs.getByBusinessUser(userId, limit, offset, (err, result) => {
-        if (err) {
-            return res.status(500).json({
-                message: 'Error fetching designs',
-                error: err.message,
+    if(userType == 'designer'){
+        Designs.getByUserId(userId, limit, offset, (err, result) => {
+            if (err) {
+                return res.status(500).json({
+                    message: 'Error fetching designs',
+                    error: err.message,
+                });
+            }
+    
+            const { results, totalCount } = result;
+    
+            res.json({
+                page,
+                limit,
+                totalCount,
+                totalPages: Math.ceil(totalCount / limit),
+                data: results,
             });
-        }
-
-        const { results, totalCount } = result;
-
-        res.json({
-            page,
-            limit,
-            totalCount,
-            totalPages: Math.ceil(totalCount / limit),
-            data: results,
         });
-    });
+    }else if(userType == 'business'){
+        Designs.getByBusinessUser(userId, limit, offset, (err, result) => {
+            if (err) {
+                return res.status(500).json({
+                    message: 'Error fetching designs',
+                    error: err.message,
+                });
+            }
+    
+            const { results, totalCount } = result;
+    
+            res.json({
+                page,
+                limit,
+                totalCount,
+                totalPages: Math.ceil(totalCount / limit),
+                data: results,
+            });
+        });
+    }
 });
 
 module.exports = route;

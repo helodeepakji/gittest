@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from "react-router-dom";
 import "./SubmittedDesigns.css";
 import axios from 'axios';
-import Profile2 from "./image/img 2.jpeg"
-import Profile3 from "./image/img 3.jpg"
-import Profile4 from "./image/img 4.jpg"
 
 
 const SubmittedDesigns = () => {
@@ -73,7 +71,7 @@ const SubmittedDesigns = () => {
 
 
         <div class="view-all-link">
-          <a href="#">View all recommendations</a>
+          <Link to="/designer/view">View all recommendations</Link>
         </div>
         <hr />
 
