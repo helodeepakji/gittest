@@ -12,6 +12,7 @@ import { FaThumbsUp } from "react-icons/fa6";
 import { TiArrowBackOutline } from "react-icons/ti";
 import { IoIosArrowForward } from "react-icons/io";
 import axios from 'axios';
+import { Link } from "react-router-dom";
 
 const ViewDesign = () => {
   const { id } = useParams();
@@ -145,7 +146,9 @@ const ViewDesign = () => {
 
             <div className="custom-btn-section">
               <button className="custom-btn1">Accept Design</button>
+              <Link to="/feedback">
               <button className="custom-btn2">Not Satisfied</button>
+              </Link>
             </div>
           </div>
 
