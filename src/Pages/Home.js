@@ -2,6 +2,10 @@ import React from 'react';
 import { NavLink } from "react-router-dom";
 import './Home.css';
 import Feq from './Feq';
+import One from "./Assests/One.png"
+import Two from "./Assests/Two.png"
+import Circle from "./Assests/Circle.png"
+import Circle2 from "./Assests/Circle2.png"
 
 const Home = () => {
   return (
@@ -50,14 +54,14 @@ const Home = () => {
               <span className="spanhead">Business Users</span> Post Their Requirements:
             </h1>
             <div className="d2">
-              <img src="/images/num1.png" className='num1' /><img src="/images/circle1.png" className='circle1' />
+              <img src={One} className='num1' /><img src={Circle} className='circle1' />
               <p className="d6">
                 Sign up as a business user and share your brand's message, LOGO, and design preferences.
               </p>
             </div>
 
             <div className="d4">
-              <img src="/images/num2.png" className='num1' /><img src="/images/circle2.png" className='circle1' />
+              <img src={Two} className='num1' /><img src={Circle2} className='circle1' />
               <p className="d6" >
                 Our platform connects you with talented designers who will create stunning ad concepts tailored to your brand.
               </p>
@@ -85,14 +89,14 @@ const Home = () => {
           </h1>
 
           <div className="d2">
-            <img src="/images/num1.png" className='num1' /><img src="/images/circle1.png" className='circle1' />
+            <img src={One} className='num1' /><img src={Circle}className='circle1' />
             <p className="d3">
               Designers receive your brief and create eye-catching advertisements that match your requirements.
             </p>
           </div>
 
           <div className="d4">
-            <img src="/images/num2.png" className='num1' /><img src="/images/circle2.png" className='circle1' />
+            <img src={Two} className='num1' /><img src={Circle2} className='circle1' />
             <p className="d6">
               Once the designs are ready, Business Users can browse and select their favorite concept.
             </p>
@@ -118,15 +122,15 @@ const Home = () => {
           </h1>
 
           <div className="d2">
-            <img src="/images/num1.png" className='num1' /><img src="/images/circle1.png" className='circle1' />
+            <img src={One} className='num1' /><img src={Circle} className='circle1' />
             <p style={{ marginLeft: '30px' }}>
               The selected design is sent directly to our retailers, who print your advertisement
               on cups, water bottles, plates, or any other disposables.
             </p>
           </div>
 
-          <div style={{ display: 'flex', marginTop: '-30px', paddingTop: '30px' }}>
-            <img src="/images/num2.png" className='num1' /><img src="/images/circle2.png" className='circle1' />
+          <div style={{ display: 'flex', paddingTop: '30px' }}>
+            <img src={Two} className='num1' /><img src={Circle2} className='circle1' />
             <p style={{ marginLeft: '15px' }}>
               Your custom-printed products are ready to be distributed, ensuring your brand reaches
               a wider audience in a unique and memorable way.

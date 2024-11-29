@@ -431,7 +431,7 @@ footer hr{
 }
 .d4{
     display: flex; 
-    margin-top: 20px;
+    margin-top: 50px;
 }
 .d5{
     font-size: 50px; 
@@ -460,12 +460,14 @@ footer hr{
 .num1{
     height: 60px;
     width: 70px;
+  
 }
 
 .circle1{
-    height: 80px;
-    width: 80px;
+    height: 85px;
+    width: 85px;
     margin-left: -20px;
+    margin-top: -15px;
    
 }
 
