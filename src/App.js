@@ -15,7 +15,7 @@ import Contactpage from './layouts/Contactpage';
 // business user page
 import Bussiness from './Pages/Business';
 import View from "./Pages/Component5/View"
-import Feedback from "./Pages/Component5/feedback"
+
 
 
 
@@ -64,7 +64,7 @@ function App() {
 
         <Route path='/business/home' element={<ProtectedRoute element={<Bussiness />} />} />
         <Route path='/business/view' element={<ProtectedRoute element={<View />} />} />
-        <Route path='/feedback' element={<ProtectedRoute element={<Feedback />} />} />
+      
         
 
         <Route path='/designer/home' element={<ProtectedRoute element={<Designerpage />} />} />
