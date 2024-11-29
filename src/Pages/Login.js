@@ -25,7 +25,7 @@ const Login = () => {
                 if (data.user_type === 'business') {
                     navigate('/business/home');
                 } else if (data.user_type === 'designer') {
-                    navigate('/desiger/home');
+                    navigate('/designer/home');
                 } else if (data.user_type === 'retailer') {
                     navigate('/retailer/home');
                 } else {
