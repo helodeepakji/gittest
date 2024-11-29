@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from 'react-router-dom';
+import { useParams } from "react-router-dom";
 import "./Viewpost.css";
 import Cupimg from "./images/cup.png";
 import menimg from "./images/men.png";
@@ -8,10 +8,10 @@ import { IoCall } from "react-icons/io5";
 import { IoVideocam } from "react-icons/io5";
 import { FaCamera } from "react-icons/fa";
 import { IoImageSharp } from "react-icons/io5";
-import { FaThumbsUp } from "react-icons/fa6";
+import { IoSend } from "react-icons/io5";
 import { TiArrowBackOutline } from "react-icons/ti";
 import { IoIosArrowForward } from "react-icons/io";
-import axios from 'axios';
+import axios from "axios";
 import { Link } from "react-router-dom";
 
 const ViewDesign = () => {
@@ -68,23 +68,30 @@ const ViewDesign = () => {
               <div className="custom-men">
                 <img src={data.designer_profile} alt="pic" />
                 <div>
-                  <h3>{data.designer_first_name +' '+ data.designer_last_name || "Name of designer"}</h3> 
-                  <p>Company Name : {data.business_company || "Project name"}</p>
-                   <p>caption : {data.caption} </p>
+                  <h3>
+                    {data.designer_first_name + " " + data.designer_last_name ||
+                      "Name of designer"}
+                  </h3>
+                  <p>
+                    Company Name : {data.business_company || "Project name"}
+                  </p>
+                  <p>caption : {data.caption} </p>
                 </div>
               </div>
               <div className="custom-go-back">
-                <p>{new Date(data.created_at).toLocaleDateString('en-US', {
-                  day: 'numeric',
-                  month: 'long',
-                  year: 'numeric'
-                })}
+                <p>
+                  {new Date(data.created_at).toLocaleDateString("en-US", {
+                    day: "numeric",
+                    month: "long",
+                    year: "numeric",
+                  })}
                   ,
-                  {new Date(data.created_at).toLocaleTimeString('en-US', {
-                    hour: '2-digit',
-                    minute: '2-digit',
-                    hour12: true
-                  })}</p>
+                  {new Date(data.created_at).toLocaleTimeString("en-US", {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                    hour12: true,
+                  })}
+                </p>
                 <div className="custom-share">
                   <TiArrowBackOutline
                     style={{
@@ -109,18 +116,19 @@ const ViewDesign = () => {
                       <img src={menimg} alt="pic" />
                     </div>
                     <div className="custom-designer-name">
-                      <h3>{data.designerName || "Name of designer"}</h3> {/* Replace with actual data */}
+                      <h3>{data.designerName || "Name of designer"}</h3>{" "}
+                      {/* Replace with actual data */}
                     </div>
                   </div>
-                  <div className="custom-calls-icon">
-                    <IoCall fontSize={20} color="#0b5258" />
-                    <IoVideocam fontSize={20} style={{ color: "#0b5258" }} />
-                  </div>
+                  /
                 </div>
 
                 <div className="custom-chat-msg">
                   <div className="custom-msg-receiver">
-                    <p>Lorem ipsum is placeholder text commonly used in the graphic, print.</p>
+                    <p>
+                      Lorem ipsum is placeholder text commonly used in the
+                      graphic, print.
+                    </p>
                   </div>
                   <div className="custom-msg-sender">
                     <p>Hello there!</p>
@@ -134,7 +142,8 @@ const ViewDesign = () => {
                   </div>
                   <div className="custom-input-sec">
                     <input type="text" placeholder="message" />
-                    <FaThumbsUp
+
+                    <IoSend
                       className="custom-thumb"
                       fontSize={20}
                       style={{ color: "#0b5258" }}
@@ -147,7 +156,7 @@ const ViewDesign = () => {
             <div className="custom-btn-section">
               <button className="custom-btn1">Accept Design</button>
               <Link to="/feedback">
-              <button className="custom-btn2">Not Satisfied</button>
+                <button className="custom-btn2">Not Satisfied</button>
               </Link>
             </div>
           </div>
