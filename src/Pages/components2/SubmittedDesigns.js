@@ -71,7 +71,7 @@ const SubmittedDesigns = () => {
 
 
         <div class="view-all-link">
-          <Link to="/designer/view">View all recommendations</Link>
+          <Link to="/designer/view">View all submittion</Link>
         </div>
         <hr />
 

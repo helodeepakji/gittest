@@ -6,6 +6,7 @@ import axios from 'axios';
 const DesignTable = () => {
   // State to store data
   const [designs, setDesigns] = useState([]);
+  const [userType, setUserType] = useState("");
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(5);
   const [error, setError] = useState('');
@@ -16,6 +17,9 @@ const DesignTable = () => {
       setError("Authentication token is missing");
       return;
     }
+
+    const decodedToken = JSON.parse(atob(token.split(".")[1]));
+    setUserType(decodedToken.user_type);
 
     try {
       const response = await axios.get(`/api/getAllDesigns?page=${currentPage}&limit=5`, {
@@ -43,14 +47,14 @@ const DesignTable = () => {
   return (
     <div className="container0">
       <div className="container00">
-        <h1>Designs</h1>
+        <h1>Designs </h1>
         <div className="search-bar00">
           <input type="text" placeholder="Search Project" />
         </div>
         <table>
           <thead>
             <tr>
-              <th>Designer</th>
+              <th>  {userType == 'business' ? 'Designer' : 'Company'} </th>
               <th>Project</th>
               <th>Date</th>
               <th>View Design</th>
@@ -66,7 +70,7 @@ const DesignTable = () => {
                         src={design.profile}
                         alt="Designer"
                       />
-                      {design.first_name} {design.last_name}
+                      {userType == 'business' ? design.first_name +' '+ design.last_name : design.company}
                     </div>
                   </td>
                   <td>

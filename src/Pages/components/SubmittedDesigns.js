@@ -45,7 +45,7 @@ const SubmittedDesigns = () => {
                             <div class="design-info-alt">
                                 <img src={design.profile} alt="Designer LIrofile" />
                                 <div class="design-details-alt">
-                                    <div class="name-alt">{design.company}</div>
+                                    <div class="name-alt">{design.first_name} {design.last_name}</div>
                                     <div class="desc-alt">{design.caption}</div>
                                     <div class="desc-alt">{new Date(design.created_at).toLocaleDateString('en-US', {
                                         day: 'numeric',

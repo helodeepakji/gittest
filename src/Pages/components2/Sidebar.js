@@ -1,5 +1,6 @@
 import React from 'react';
 import './Sidebar.css';
+import { NavLink } from "react-router-dom";
 import Graph from "./image/Graph.png"
 import Activity from "./image/Activity.png"
 import Chart from "./image/Chart.png"
@@ -22,7 +23,7 @@ function Sidebar() {
       </div>
       <div className="sidebar-item">
         <img src={Chart} alt="Completed Designs Icon" className="sidebar-item-icon" />
-        <span className="sidebar-item-text">Completed Designs</span>
+        <NavLink to='/designer/view'><span className="sidebar-item-text">Completed Designs</span></NavLink>
       </div>
       <div className="sidebar-item">
         <img src={Category} alt="Messaging Icon" className="sidebar-item-icon" />
