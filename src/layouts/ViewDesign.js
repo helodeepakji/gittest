@@ -16,8 +16,13 @@ import { Link } from "react-router-dom";
 
 const ViewDesign = () => {
   const { id } = useParams();
-  const [data, setData] = useState(null); // Change initial state to null
+  const [data, setData] = useState(null);
   const [error, setError] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const toggleModal = () => {
+    setIsModalOpen(!isModalOpen);
+  };
 
   useEffect(() => {
     const fetchDesign = async () => {
@@ -53,6 +58,25 @@ const ViewDesign = () => {
 
   return (
     <div className="custom-container custom-all custom-section">
+      {isModalOpen && (
+        <div className="custom-modal-overlay">
+          <div className="custom-modal">
+            <h2>Why are you not satisfied?</h2>
+            <textarea
+              rows="5"
+              placeholder="Please provide your feedback here..."
+              className="custom-modal-textarea"
+            ></textarea>
+            <div className="custom-modal-actions">
+              <button onClick={toggleModal} className="custom-btn-close">
+                Close
+              </button>
+              <button className="custom-btn-submit">Submit Feedback</button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {error && <p>{error}</p>}
       {data ? (
         <div className="custom-main-div">
@@ -155,9 +179,7 @@ const ViewDesign = () => {
 
             <div className="custom-btn-section">
               <button className="custom-btn1">Accept Design</button>
-              <Link to="/feedback">
-                <button className="custom-btn2">Not Satisfied</button>
-              </Link>
+              <button onClick={toggleModal} className="custom-btn2">Not Satisfied</button>
             </div>
           </div>
 
