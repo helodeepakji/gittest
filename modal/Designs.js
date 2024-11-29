@@ -25,9 +25,24 @@ Designs.uploadDesign = (mediaData, callback) => {
 // Get a design by ID
 Designs.getById = (id, callback) => {
     const query = `
-        SELECT * 
-        FROM designs 
-        WHERE id = ?;
+       SELECT 
+    designs.*, 
+    business.caption, 
+    business.media AS business_media, 
+    business_user.first_name AS business_first_name, 
+    business_user.last_name AS business_last_name, 
+    business_user.company AS business_company, 
+    business_user.profile AS business_profile,
+    designer_user.first_name AS designer_first_name, 
+    designer_user.last_name AS designer_last_name, 
+    designer_user.company AS designer_company, 
+    designer_user.profile AS designer_profile
+FROM designs
+JOIN business ON designs.ads_id = business.id
+JOIN users AS business_user ON business_user.id = business.user_id 
+JOIN users AS designer_user ON designer_user.id = designs.user_id
+WHERE designs.id = ?;
+
     `;
     connection.query(query, [id], (err, results) => {
         if (err) {

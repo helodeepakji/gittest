@@ -31,15 +31,15 @@ function authenticateToken(req, res, next) {
         if (err) {
             return res.status(403).json({ message: 'Invalid or expired token' });
         }
-        
+
         req.user = user; // Attach decoded token data to request
         next();
     });
 }
 
-route.get('/getAllUser',(req,res) => {
-    User.allUser((err,results)=>{
-        if(!err){
+route.get('/getAllUser', (req, res) => {
+    User.allUser((err, results) => {
+        if (!err) {
             res.json(results);
         }
     });
@@ -101,11 +101,11 @@ route.post('/login', (req, res) => {
         }
 
         // Generate JWT token
-        const token = jwt.sign({ id: user.id, email: user.email , user_type: user.user_type }, JWT_SECRET, {
+        const token = jwt.sign({ id: user.id, email: user.email, user_type: user.user_type }, JWT_SECRET, {
             expiresIn: '1h'
         });
 
-        res.json({ token, user_type: user.user_type });        
+        res.json({ token, user_type: user.user_type });
     });
 });
 
@@ -135,13 +135,13 @@ route.post('/uploadRequirement', authenticateToken, upload.array('media[]', 10),
         return res.status(400).json({ message: 'At least one file is required' });
     }
 
-    if(user_type != 'business'){
+    if (user_type != 'business') {
         return res.status(400).json({ message: 'This is only for Business User' });
     }
 
     // Map through req.files to get the file paths
     const mediaPaths = req.files.map(file => `/upload/${file.filename}`);
-    
+
     // Ensure no duplicates
     const uniqueMediaPaths = [...new Set(mediaPaths)];
 
@@ -206,26 +206,26 @@ route.get('/getRequirement', authenticateToken, (req, res) => {
 });
 
 // upload designs
-route.post('/uploadDesign', authenticateToken , upload.array('media[]', 10) , (req, res) => {
+route.post('/uploadDesign', authenticateToken, upload.array('media[]', 10), (req, res) => {
     const user_id = req.user.id;
     const ads_id = req.body.ads_id;
     const user_type = req.user.user_type;
 
-    if(user_type != 'designer'){
+    if (user_type != 'designer') {
         return res.status(400).json({ message: 'This is only for Designer User' });
     }
-   
+
     if (!req.files || req.files.length === 0) {
         return res.status(400).json({ message: 'At least one file is required' });
     }
 
-     // Map through req.files to get the file paths
+    // Map through req.files to get the file paths
     const mediaPaths = req.files.map(file => `/upload/${file.filename}`);
-    
-     // Ensure no duplicates
+
+    // Ensure no duplicates
     const uniqueMediaPaths = [...new Set(mediaPaths)];
 
-    Designs.uploadDesign( {ads_id, user_id , media: uniqueMediaPaths},(err, result) => {
+    Designs.uploadDesign({ ads_id, user_id, media: uniqueMediaPaths }, (err, result) => {
         if (err) {
             return res.status(500).json({ message: 'Error uploading media', error: err.message });
         }
@@ -266,7 +266,7 @@ route.get('/getAllDesigns', authenticateToken, (req, res) => {
     const limit = parseInt(req.query.limit) || 5; // Default to 5 items per page
     const offset = (page - 1) * limit;
 
-    if(userType == 'designer'){
+    if (userType == 'designer') {
         Designs.getByUserId(userId, limit, offset, (err, result) => {
             if (err) {
                 return res.status(500).json({
@@ -274,9 +274,9 @@ route.get('/getAllDesigns', authenticateToken, (req, res) => {
                     error: err.message,
                 });
             }
-    
+
             const { results, totalCount } = result;
-    
+
             res.json({
                 page,
                 limit,
@@ -285,7 +285,7 @@ route.get('/getAllDesigns', authenticateToken, (req, res) => {
                 data: results,
             });
         });
-    }else if(userType == 'business'){
+    } else if (userType == 'business') {
         Designs.getByBusinessUser(userId, limit, offset, (err, result) => {
             if (err) {
                 return res.status(500).json({
@@ -293,9 +293,9 @@ route.get('/getAllDesigns', authenticateToken, (req, res) => {
                     error: err.message,
                 });
             }
-    
+
             const { results, totalCount } = result;
-    
+
             res.json({
                 page,
                 limit,
@@ -305,6 +305,27 @@ route.get('/getAllDesigns', authenticateToken, (req, res) => {
             });
         });
     }
+});
+
+
+route.get('/getDesign/:id', authenticateToken, (req, res) => {
+    const id = req.params.id;
+    Designs.getById(id, (err, result) => {
+        if (err) {
+            return res.status(500).json({
+                message: 'Error fetching designs',
+                error: err.message,
+            });
+        }
+
+        if (!result) {
+            return res.status(404).json({
+                message: 'Design not found',
+            });
+        }
+
+        res.status(200).json({data : result});
+    });
 });
 
 module.exports = route;
