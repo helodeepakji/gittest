@@ -17,8 +17,11 @@ import { Link } from "react-router-dom";
 const ViewDesign = () => {
   const { id } = useParams();
   const [data, setData] = useState(null);
+  const [adsId, setAdsId] = useState(0);
   const [error, setError] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const [feedback, setFeedback] = useState("");
 
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen);
@@ -40,7 +43,8 @@ const ViewDesign = () => {
         });
 
         if (response.status === 200) {
-          setData(response.data.data); // Assuming the response has a 'data' field
+          setData(response.data.data);
+          setAdsId(response.data.data.ads_id);
         }
       } catch (err) {
         setData(null);
@@ -56,6 +60,37 @@ const ViewDesign = () => {
     fetchDesign();
   }, [id]);
 
+  const handleSubmit = async () => {
+    if (!feedback.trim()) {
+      alert("Please provide your feedback before submitting.");
+      return;
+    }
+
+    try {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        throw new Error("Authentication token missing");
+      }
+
+      const response = await axios.post(
+        `/api/designNotSatisfied/${id}`,
+        { ads_id: adsId, feedback },
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+
+      if (response.status === 201) {
+        alert("Feedback submitted successfully!");
+        setFeedback("");
+        toggleModal(); // Close the modal
+      }
+    } catch (err) {
+      console.error("Error submitting feedback:", err);
+      alert("Failed to submit feedback. Please try again.");
+    }
+  };
+
   return (
     <div className="custom-container custom-all custom-section">
       {isModalOpen && (
@@ -66,12 +101,16 @@ const ViewDesign = () => {
               rows="5"
               placeholder="Please provide your feedback here..."
               className="custom-modal-textarea"
+              value={feedback}
+              onChange={(e) => setFeedback(e.target.value)}
             ></textarea>
             <div className="custom-modal-actions">
               <button onClick={toggleModal} className="custom-btn-close">
                 Close
               </button>
-              <button className="custom-btn-submit">Submit Feedback</button>
+              <button onClick={handleSubmit} className="custom-btn-submit">
+                Submit Feedback
+              </button>
             </div>
           </div>
         </div>
@@ -96,9 +135,7 @@ const ViewDesign = () => {
                     {data.designer_first_name + " " + data.designer_last_name ||
                       "Name of designer"}
                   </h3>
-                  <p>
-                    Company Name : {data.business_company || "Project name"}
-                  </p>
+                  <p>Company Name : {data.business_company || "Project name"}</p>
                   <p>caption : {data.caption} </p>
                 </div>
               </div>
@@ -109,7 +146,7 @@ const ViewDesign = () => {
                     month: "long",
                     year: "numeric",
                   })}
-                  ,
+                  ,{" "}
                   {new Date(data.created_at).toLocaleTimeString("en-US", {
                     hour: "2-digit",
                     minute: "2-digit",
@@ -177,17 +214,23 @@ const ViewDesign = () => {
               </div>
             </div>
 
-            <div className="custom-btn-section">
-              <button className="custom-btn1">Accept Design</button>
-              <button onClick={toggleModal} className="custom-btn2">Not Satisfied</button>
-            </div>
-          </div>
+            {data.status === "pending" ? (
+              <div className="custom-btn-section">
+                <button className="custom-btn1">Accept Design</button>
+                <button onClick={toggleModal} className="custom-btn2">
+                  Not Satisfied
+                </button>
+              </div>
+            ) : (
+              <div className="custom-btn-section">Design is {data.status}</div>
+            )}
 
-          <div className="custom-next">
-            <h1>Next</h1>
-            <p className="custom-arrow">
-              <IoIosArrowForward color="#0b5258" fontSize={25} />
-            </p>
+            <div className="custom-next">
+              <h1>Next</h1>
+              <p className="custom-arrow">
+                <IoIosArrowForward color="#0b5258" fontSize={25} />
+              </p>
+            </div>
           </div>
         </div>
       ) : (
@@ -195,6 +238,8 @@ const ViewDesign = () => {
       )}
     </div>
   );
-};
 
-export default ViewDesign;
+}
+
+
+  export default ViewDesign;

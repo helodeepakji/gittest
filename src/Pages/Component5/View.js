@@ -56,6 +56,7 @@ const DesignTable = () => {
             <tr>
               <th>  {userType == 'business' ? 'Designer' : 'Company'} </th>
               <th>Project</th>
+              <th>Status</th>
               <th>Date</th>
               <th>View Design</th>
             </tr>
@@ -82,6 +83,7 @@ const DesignTable = () => {
                       {design.caption}
                     </div>
                   </td>
+                  <td>{design.status}</td>
                   <td>{new Date(design.created_at).toLocaleDateString('en-US', {
                     day: 'numeric',
                     month: 'long',

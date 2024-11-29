@@ -6,6 +6,7 @@ const path = require('path');
 const User = require('../modal/User');
 const Business = require('../modal/Business');
 const Designs = require('../modal/Designs');
+const RejectDesign = require('../modal/RejectDesign');
 const JWT_SECRET = 'your_jwt_secret_key';
 
 const storage = multer.diskStorage({
@@ -307,7 +308,6 @@ route.get('/getAllDesigns', authenticateToken, (req, res) => {
     }
 });
 
-
 route.get('/getDesign/:id', authenticateToken, (req, res) => {
     const id = req.params.id;
     Designs.getById(id, (err, result) => {
@@ -324,8 +324,37 @@ route.get('/getDesign/:id', authenticateToken, (req, res) => {
             });
         }
 
-        res.status(200).json({data : result});
+        res.status(200).json({ data: result });
     });
+});
+
+route.post('/designNotSatisfied/:id', authenticateToken, (req, res) => {
+    const user_id = req.user.id;
+    const design_id = req.params.id;
+    const { ads_id, feedback } = req.body;
+    // Validate the input
+    if (!ads_id || !feedback) {
+        return res.status(400).json({
+            message: 'ads_id and feedback are required fields.',
+        });
+    }
+
+    Designs.reject(design_id ,(err, result) => {
+        RejectDesign.create({ design_id, user_id ,  ads_id, feedback }, (err, result) => {
+            if (err) {
+                return res.status(500).json({
+                    message: 'Error creating rejected design entry',
+                    error: err.message,
+                });
+            }
+    
+            res.status(201).json({
+                message: 'Rejected design successfully',
+                data: result,
+            });
+        });
+    });
+
 });
 
 module.exports = route;

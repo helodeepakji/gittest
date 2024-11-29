@@ -136,6 +136,21 @@ Designs.update = (id, adsId, userId, images, callback) => {
     });
 };
 
+// Update a design by ID
+Designs.reject = (id , callback) => {
+    const query = `
+        UPDATE designs 
+        SET status = ? WHERE id = ?;
+    `;
+    connection.query(query, ['reject', id], (err, results) => {
+        if (err) {
+            console.error('Error updating design:', err.message);
+            return callback(err);
+        }
+        callback(null, results);
+    });
+};
+
 // Delete a design by ID
 Designs.delete = (id, callback) => {
     const query = `
