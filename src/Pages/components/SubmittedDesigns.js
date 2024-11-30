@@ -60,7 +60,7 @@ const SubmittedDesigns = () => {
                                         })}</div>
                                 </div>
                             </div>
-                            <button class="view-button-alt">View</button>
+                            <Link to={`view${req.id}`} class="view-button-alt">View</Link>
                         </div>
                     ))) : (
                     <tr>
