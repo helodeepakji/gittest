@@ -1,5 +1,5 @@
 import React from "react";
-import "./components2/Designer.css";
+import "./Designer.css";
 import Sidebar from "./components2/Sidebar";
 import ProjectCard from "./components2/ProjectCard";
 import SubmittedDesigns from "./components2/SubmittedDesigns";

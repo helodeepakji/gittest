@@ -3,6 +3,14 @@
   padding: 0;
   box-sizing: border-box;
 }
+.custom-container-custom-all-custom-section{
+  width: 90%;
+  background-color: #ffffff;
+  margin: 20px auto;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.2);
+}
 
 .custom-modal-overlay {
   position: fixed;
@@ -98,14 +106,7 @@
   );
 }
 
-  .custom-main-div{
-    width: 90%;
-    background-color: #ffffff;
-    margin: 20px auto;
-    display: flex;
-    flex-direction: column;
-    box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.2);
-  }
+ 
   .custom-heading{
     width: 100%;
     width: 1px solid green;
@@ -125,7 +126,7 @@
     margin: auto;
     padding: 20px;
     border-radius: 10px;
-    height: 550px;
+    height: 600px;
     background-image: linear-gradient(
       210deg,
       #ebcaf3 0%,
@@ -181,7 +182,7 @@
   }
   .custom-image-section > img {
     width: 500px;
-    height: 350px;
+    height: 450px;
     border-radius: 20px;
   }
   .custom-chat-section{
@@ -202,11 +203,42 @@
     display: flex;
     gap: 10px;
   } */
-  .custom-chat-msg{
+    /* .custom-chat-msg{
     width: 100%;
     padding: 20px;
   }
-  .custom-msg-receiver {
+  */
+  .custom-chat-msg {
+    border: 1px solid #ccc; /* Adds a light gray border */
+    border-radius: 8px; /* Rounds the corners */
+    box-sizing: border-box; /* Ensures padding is included in the width/height */
+    height: 300px; /* Sets a fixed height for the chat section */
+    overflow-y: auto; /* Enables vertical scrolling */
+    padding: 10px; /* Adds inner spacing for aesthetics */
+    background-color: #f9f9f9; /* Light background for better contrast */
+    scrollbar-width: thin; /* For modern browsers: reduces scrollbar width */
+    scrollbar-color: #ccc transparent; /* Light gray scrollbar on transparent track */
+  }
+  
+  /* Custom scrollbar for Webkit-based browsers */
+  .custom-chat-msg::-webkit-scrollbar {
+    width: 8px; /* Width of the scrollbar */
+  }
+  
+  .custom-chat-msg::-webkit-scrollbar-track {
+    background: transparent; /* Track color */
+  }
+  
+  .custom-chat-msg::-webkit-scrollbar-thumb {
+    background: #ccc; /* Scrollbar color */
+    border-radius: 4px; /* Rounded scrollbar */
+  }
+  
+  .custom-chat-msg::-webkit-scrollbar-thumb:hover {
+    background: #999; /* Darker color on hover */
+  }
+  
+ .custom-msg-receiver {
     width: 100%;
     margin: 20px 0;
   }
@@ -282,12 +314,27 @@
   }
   
   .custom-btn-section {
-    width: 40%;
-    display: flex;
+    width: 30%;
     float: left;
-    margin: auto 20px;
-
+    margin: 20px;
   }
+  .custom-btn-section-1{
+    width: 30%;
+   float: left;
+    margin: 30px;
+   background-color: #f0f8ff; 
+    color: #333; 
+    font-size: 16px; 
+    font-weight: bold; 
+    padding: 10px 20px; 
+    border: 2px solid #007acc; 
+    border-radius: 8px; 
+    text-align: center; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+    transition: all 0.3s ease; 
+    cursor: pointer; 
+  }
+ 
   button {
     cursor: pointer;
   }
@@ -315,11 +362,11 @@
   }
   
   .custom-next {
-    width: 80%;
+    width: 60%;
     display: flex;
     align-items: end;
     justify-content: end;
-     margin: 10px auto; 
+     margin: 50px auto; 
     position: relative;
   }
   .custom-next > h1 {

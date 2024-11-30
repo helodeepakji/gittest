@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import "./Header.css";
-import logo from "./images/image.png";
+import logo from "./images/ADJERRY SVG LOGO 1.png";
 
 const Header = () => {
   const [user, setUser] = useState(null);

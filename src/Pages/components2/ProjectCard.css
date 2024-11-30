@@ -4,10 +4,9 @@
   padding-bottom: 50px; /* add this */
   border-radius: 15px;
   max-width: 700px;
-  margin: auto;
   overflow-y: auto; /* add this */
   box-sizing: border-box; /* add this */
- max-height: 210vh;
+  max-height: 110vh;
  scrollbar-width: thin; /* For Firefox */
   scrollbar-color: #999 #e5e5e5;
 }

@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import "./Viewpost.css";
+import "./ViewDesign.css";
 import topImg from "./images/Group (3).png";
 import { IoImageSharp } from "react-icons/io5";
 import { IoSend } from "react-icons/io5";
 import { TiArrowBackOutline } from "react-icons/ti";
 import { IoIosArrowForward } from "react-icons/io";
 import axios from "axios";
-
 
 const ViewDesign = () => {
   const { id } = useParams();
@@ -18,7 +17,7 @@ const ViewDesign = () => {
 
   const [feedback, setFeedback] = useState("");
 
-  const [newMessage, setNewMessage] = useState('');
+  const [newMessage, setNewMessage] = useState("");
   const [messages, setMessages] = useState([]);
   const [receiverId, setReceiverId] = useState(0);
   const [senderId, setSenderId] = useState(0);
@@ -48,7 +47,7 @@ const ViewDesign = () => {
         if (response.status === 200) {
           setData(response.data.data);
           setAdsId(response.data.data.ads_id);
-          if (decodedToken.user_type == 'business') {
+          if (decodedToken.user_type == "business") {
             setReceiverId(response.data.data.designer_id);
             setSenderId(response.data.data.business_id);
           } else {
@@ -67,27 +66,26 @@ const ViewDesign = () => {
       }
     };
 
-
     fetchDesign();
     fetchChatHistory();
   }, [id]);
 
   const fetchChatHistory = () => {
     fetch(`/api/chat/history/${id}?timestamp=${Date.now()}`, {
-      method: 'GET',
+      method: "GET",
       headers: {
-        'Authorization': `Bearer ${localStorage.getItem("token")}`,
-        'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        "Content-Type": "application/json",
       },
     })
-      .then(response => {
+      .then((response) => {
         if (!response.ok) {
           throw new Error(`Error: ${response.status} ${response.statusText}`);
         }
         return response.json();
       })
-      .then(data => setMessages(data))
-      .catch(error => console.error('Error fetching chat history:', error));
+      .then((data) => setMessages(data))
+      .catch((error) => console.error("Error fetching chat history:", error));
   };
 
   const handleSubmit = async () => {
@@ -131,27 +129,38 @@ const ViewDesign = () => {
     const newMessageData = {
       receiver: receiverId,
       msg: newMessage,
-      media: media || '',
+      media: media || "",
     };
 
     // Optimistically update UI
-    setMessages([...messages, { sender: 'You', msg: newMessage, media, created_at: new Date().toISOString() }]);
-    setNewMessage('');
+    setMessages([
+      ...messages,
+      {
+        sender: "You",
+        msg: newMessage,
+        media,
+        created_at: new Date().toISOString(),
+      },
+    ]);
+    setNewMessage("");
 
     try {
       await fetch(`/api/chat/send/${id}`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
         body: JSON.stringify(newMessageData),
       });
       fetchChatHistory();
     } catch (error) {
-      console.error('Error sending message:', error);
+      console.error("Error sending message:", error);
     }
   };
 
   return (
-    <div className="custom-container custom-all custom-section">
+    <div className="custom-container-custom-all-custom-section">
       {isModalOpen && (
         <div className="custom-modal-overlay">
           <div className="custom-modal">
@@ -194,7 +203,9 @@ const ViewDesign = () => {
                     {data.designer_first_name + " " + data.designer_last_name ||
                       "Name of designer"}
                   </h3>
-                  <p>Company Name : {data.business_company || "Project name"}</p>
+                  <p>
+                    Company Name : {data.business_company || "Project name"}
+                  </p>
                   <p>caption : {data.caption} </p>
                 </div>
               </div>
@@ -236,7 +247,11 @@ const ViewDesign = () => {
                       <img src={data.designer_profile} alt="pic" />
                     </div>
                     <div className="custom-designer-name">
-                      <h3>{data.designer_first_name + " " + data.designer_last_name}</h3>{" "}
+                      <h3>
+                        {data.designer_first_name +
+                          " " +
+                          data.designer_last_name}
+                      </h3>{" "}
                     </div>
                   </div>
                 </div>
@@ -245,8 +260,11 @@ const ViewDesign = () => {
                   {messages.map((message) => (
                     <div
                       key={message.id}
-                      className={`custom-msg ${message.sender === senderId ? 'custom-msg-sender' : 'custom-msg-receiver'
-                        }`}
+                      className={`custom-msg ${
+                        message.sender === senderId
+                          ? "custom-msg-sender"
+                          : "custom-msg-receiver"
+                      }`}
                     >
                       <p>{message.msg}</p>
                       {message.media && <img src={message.media} alt="Media" />}
@@ -259,7 +277,12 @@ const ViewDesign = () => {
                     <IoImageSharp fontSize={20} style={{ color: "#0b5258" }} />
                   </div>
                   <div className="custom-input-sec">
-                    <input type="text" placeholder="message" value={newMessage} onChange={(e) => setNewMessage(e.target.value)} />
+                    <input
+                      type="text"
+                      placeholder="message"
+                      value={newMessage}
+                      onChange={(e) => setNewMessage(e.target.value)}
+                    />
                     <IoSend
                       className="custom-thumb"
                       fontSize={20}
@@ -272,22 +295,22 @@ const ViewDesign = () => {
             </div>
 
             {data.status === "pending" ? (
-              <div className="custom-btn-section">
-                <button className="custom-btn1">Accept Design</button>
-                <button onClick={toggleModal} className="custom-btn2">
-                  Not Satisfied
-                </button>
-              </div>
+              
+                <div className="custom-btn-section">
+                  <button className="custom-btn1">Accept Design</button>
+                  <button onClick={toggleModal} className="custom-btn2">
+                    Not Satisfied
+                  </button>
+                </div>
+              
             ) : (
-              <div className="custom-btn-section">Design is {data.status}</div>
+              <div className="custom-btn-section-1">
+                Design is {data.status}
+              </div>
             )}
-
-            <div className="custom-next">
-              <h1>Next</h1>
-              <p className="custom-arrow">
-                <IoIosArrowForward color="#0b5258" fontSize={25} />
-              </p>
-            </div>
+              <div className="custom-next"> 
+                  <h1>Next </h1>
+             </div>
           </div>
         </div>
       ) : (
@@ -295,8 +318,6 @@ const ViewDesign = () => {
       )}
     </div>
   );
-
-}
-
+};
 
 export default ViewDesign;

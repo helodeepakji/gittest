@@ -16,6 +16,14 @@
     text-align: center;
     transition: transform 0.3s;
 }
+  a {
+    color: white;
+    text-decoration: none;
+}
+a:hover{
+    color: white;
+    text-decoration: none;
+}
 
 .card:hover {
     transform: scale(1.05);

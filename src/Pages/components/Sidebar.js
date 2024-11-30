@@ -8,7 +8,7 @@ import Category from "./images/Category.png";
 import Discovery from "./images/Discovery.png";
 import Experience from "./images/experience-1.png";
 import Profile from "./images/profile-picture.webp";
-import Group from "./images/Group.png";
+
 
 function Sidebar() {
   return (
@@ -53,9 +53,6 @@ function Sidebar() {
         <img src={Profile} alt="Profile Picture" />
         <div className="user-name">Mickelson Klus</div>
         <button className="user-button">Business Profile</button>
-      </div>
-      <div className="sidebar-group">
-        <img src={Group} style={{marginTop:'100px'} } alt="Group" />
       </div>
     </div>
   );

@@ -18,7 +18,7 @@ const Top = () => {
                 </div>
 
                 <div class="card">
-                    <Link to="/business/view">
+                    <Link to="/business/view" className='card-1'>
                         <div class="icon">
                             <span> <h3>Design Selection</h3></span>    <img src={Design} alt="Design Icon" />
                         </div>
