@@ -26,6 +26,7 @@ import Adv from './Pages/components3/Adv';
 import Retailer from './Pages/Component4/Retailer';
 import ViewDesign from './layouts/ViewDesign';
 import EditProfile from './Pages/Component5/EditProfile';
+import Profile from './Pages/Component5/Profile/Profile';
 
 
 function App() {
@@ -58,6 +59,8 @@ function App() {
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/login' element={<Login />} />
+        <Route path='/profile' element={<Profile />} />
+
         <Route path='/signup' element={<Signup />} />
         <Route path='/proceed' element={<Join />} />
         <Route path='/contact' element={<Contactpage />} />

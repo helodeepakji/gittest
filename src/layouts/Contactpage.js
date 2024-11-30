@@ -16,10 +16,10 @@ const Contactpage = () => {
           <br />
           <input type="text" name="Purpose" placeholder="Purpose" className="input" />
           <br />
-          <button className="send">send</button>
+          <button className="send">Send</button>
         </div>
         <div class="one">
-          <img src={Nice} height="550px" width="570px" />
+          <img src={Nice}  />
         </div>
       </div>
     </div>

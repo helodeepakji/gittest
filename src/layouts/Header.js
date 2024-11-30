@@ -94,6 +94,7 @@ const Header = () => {
           <Link to="/login" className="text-white align-self-center">
             Login
           </Link>
+        
           <Link to="/proceed" className="btn btn-info text-white px-3xl">
             Join Now
           </Link>
