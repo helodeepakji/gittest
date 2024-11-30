@@ -32,9 +32,11 @@ Designs.getById = (id, callback) => {
     business_user.first_name AS business_first_name, 
     business_user.last_name AS business_last_name, 
     business_user.company AS business_company, 
+    business_user.id AS business_id, 
     business_user.profile AS business_profile,
     designer_user.first_name AS designer_first_name, 
     designer_user.last_name AS designer_last_name, 
+    designer_user.id AS designer_id, 
     designer_user.company AS designer_company, 
     designer_user.profile AS designer_profile
 FROM designs

@@ -1,12 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import "./Viewpost.css";
-import Cupimg from "./images/cup.png";
-import menimg from "./images/men.png";
 import topImg from "./images/Group (3).png";
-import { IoCall } from "react-icons/io5";
-import { IoVideocam } from "react-icons/io5";
-import { FaCamera } from "react-icons/fa";
 import { IoImageSharp } from "react-icons/io5";
 import { IoSend } from "react-icons/io5";
 import { TiArrowBackOutline } from "react-icons/ti";
@@ -23,6 +18,12 @@ const ViewDesign = () => {
 
   const [feedback, setFeedback] = useState("");
 
+  const [newMessage, setNewMessage] = useState('');
+  const [messages, setMessages] = useState([]);
+  const [receiverId, setReceiverId] = useState(0);
+  const [senderId, setSenderId] = useState(0);
+  const [media, setMedia] = useState(null);
+
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen);
   };
@@ -35,6 +36,8 @@ const ViewDesign = () => {
         return;
       }
 
+      const decodedToken = JSON.parse(atob(token.split(".")[1]));
+
       try {
         const response = await axios.get(`/api/getDesign/${id}`, {
           headers: {
@@ -45,6 +48,13 @@ const ViewDesign = () => {
         if (response.status === 200) {
           setData(response.data.data);
           setAdsId(response.data.data.ads_id);
+          if (decodedToken.user_type == 'business') {
+            setReceiverId(response.data.data.designer_id);
+            setSenderId(response.data.data.business_id);
+          } else {
+            setReceiverId(response.data.data.business_id);
+            setSenderId(response.data.data.designer_id);
+          }
         }
       } catch (err) {
         setData(null);
@@ -57,8 +67,28 @@ const ViewDesign = () => {
       }
     };
 
+
     fetchDesign();
+    fetchChatHistory();
   }, [id]);
+
+  const fetchChatHistory = () => {
+    fetch(`/api/chat/history/${id}?timestamp=${Date.now()}`, {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem("token")}`,
+        'Content-Type': 'application/json',
+      },
+    })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`Error: ${response.status} ${response.statusText}`);
+        }
+        return response.json();
+      })
+      .then(data => setMessages(data))
+      .catch(error => console.error('Error fetching chat history:', error));
+  };
 
   const handleSubmit = async () => {
     if (!feedback.trim()) {
@@ -88,6 +118,35 @@ const ViewDesign = () => {
     } catch (err) {
       console.error("Error submitting feedback:", err);
       alert("Failed to submit feedback. Please try again.");
+    }
+  };
+
+  const handleSendMessage = async () => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      throw new Error("Authentication token missing");
+    }
+    if (!newMessage.trim()) return;
+
+    const newMessageData = {
+      receiver: receiverId,
+      msg: newMessage,
+      media: media || '',
+    };
+
+    // Optimistically update UI
+    setMessages([...messages, { sender: 'You', msg: newMessage, media, created_at: new Date().toISOString() }]);
+    setNewMessage('');
+
+    try {
+      await fetch(`/api/chat/send/${id}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+        body: JSON.stringify(newMessageData),
+      });
+      fetchChatHistory();
+    } catch (error) {
+      console.error('Error sending message:', error);
     }
   };
 
@@ -174,40 +233,38 @@ const ViewDesign = () => {
                 <div className="custom-chat-header">
                   <div className="custom-chat-info">
                     <div className="custom-profile-picture">
-                      <img src={menimg} alt="pic" />
+                      <img src={data.designer_profile} alt="pic" />
                     </div>
                     <div className="custom-designer-name">
-                      <h3>{data.designerName || "Name of designer"}</h3>{" "}
-                      {/* Replace with actual data */}
+                      <h3>{data.designer_first_name + " " + data.designer_last_name}</h3>{" "}
                     </div>
                   </div>
-                  /
                 </div>
 
                 <div className="custom-chat-msg">
-                  <div className="custom-msg-receiver">
-                    <p>
-                      Lorem ipsum is placeholder text commonly used in the
-                      graphic, print.
-                    </p>
-                  </div>
-                  <div className="custom-msg-sender">
-                    <p>Hello there!</p>
-                  </div>
+                  {messages.map((message) => (
+                    <div
+                      key={message.id}
+                      className={`custom-msg ${message.sender === senderId ? 'custom-msg-sender' : 'custom-msg-receiver'
+                        }`}
+                    >
+                      <p>{message.msg}</p>
+                      {message.media && <img src={message.media} alt="Media" />}
+                    </div>
+                  ))}
                 </div>
 
                 <div className="custom-chat-footer">
                   <div className="custom-footer-icon">
-                    <FaCamera fontSize={20} style={{ color: "#0b5258" }} />
                     <IoImageSharp fontSize={20} style={{ color: "#0b5258" }} />
                   </div>
                   <div className="custom-input-sec">
-                    <input type="text" placeholder="message" />
-
+                    <input type="text" placeholder="message" value={newMessage} onChange={(e) => setNewMessage(e.target.value)} />
                     <IoSend
                       className="custom-thumb"
                       fontSize={20}
                       style={{ color: "#0b5258" }}
+                      onClick={handleSendMessage}
                     />
                   </div>
                 </div>
@@ -242,4 +299,4 @@ const ViewDesign = () => {
 }
 
 
-  export default ViewDesign;
+export default ViewDesign;

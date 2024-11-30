@@ -7,6 +7,7 @@ const User = require('../modal/User');
 const Business = require('../modal/Business');
 const Designs = require('../modal/Designs');
 const RejectDesign = require('../modal/RejectDesign');
+const Chat = require('../modal/Chat');
 const JWT_SECRET = 'your_jwt_secret_key';
 
 const storage = multer.diskStorage({
@@ -356,5 +357,49 @@ route.post('/designNotSatisfied/:id', authenticateToken, (req, res) => {
     });
 
 });
+
+route.post('/chat/send/:id', authenticateToken, (req, res) => {
+    const user_id = req.user.id;
+    const design_id = req.params.id;
+    const { msg, receiver, media } = req.body;
+
+    if (!msg || !receiver || !design_id) {
+        return res.status(400).json({
+            message: 'Invalid input data. Ensure sender, receiver, msg, and design_id are provided.',
+        });
+    }
+
+    Chat.sendMessage({ user_id, receiver, msg, design_id, media }, (err, result) => {
+        if (err) {
+            return res.status(500).json({
+                message: 'Error sending',
+                error: err.message,
+            });
+        }
+
+        res.status(201).json({
+            message: 'Send successfully',
+            data: result,
+        });
+    });
+});
+
+route.get('/chat/history/:id', authenticateToken, (req, res) => {
+    const design_id = req.params.id;
+    console.log('Received design_id:', design_id); // Add this line
+
+    Chat.getChatHistory(design_id, (err, result) => {
+        if (err) {
+            console.error('Error in getChatHistory:', err.message); // Add this line
+            return res.status(500).json({
+                message: 'Error sending',
+                error: err.message,
+            });
+        }
+        res.status(201).json(result);
+    });
+});
+
+
 
 module.exports = route;
