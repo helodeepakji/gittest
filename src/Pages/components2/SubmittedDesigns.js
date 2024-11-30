@@ -63,7 +63,7 @@ const SubmittedDesigns = () => {
                     })}</div>
                 </div>
               </div>
-              <Link to={`view${req.id}`} class="view-button1">View</Link>
+              <Link to={`/view/${req.id}`} class="view-button1">View</Link>
             </div>
           ))) : (
           <p>No Submiited Designs available</p>
