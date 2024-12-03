@@ -11,11 +11,12 @@ import Login from './Pages/Login';
 import Signup from './Pages/Signup';
 import Join from './Pages/Join';
 import Contactpage from './layouts/Contactpage';
+import Product from './Pages/Component5/Product';
 
 // business user page
 import Bussiness from './Pages/Business';
 import View from "./Pages/Component5/View"
-import Product from './Pages/Component5/Product';
+import Productdesign from './Pages/component6/Productdesign';
 
 
 
@@ -78,6 +79,8 @@ function App() {
 
         <Route path='/editprofile' element={<ProtectedRoute element={<EditProfile />} />} />
         <Route path='/view/:id' element={<ProtectedRoute element={<ViewDesign />} />} />
+        <Route path='/productdesign' element={<ProtectedRoute element={<Productdesign />}/>} />
+      
 
 
         <Route path='/retailer/home' element={<ProtectedRoute element={<Retailer />} />} />

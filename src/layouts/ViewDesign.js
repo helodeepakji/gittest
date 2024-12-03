@@ -298,7 +298,7 @@ const ViewDesign = () => {
             {data.status === "pending" ? (
               
                 <div className="custom-btn-section">
-                  <Link to="/product">
+                  <Link to="/productdesign">
                   <button className="custom-btn1">Accept Design</button>
                   </Link>
                   <button onClick={toggleModal} className="custom-btn2">
