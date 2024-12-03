@@ -7,6 +7,7 @@ import { IoSend } from "react-icons/io5";
 import { TiArrowBackOutline } from "react-icons/ti";
 import { IoIosArrowForward } from "react-icons/io";
 import axios from "axios";
+import {Link} from 'react-router-dom';
 
 const ViewDesign = () => {
   const { id } = useParams();
@@ -297,7 +298,9 @@ const ViewDesign = () => {
             {data.status === "pending" ? (
               
                 <div className="custom-btn-section">
+                  <Link to="/product">
                   <button className="custom-btn1">Accept Design</button>
+                  </Link>
                   <button onClick={toggleModal} className="custom-btn2">
                     Not Satisfied
                   </button>

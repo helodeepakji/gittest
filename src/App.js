@@ -15,6 +15,7 @@ import Contactpage from './layouts/Contactpage';
 // business user page
 import Bussiness from './Pages/Business';
 import View from "./Pages/Component5/View"
+import Product from './Pages/Component5/Product';
 
 
 
@@ -27,6 +28,7 @@ import Retailer from './Pages/Component4/Retailer';
 import ViewDesign from './layouts/ViewDesign';
 import EditProfile from './Pages/Component5/EditProfile';
 import Profile from './Pages/Component5/Profile/Profile';
+
 
 
 function App() {
@@ -67,6 +69,7 @@ function App() {
 
         <Route path='/business/home' element={<ProtectedRoute element={<Bussiness />} />} />
         <Route path='/business/view' element={<ProtectedRoute element={<View />} />} />
+        <Route path='/product' element={<ProtectedRoute element={<Product />}/>} />
       
         
 
