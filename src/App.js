@@ -11,7 +11,7 @@ import Login from './Pages/Login';
 import Signup from './Pages/Signup';
 import Join from './Pages/Join';
 import Contactpage from './layouts/Contactpage';
-import Product from './Pages/Component5/Product';
+
 
 // business user page
 import Bussiness from './Pages/Business';
@@ -70,7 +70,7 @@ function App() {
 
         <Route path='/business/home' element={<ProtectedRoute element={<Bussiness />} />} />
         <Route path='/business/view' element={<ProtectedRoute element={<View />} />} />
-        <Route path='/product' element={<ProtectedRoute element={<Product />}/>} />
+        
       
         
 
