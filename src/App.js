@@ -63,28 +63,25 @@ function App() {
         <Route path='/' element={<Home />} />
         <Route path='/login' element={<Login />} />
         <Route path='/profile' element={<Profile />} />
-
         <Route path='/signup' element={<Signup />} />
         <Route path='/proceed' element={<Join />} />
         <Route path='/contact' element={<Contactpage />} />
 
+
         <Route path='/business/home' element={<ProtectedRoute element={<Bussiness />} />} />
         <Route path='/business/view' element={<ProtectedRoute element={<View />} />} />
+        <Route path='/business/wallet' element={<ProtectedRoute element={<Wallet />} />} />
         
-      
-        
-
         <Route path='/designer/home' element={<ProtectedRoute element={<Designerpage />} />} />
         <Route path='/designer/view' element={<ProtectedRoute element={<View />} />} />
-
+        <Route path='/designer/wallet' element={<ProtectedRoute element={<Wallet />} />} />
+        
+        <Route path='/productdesign/:id' element={<ProtectedRoute element={<Productdesign />}/>} />
+        
         <Route path='/editprofile' element={<ProtectedRoute element={<EditProfile />} />} />
-        <Route path='/view/:id' element={<ProtectedRoute element={<ViewDesign />} />} />
-        <Route path='/productdesign' element={<ProtectedRoute element={<Productdesign />}/>} />
-      
-
 
         <Route path='/retailer/home' element={<ProtectedRoute element={<Retailer />} />} />
-        <Route path='/wallet' element={<ProtectedRoute element={<Wallet />} />} />
+        <Route path='/retailer/wallet' element={<ProtectedRoute element={<Wallet />} />} />
 
         <Route path='/adv' element={<ProtectedRoute element={<Adv />} />} />
       </Routes>

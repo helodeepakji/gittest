@@ -96,7 +96,7 @@ const DesignTable = () => {
                       hour12: true
                     })}</td>
                   <td>
-                    <Link to={`/view/${design.id}`}>
+                    <Link to={`/productdesign/${design.id}`}>
                       <button className="view-button00">View</button>
                     </Link>
                   </td>
