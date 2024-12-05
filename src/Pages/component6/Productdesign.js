@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from "react-router-dom";
+import { IoImageSharp } from "react-icons/io5";
+import { IoSend } from "react-icons/io5";
 import "./Productdesign.css";
 import Auto from "./pic/auto.png"
 import Train from "./pic/train.png"
@@ -246,7 +248,7 @@ const Product = () => {
                     })}</span>
                 </div>
               </div>
-              {data.status === "pending" &&  userType == 'business'  ? (
+              {data.status === "pending" && userType == 'business' ? (
                 <div class="actions-33">
                   <button class="approved-33">Approved</button>
                   <button class="btn btn-danger" onClick={toggleModal}> Not Satisfied</button>
@@ -259,10 +261,60 @@ const Product = () => {
                 </div>
               )}
             </div>
+            <div className="custom-chat-section">
+              <div className="custom-chat-header">
+                <div className="custom-chat-info">
+                  <div className="custom-profile-picture">
+                    <img src={data.designer_profile} alt="pic" />
+                  </div>
+                  <div className="custom-designer-name">
+                    <h3>
+                      {data.designer_first_name +
+                        " " +
+                        data.designer_last_name}
+                    </h3>{" "}
+                  </div>
+                </div>
+              </div>
+
+              <div className="custom-chat-msg">
+                {messages.map((message) => (
+                  <div
+                    key={message.id}
+                    className={`custom-msg ${message.sender === senderId
+                        ? "custom-msg-sender"
+                        : "custom-msg-receiver"
+                      }`}
+                  >
+                    <p>{message.msg}</p>
+                    {message.media && <img src={message.media} alt="Media" />}
+                  </div>
+                ))}
+              </div>
+
+              <div className="custom-chat-footer">
+                <div className="custom-footer-icon">
+                  <IoImageSharp fontSize={20} style={{ color: "#0b5258" }} />
+                </div>
+                <div className="custom-input-sec">
+                  <input
+                    type="text"
+                    placeholder="message"
+                    value={newMessage}
+                    onChange={(e) => setNewMessage(e.target.value)}
+                  />
+                  <IoSend
+                    className="custom-thumb"
+                    fontSize={20}
+                    style={{ color: "#0b5258" }}
+                    onClick={handleSendMessage}
+                  />
+                </div>
+              </div>
+            </div>
           </section>
 
           {userType == 'business' ? (
-
             <section class="advertisement-categories-33">
               <h2>Advertisement Categories</h2>
 

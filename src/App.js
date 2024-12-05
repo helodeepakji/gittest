@@ -83,7 +83,7 @@ function App() {
         <Route path='/retailer/home' element={<ProtectedRoute element={<Retailer />} />} />
         <Route path='/retailer/wallet' element={<ProtectedRoute element={<Wallet />} />} />
 
-        <Route path='/adv' element={<ProtectedRoute element={<Adv />} />} />
+        <Route path='/uploadDesign' element={<ProtectedRoute element={<Adv />} />} />
       </Routes>
 
       <Footer />

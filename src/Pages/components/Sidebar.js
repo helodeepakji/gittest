@@ -16,7 +16,7 @@ function Sidebar() {
 
       <div className="menu-item">
         <img src={Graph} alt="Projects Icon" className="menu-icon" />
-        <span className="menu-text">Upload Post</span>
+        <span className="menu-text">Upload Design</span>
       </div>
      <div className="menu-item">
         <img src={Activity} alt="Transactions Icon" className="menu-icon" />
