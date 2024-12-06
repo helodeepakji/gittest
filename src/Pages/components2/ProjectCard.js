@@ -56,7 +56,7 @@ const ProjectCard = () => {
       });
 
       if (response.status === 200) {
-        alert('Project submitted successfully!');
+        alert('Design submitted successfully!');
         setImage(null); // Reset the image state
         fetchRequirements(page);
       } else {

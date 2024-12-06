@@ -1,10 +1,109 @@
-import React from 'react';
+import React, {useState, useRef} from "react";
 import './adv.css'; 
+import axios from 'axios';
+import UploadDesign from "./Image upload-bro 1.png"
 
 
 const Adv = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [image, setImage] = useState("");
+  const [error, setError] = useState(null);
+  const [files, setFiles] = useState([]);
+  const inputRef = useRef(null);
+
+  const closeModal = () => {
+    setIsModalOpen(!isModalOpen);
+  };
+
+  const handleImageClick = () => {
+    inputRef.current.click();
+  };
+
+  const handleImageChange = (e) => {
+    setFiles([...e.target.files]);
+    setImage(e.target.files[0]);
+  };
+
+  const handleSubmit = async (ads_id) => {
+    if (!ads_id) {
+      alert("Please provide an image.");
+      return;
+    }
+  
+    if (files.length === 0) {
+      alert("Please upload at least one design to submit.");
+      return;
+    }
+
+    const token = localStorage.getItem('token');
+    if (!token) {
+      setError('Authentication token is missing');
+      return;
+    }
+
+    try {
+      const formData = new FormData();
+      formData.append('ads_id', ads_id);
+      files.forEach((file) => {
+        formData.append("media[]", file);
+      });
+
+      const response = await axios.post('/api/uploadDesign', formData, {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+
+      if (response.status === 200) {
+        alert('Project submitted successfully!');
+        setFiles([])
+        setImage(""); // Reset the image state
+        closeModal();
+      } else {
+        alert(`Submission failed: ${response.statusText}`);
+      }
+    } catch (err) {
+      alert(`An error occurred: ${err.message}`);
+    }
+  };
+
     return (
-        <div className="container mt-5 w-2/3 text-white">
+      <> 
+       {isModalOpen && (
+       <div className="modal-overlay-000">
+        <div className="modal-content-000">
+          <div className="modal-body-000">
+
+            <div className="image-container-000">
+            {image ? <img src={URL.createObjectURL(image)} alt='' style={{ width: "50px" }} /> : <img src={UploadDesign} alt="" />}
+                    <input
+                      type="file"
+                      ref={inputRef}
+                      onChange={handleImageChange}
+                      style={{ display: "none" }}
+                    />
+
+            </div>
+
+            <h2>Select files </h2>
+            <p>Share your design to business user</p>
+            <button onClick={handleImageClick} className="upload-button-000">Upload Design</button>
+          </div>
+          <div className="custom-modal-actions-000">
+              <button onClick={closeModal} className="custom-btn-close-000">
+                Close
+              </button>
+              <button className="custom-btn-submit-000" onClick={ handleSubmit}>
+               Submit
+              </button>
+            </div>
+
+        </div>
+      </div>
+      )}
+
+ <div className="container mt-5 w-2/3 text-white">
           {/* Header Section */}
           <div className="row mb-4 text-center">
             <div className="col-md-4 mb-3">
@@ -51,7 +150,7 @@ const Adv = () => {
               Unlock access to 10,000+ designers for hire with Dribbble, the largest platform of designers online. Simplify your hiring process today and never have to worry about where to hire top design talent again
               </p>
               <div className='text-left '>
-              <button className="btn btn-info text-white mt-4 ">Upload Post</button>
+              <button className="btn btn-info text-white mt-4 " onClick={closeModal}>Upload Post</button>
               </div>
             </div>
             <div className="col-md-4 text-center">
@@ -85,6 +184,9 @@ const Adv = () => {
             </div>
           </div>
         </div>
+      </>
+     
+       
       );
 };
 

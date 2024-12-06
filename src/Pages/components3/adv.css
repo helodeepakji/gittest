@@ -29,3 +29,96 @@
     font-size: 35px;
     font-weight: 600;
 }
+
+
+
+/* Modal overlay */
+.modal-overlay-000 {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+/* Modal content */
+.modal-content-000 {
+  background-color: #fff;
+  width: 500px;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Close button */
+.close-button-000 {
+  position: absolute;
+ 
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+/* Image container */
+.image-container-000 {
+  margin: 20px 0;
+}
+
+.upload-image-000 {
+  width: 100px;
+  height: auto;
+}
+
+
+
+/* Upload button */
+.upload-button-000 {
+  background-color: #008cba;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin-top: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.upload-button-000:hover {
+  background-color: #005f7a;
+}
+
+/* Submit button */
+.custom-btn-submit-000 {
+  background-color: #fff;
+  color: #008cba;
+  border: 2px solid #008cba;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 10px;
+}
+
+.custom-btn-submit-000:hover {
+  background-color: #008cba;
+  color: white;
+}
+
+.custom-btn-close-000{
+  background-color: #fff;
+  color: #008cba;
+  border: 2px solid #008cba;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+.custom-btn-close-000:hover{
+  background-color: #008cba;
+  color: white;
+}

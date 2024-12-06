@@ -17,6 +17,7 @@ import Contactpage from './layouts/Contactpage';
 import Bussiness from './Pages/Business';
 import View from "./Pages/Component5/View"
 import Productdesign from './Pages/component6/Productdesign';
+import Payment from "./Pages/component6/Payment"
 
 
 
@@ -26,7 +27,6 @@ import Designerpage from "./Pages/Designer";
 import Wallet from './layouts/Wallet';
 import Adv from './Pages/components3/Adv';
 import Retailer from './Pages/Component4/Retailer';
-import ViewDesign from './layouts/ViewDesign';
 import EditProfile from './Pages/Component5/EditProfile';
 import Profile from './Pages/Component5/Profile/Profile';
 
@@ -84,6 +84,7 @@ function App() {
         <Route path='/retailer/wallet' element={<ProtectedRoute element={<Wallet />} />} />
 
         <Route path='/uploadDesign' element={<ProtectedRoute element={<Adv />} />} />
+        <Route path='/payment' element={<ProtectedRoute element={<Payment />} />} />
       </Routes>
 
       <Footer />

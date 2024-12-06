@@ -166,3 +166,43 @@
   background: #0b5258;
   color: white;
 }
+.custom-profile-picture img{
+  height: 50px;
+  width: 50px;
+}
+
+.approved-333 {
+  position: fixed; /* Keeps the button in a constant position */
+  right: 20px; /* Distance from the right side of the screen */
+  bottom: 20px; /* Distance from the bottom of the screen */
+  background-color: #4CAF50; /* Green background */
+  color: white; /* White text color */
+  border: none; /* Remove border */
+  border-radius: 5px; /* Rounded corners */
+  padding: 10px 20px; /* Padding for the button */
+  font-size: 16px; /* Font size */
+  cursor: pointer; /* Pointer cursor on hover */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow */
+  z-index: 1000; /* Ensures the button stays on top */
+}
+
+.approved-333:hover {
+  background-color: #45a049; /* Slightly darker green on hover */
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15); /* More pronounced shadow */
+}
+
+
+
+
+.counter-container-11 {
+  display: inline-flex;
+  align-items: center;
+  border: 2px solid #00a8e1;
+  border-radius: 5px;
+  padding: 5px 10px;
+  font-size: 18px;
+  font-family: Arial, sans-serif;
+}
+.counter-value-11 {
+  margin: 0 10px;
+}

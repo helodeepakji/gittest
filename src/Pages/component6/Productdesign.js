@@ -1,36 +1,37 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom" 
 import { useParams } from "react-router-dom";
 import { IoImageSharp } from "react-icons/io5";
 import { IoSend } from "react-icons/io5";
 import "./Productdesign.css";
-import Auto from "./pic/auto.png"
-import Train from "./pic/train.png"
-import Metro from "./pic/metro.png"
-import Plane from "./pic/plane.png"
+import Auto from "./pic/auto.png";
+import Train from "./pic/train.png";
+import Metro from "./pic/metro.png";
+import Plane from "./pic/plane.png";
 
-import Papercup from "./pic/PaperCup.png"
-import Paperplate from "./pic/Paperplate.png"
-import Paperbag from "./pic/Paperbag.png"
-import Pizza from "./pic/Pizza .png"
-import Plus from "./pic/plus.png"
+import Papercup from "./pic/PaperCup.png";
+import Paperplate from "./pic/Paperplate.png";
+import Paperbag from "./pic/Paperbag.png";
+import Pizza from "./pic/Pizza .png";
+import Plus from "./pic/plus.png";
 
-import Half from "./pic/Half T shirt.png"
-import Full from "./pic/T-shirt.png"
-import Hoddies from "./pic/hoodies.png"
-import Jackets from "./pic/Jackets.png"
-import Cap from "./pic/Cap.png"
-import Handkerchiefs from "./pic/handkerchiefs.png"
+import Half from "./pic/Half T shirt.png";
+import Full from "./pic/T-shirt.png";
+import Hoddies from "./pic/hoodies.png";
+import Jackets from "./pic/Jackets.png";
+import Cap from "./pic/Cap.png";
+import Handkerchiefs from "./pic/handkerchiefs.png";
 
-import City from "./pic/city.png"
-import Buildings from "./pic/buildings.png"
-import Markets from "./pic/market.png"
-import Mall from "./pic/malls.png"
+import City from "./pic/city.png";
+import Buildings from "./pic/buildings.png";
+import Markets from "./pic/market.png";
+import Mall from "./pic/malls.png";
 
-import Water from "./pic/waterbottle.png"
-import Wall from "./pic/wall.png"
+import Water from "./pic/waterbottle.png";
+import Wall from "./pic/wall.png";
 import axios from "axios";
-
-
+import Add from "./pic/addd.png";
+import minus from "./pic/minus.png";
 
 const Product = () => {
   const { id } = useParams();
@@ -47,6 +48,16 @@ const Product = () => {
   const [receiverId, setReceiverId] = useState(0);
   const [senderId, setSenderId] = useState(0);
   const [media, setMedia] = useState(null);
+
+  const [quantity, setQuantity] = useState(1);
+
+  const incrementQuantity = () => {
+    setQuantity((prevQuantity) => prevQuantity + 1);
+  };
+
+  const decrementQuantity = () => {
+    setQuantity((prevQuantity) => (prevQuantity > 1 ? prevQuantity - 1 : 1));
+  };
 
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen);
@@ -107,7 +118,7 @@ const Product = () => {
       .then((response) => {
         if (!response.ok) {
           throw new Error(`Error: ${response.status} ${response.statusText}`);
-          fetchDesign();
+          // fetchDesign();
         }
         return response.json();
       })
@@ -187,7 +198,7 @@ const Product = () => {
   };
 
   return (
-    <div className='inventory-0-33'>
+    <div className="inventory-0-33">
       {isModalOpen && (
         <div className="custom-modal-overlay">
           <div className="custom-modal">
@@ -214,7 +225,9 @@ const Product = () => {
       {data ? (
         <div class="inventory-33">
           <header class="inventory-header-33">
-            <h1>Inventory <span>/current</span></h1>
+            <h1>
+              Inventory <span>/current</span>
+            </h1>
           </header>
 
           <section class="requirement-section-33">
@@ -227,31 +240,42 @@ const Product = () => {
               <h2>Company Name: {data.business_company}</h2>
               <p>Caption: {data.caption}</p>
               <div class="user-info-33">
-                <div className='profile-pic-33'>
-                  <img src={data.designer_profile} alt='' style={{ width: '25px', borderRadius: '50%' }} />
+                <div className="profile-pic-33">
+                  <img
+                    src={data.designer_profile}
+                    alt=""
+                    style={{ width: "25px", borderRadius: "50%" }}
+                  />
                 </div>
                 <div>
-                  <span>{data.designer_first_name} {data.designer_last_name}</span>
+                  <span>
+                    {data.designer_first_name} {data.designer_last_name}
+                  </span>
                   <br />
                   <span>Designer</span>
                   <br />
-                  <span>{new Date(data.created_at).toLocaleDateString("en-US", {
-                    day: "numeric",
-                    month: "long",
-                    year: "numeric",
-                  })}
+                  <span>
+                    {new Date(data.created_at).toLocaleDateString("en-US", {
+                      day: "numeric",
+                      month: "long",
+                      year: "numeric",
+                    })}
                     ,{" "}
                     {new Date(data.created_at).toLocaleTimeString("en-US", {
                       hour: "2-digit",
                       minute: "2-digit",
                       hour12: true,
-                    })}</span>
+                    })}
+                  </span>
                 </div>
               </div>
-              {data.status === "pending" && userType == 'business' ? (
+              {data.status === "pending" && userType == "business" ? (
                 <div class="actions-33">
-                  <button class="approved-33">Approved</button>
-                  <button class="btn btn-danger" onClick={toggleModal}> Not Satisfied</button>
+                 
+                  <button class="btn btn-danger" onClick={toggleModal}>
+                    {" "}
+                    Not Satisfied
+                  </button>
                   <button class="chat-33">Chat</button>
                 </div>
               ) : (
@@ -269,9 +293,7 @@ const Product = () => {
                   </div>
                   <div className="custom-designer-name">
                     <h3>
-                      {data.designer_first_name +
-                        " " +
-                        data.designer_last_name}
+                      {data.designer_first_name + " " + data.designer_last_name}
                     </h3>{" "}
                   </div>
                 </div>
@@ -281,10 +303,11 @@ const Product = () => {
                 {messages.map((message) => (
                   <div
                     key={message.id}
-                    className={`custom-msg ${message.sender === senderId
+                    className={`custom-msg ${
+                      message.sender === senderId
                         ? "custom-msg-sender"
                         : "custom-msg-receiver"
-                      }`}
+                    }`}
                   >
                     <p>{message.msg}</p>
                     {message.media && <img src={message.media} alt="Media" />}
@@ -314,78 +337,307 @@ const Product = () => {
             </div>
           </section>
 
-          {userType == 'business' ? (
+          {userType == "business" ? (
             <section class="advertisement-categories-33">
               <h2>Advertisement Categories</h2>
 
               <div class="category transport-33">
                 <h3>Transport</h3>
                 <div class="items-33">
-                  <div class="item-33"> <img src={Auto} /><br />Auto Rickshaw</div>
-                  <div class="item-33"> <img src={Train} /><br />Railway Train</div>
-                  <div class="item-33" ><img src={Metro} /><br />Metro</div>
-                  <div class="item-33"> <img src={Plane} /><br />Air Plane</div>
+                  <div class="item-33">
+                    {" "}
+                    <img src={Auto} />
+                    <br />
+                    <p>Auto Rickshaw</p>
+                    <div class="counter-container-11">
+                      <img src={minus} onClick={decrementQuantity} />
+                      <span id="counter-value" class="counter-value-11">
+                        {quantity}
+                      </span>
+                      <img src={Add} onClick={incrementQuantity} />
+                    </div>
+                  </div>
+                  <div class="item-33">
+                    {" "}
+                    <img src={Train} />
+                    <br />
+                    <p>Railway Train</p> 
+                    <div class="counter-container-11">
+                      <img src={minus} onClick={decrementQuantity} />
+                      <span id="counter-value" class="counter-value-11">
+                        {quantity}
+                      </span>
+                      <img src={Add} onClick={incrementQuantity} />
+                    </div>
+                  </div>
+                  <div class="item-33">
+                    <img src={Metro} />
+                    <br />
+                    <p>Metro</p>
+                    <div class="counter-container-11">
+                      <img src={minus} onClick={decrementQuantity} />
+                      <span id="counter-value" class="counter-value-11">
+                        {quantity}
+                      </span>
+                      <img src={Add} onClick={incrementQuantity} />
+                    </div>
+                  </div>
+                  <div class="item-33">
+                    {" "}
+                    <img src={Plane} />
+                    <br />
+                    <p>Air Plane</p>
+                    <div class="counter-container-11">
+                      <img src={minus} onClick={decrementQuantity} />
+                      <span id="counter-value" class="counter-value-11">
+                        {quantity}
+                      </span>
+                      <img src={Add} onClick={incrementQuantity} />
+                    </div>
+                  </div>
                 </div>
               </div>
 
               <div class="category disposables-33">
                 <h3>Disposables</h3>
                 <div class="items-33">
-                  <div class="item-33"> <img src={Papercup} /><br />Paper Cup</div>
-                  <div class="item-33"><img src={Paperbag} /><br />Paper Bag</div>
-                  <div class="item-33"><img src={Paperplate} /><br />Paper Plate</div>
-                  <div class="item-33"><img src={Pizza} /><br />Pizza Box</div>
-                  <div class="item-33"><img src={Plus} /><br />For Special Request</div>
+                  <div class="item-33">
+                    {" "}
+                    <img src={Papercup} />
+                    <br />
+                    <p>Paper Cup</p> 
+                    <div class="counter-container-11">
+                      <img src={minus} onClick={decrementQuantity} />
+                      <span id="counter-value" class="counter-value-11">
+                        {quantity}
+                      </span>
+                      <img src={Add} onClick={incrementQuantity} />
+                    </div>
+                  </div>
+                  <div class="item-33">
+                    <img src={Paperbag} />
+                    <br />
+                    <p>Paper Bag</p> 
+                    <div class="counter-container-11">
+                      <img src={minus} onClick={decrementQuantity} />
+                      <span id="counter-value" class="counter-value-11">
+                        {quantity}
+                      </span>
+                      <img src={Add} onClick={incrementQuantity} />
+                    </div>
+                  </div>
+                  <div class="item-33">
+                    <img src={Paperplate} />
+                    <br />
+                    <p>Paper Plate</p>
+                    <div class="counter-container-11">
+                      <img src={minus} onClick={decrementQuantity} />
+                      <span id="counter-value" class="counter-value-11">
+                        {quantity}
+                      </span>
+                      <img src={Add} onClick={incrementQuantity} />
+                    </div>
+                  </div>
+                  <div class="item-33">
+                    <img src={Pizza} />
+                    <br />
+                    <p>Pizza Box</p>
+                    <div class="counter-container-11">
+                      <img src={minus} onClick={decrementQuantity} />
+                      <span id="counter-value" class="counter-value-11">
+                        {quantity}
+                      </span>
+                      <img src={Add} onClick={incrementQuantity} />
+                    </div>
+                  </div>
+                  <div class="item-33">
+                    <img src={Plus} />
+                    <br />
+                    For Special Request
+                  </div>
                 </div>
               </div>
 
               <div class="category clothing-33">
                 <h3>Clothing</h3>
                 <div class="items-33">
-                  <div class="item-33"><img src={Half} /><br />Half Sleeves T-shirt</div>
-                  <div class="item-33"><img src={Full} /><br />Full Sleeves T-shirt</div>
-                  <div class="item-33"><img src={Hoddies} /><br />Hoodie's</div>
-                  <div class="item-33"><img src={Jackets} /><br />Jacket's</div>
-                  <div class="item-33"><img src={Cap} /><br />Cap</div>
-                  <div class="item-33"><img src={Handkerchiefs} /><br />Handkerchiefs</div>
+                  <div class="item-33">
+                    <img src={Half} />
+                    <br />
+                    <p>Half Sleeves T-shirt</p>
+                    <div class="counter-container-11">
+                      <img src={minus} onClick={decrementQuantity} />
+                      <span id="counter-value" class="counter-value-11">
+                        {quantity}
+                      </span>
+                      <img src={Add} onClick={incrementQuantity} />
+                    </div>
+                  </div>
+                  <div class="item-33">
+                    <img src={Full} />
+                    <br />
+                    <p>Full Sleeves T-shirt</p>
+                    <div class="counter-container-11">
+                      <img src={minus} onClick={decrementQuantity} />
+                      <span id="counter-value" class="counter-value-11">
+                        {quantity}
+                      </span>
+                      <img src={Add} onClick={incrementQuantity} />
+                    </div>
+                  </div>
+                  <div class="item-33">
+                    <img src={Hoddies} />
+                    <br />
+                    <p>Hoodie's</p>
+                    <div class="counter-container-11">
+                      <img src={minus} onClick={decrementQuantity} />
+                      <span id="counter-value" class="counter-value-11">
+                        {quantity}
+                      </span>
+                      <img src={Add} onClick={incrementQuantity} />
+                    </div>
+                  </div>
+                  <div class="item-33">
+                    <img src={Jackets} />
+                    <br />
+                    <p>Jacket's</p>
+                    <div class="counter-container-11">
+                      <img src={minus} onClick={decrementQuantity} />
+                      <span id="counter-value" class="counter-value-11">
+                        {quantity}
+                      </span>
+                      <img src={Add} onClick={incrementQuantity} />
+                    </div>
+                  </div>
+                  <div class="item-33">
+                    <img src={Cap} />
+                    <br />
+                    <p>Cap</p>
+                    <div class="counter-container-11">
+                      <img src={minus} onClick={decrementQuantity} />
+                      <span id="counter-value" class="counter-value-11">
+                        {quantity}
+                      </span>
+                      <img src={Add} onClick={incrementQuantity} />
+                    </div>
+                  </div>
+                  <div class="item-33">
+                    <img src={Handkerchiefs} />
+                    <br />
+                    <p>Handkerchiefs</p>
+                    <div class="counter-container-11">
+                      <img src={minus} onClick={decrementQuantity} />
+                      <span id="counter-value" class="counter-value-11">
+                        {quantity}
+                      </span>
+                      <img src={Add} onClick={incrementQuantity} />
+                    </div>
+                  </div>
                 </div>
               </div>
 
               <div class="category billboards-33">
                 <h3>Bill Board</h3>
                 <div class="items-33">
-                  <div class="item-33"><img src={City} /><br />Holdings in City</div>
-                  <div class="item-33"><img src={Buildings} /><br />Holdings on Buildings</div>
-                  <div class="item-33"><img src={Markets} /><br />Holdings on Buildings</div>
-                  <div class="item-33"><img src={Mall} /><br />Inside Malls</div>
-
+                  <div class="item-33">
+                    <img src={City} />
+                    <br />
+                    <p> Holdings in City</p>
+                    <div class="counter-container-11">
+                      <img src={minus} onClick={decrementQuantity} />
+                      <span id="counter-value" class="counter-value-11">
+                        {quantity}
+                      </span>
+                      <img src={Add} onClick={incrementQuantity} />
+                    </div>
+                  </div>
+                  <div class="item-33">
+                    <img src={Buildings} />
+                    <br />
+                    <p>Holdings on Buildings</p> 
+                    <div class="counter-container-11">
+                      <img src={minus} onClick={decrementQuantity} />
+                      <span id="counter-value" class="counter-value-11">
+                        {quantity}
+                      </span>
+                      <img src={Add} onClick={incrementQuantity} />
+                    </div>
+                  </div>
+                  <div class="item-33">
+                    <img src={Markets} />
+                    <br />
+                    <p>Holdings on Buildings</p>
+                    <div class="counter-container-11">
+                      <img src={minus} onClick={decrementQuantity} />
+                      <span id="counter-value" class="counter-value-11">
+                        {quantity}
+                      </span>
+                      <img src={Add} onClick={incrementQuantity} />
+                    </div>
+                  </div>
+                  <div class="item-33">
+                    <img src={Mall} />
+                    <br />
+                    <p>Inside Malls</p>
+                    <div class="counter-container-11">
+                      <img src={minus} onClick={decrementQuantity} />
+                      <span id="counter-value" class="counter-value-11">
+                        {quantity}
+                      </span>
+                      <img src={Add} onClick={incrementQuantity} />
+                    </div>
+                  </div>
                 </div>
               </div>
 
               <div class="category water-bottles-33">
                 <h3>Water Bottles</h3>
                 <div class="items-33">
-                  <div class="item-33"><img src={Water} /><br />Water Bottles</div>
+                  <div class="item-33">
+                    <img src={Water} />
+                    <br />
+                    <p>Water Bottles</p>
+                    <div class="counter-container-11">
+                      <img src={minus} onClick={decrementQuantity} />
+                      <span id="counter-value" class="counter-value-11">
+                        {quantity}
+                      </span>
+                      <img src={Add} onClick={incrementQuantity} />
+                    </div>
+                  </div>
                 </div>
               </div>
 
               <div class="category walls-33">
                 <h3>Walls</h3>
                 <div class="items-33">
-                  <div class="item-33"><img src={Wall} /><br />Walls</div>
+                  <div class="item-33">
+                    <img src={Wall} />
+                    <br />
+                    <p>Walls</p>
+                    <div class="counter-container-11">
+                      <img src={minus} onClick={decrementQuantity} />
+                      <span id="counter-value" class="counter-value-11">
+                        {quantity}
+                      </span>
+                      <img src={Add} onClick={incrementQuantity} />
+                    </div>
+                  </div>
                 </div>
               </div>
+              <Link to="./payment">
+              <button class="approved-333">Approved</button>
+              </Link>
             </section>
           ) : (
             <p></p>
           )}
-
         </div>
       ) : (
         !error && <p>Loading design...</p>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default Product
+export default Product;
