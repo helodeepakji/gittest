@@ -150,7 +150,7 @@ const Adv = () => {
               Unlock access to 10,000+ designers for hire with Dribbble, the largest platform of designers online. Simplify your hiring process today and never have to worry about where to hire top design talent again
               </p>
               <div className='text-left '>
-              <button className="btn btn-info text-white mt-4 " onClick={closeModal}>Upload Post</button>
+              <button className="btn btn-info text-white mt-4 " onClick={closeModal}>Upload Design</button>
               </div>
             </div>
             <div className="col-md-4 text-center">
