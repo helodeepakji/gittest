@@ -4,32 +4,6 @@ import { useParams } from "react-router-dom";
 import { IoImageSharp } from "react-icons/io5";
 import { IoSend } from "react-icons/io5";
 import "./Productdesign.css";
-
-import Auto from "./pic/auto.png";
-import Train from "./pic/train.png";
-import Metro from "./pic/metro.png";
-import Plane from "./pic/plane.png";
-
-import Papercup from "./pic/PaperCup.png";
-import Paperplate from "./pic/Paperplate.png";
-import Paperbag from "./pic/Paperbag.png";
-import Pizza from "./pic/Pizza .png";
-import Plus from "./pic/plus.png";
-
-import Half from "./pic/Half T shirt.png";
-import Full from "./pic/T-shirt.png";
-import Hoddies from "./pic/hoodies.png";
-import Jackets from "./pic/Jackets.png";
-import Cap from "./pic/Cap.png";
-import Handkerchiefs from "./pic/handkerchiefs.png";
-
-import City from "./pic/city.png";
-import Buildings from "./pic/buildings.png";
-import Markets from "./pic/market.png";
-import Mall from "./pic/malls.png";
-
-import Water from "./pic/waterbottle.png";
-import Wall from "./pic/wall.png";
 import axios from "axios";
 import Add from "./pic/addd.png";
 import minus from "./pic/minus.png";
@@ -220,13 +194,17 @@ const Product = () => {
   };
 
   const handleApprove = () => {
-    return Object.entries(quantities)
-      .filter(([_, quantity]) => quantity > 0) // Include only items with a quantity > 0
-      .map(([itemId, quantity]) => ({
-        itemId: Number(itemId),
-        quantity,
-      }));
-  };
+  return categories
+    .flatMap(category => category.items) // Flatten all items
+    .filter(item => quantities[item.id] > 0) // Filter by selected quantity
+    .map(item => ({
+      id: item.id,
+      name: item.name,
+      image: item.image,
+      price: item.price, // Include price
+      quantity: quantities[item.id], // Include selected quantity
+    }));
+};
 
   return (
     <div className="inventory-0-33">
