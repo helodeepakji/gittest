@@ -341,15 +341,15 @@ route.post('/designNotSatisfied/:id', authenticateToken, (req, res) => {
         });
     }
 
-    Designs.reject(design_id ,(err, result) => {
-        RejectDesign.create({ design_id, user_id ,  ads_id, feedback }, (err, result) => {
+    Designs.reject(design_id, (err, result) => {
+        RejectDesign.create({ design_id, user_id, ads_id, feedback }, (err, result) => {
             if (err) {
                 return res.status(500).json({
                     message: 'Error creating rejected design entry',
                     error: err.message,
                 });
             }
-    
+
             res.status(201).json({
                 message: 'Rejected design successfully',
                 data: result,
@@ -403,11 +403,28 @@ route.get('/chat/history/:id', authenticateToken, (req, res) => {
 
 route.get('/products', (req, res) => {
     Product.getAllProduct((error, data) => {
-      if (error) {
-        return res.status(500).json({ error: 'Database query failed.' });
-      }
-      res.status(200).json(data);
+        if (error) {
+            return res.status(500).json({ error: 'Database query failed.' });
+        }
+        res.status(200).json(data);
     });
-  });
+});
+
+route.post('/selected-items', (req, res) => {
+    const selectedItems = req.body.selectedItems;
+
+    if (!selectedItems || selectedItems.length === 0) {
+        return res.status(400).json({ message: "No items selected" });
+    }
+
+    // Call the model method to get selected items with their details
+    Product.getSelectedItems(selectedItems, (error, detailedItems) => {
+        if (error) {
+            return res.status(500).json({ message: "Error fetching selected items", error });
+        }
+
+        return res.status(200).json(detailedItems);
+    });
+});
 
 module.exports = route;

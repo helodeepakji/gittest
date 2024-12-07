@@ -219,6 +219,15 @@ const Product = () => {
     }
   };
 
+  const handleApprove = () => {
+    return Object.entries(quantities)
+      .filter(([_, quantity]) => quantity > 0) // Include only items with a quantity > 0
+      .map(([itemId, quantity]) => ({
+        itemId: Number(itemId),
+        quantity,
+      }));
+  };
+
   return (
     <div className="inventory-0-33">
       {isModalOpen && (
@@ -403,7 +412,7 @@ const Product = () => {
                   <p>No Category available</p>
                 )}
 
-              <Link to="./payment">
+              <Link to="/checkout" state={{ selectedItems: handleApprove() }}>
                 <button class="approved-333">Approved</button>
               </Link>
             </section>

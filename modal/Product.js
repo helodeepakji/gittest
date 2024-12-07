@@ -53,4 +53,43 @@ Product.getAllProduct = (callback) => {
   });
 };
 
+Product.getSelectedItems = (selectedItems, callback) => {
+  const itemIds = selectedItems.map(item => item.itemId);
+  
+  // SQL query to get the selected products' details
+  const sql = `
+    SELECT 
+      products.id AS product_id,
+      products.product_name,
+      products.description,
+      products.price,
+      products.image
+    FROM 
+      products JOIN categories ON categories.id = products.cat_id
+    WHERE 
+      products.id IN (${itemIds.join(', ')});
+  `;
+
+  connection.query(sql, (error, results) => {
+    if (error) {
+      return callback(error, null);
+    }
+
+    // Combine the results with quantity
+    const detailedItems = results.map((product) => {
+      const selectedItem = selectedItems.find(item => item.itemId === product.product_id);
+      return {
+        id: product.product_id,
+        name: product.product_name,
+        description: product.description,
+        price: product.price,
+        image: product.image,
+        quantity: selectedItem ? selectedItem.quantity : 0,
+      };
+    });
+
+    callback(null, detailedItems);
+  });
+};
+
 module.exports = Product;

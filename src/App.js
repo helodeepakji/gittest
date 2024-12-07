@@ -10,6 +10,7 @@ import Home from './Pages/Home';
 import Login from './Pages/Login';
 import Signup from './Pages/Signup';
 import Join from './Pages/Join';
+import Checkout from './Pages/Checkout';
 import Contactpage from './layouts/Contactpage';
 
 
@@ -84,6 +85,7 @@ function App() {
         <Route path='/retailer/wallet' element={<ProtectedRoute element={<Wallet />} />} />
 
         <Route path='/uploadDesign' element={<ProtectedRoute element={<Adv />} />} />
+        <Route path='/checkout' element={<ProtectedRoute element={<Checkout />} />} />
         <Route path='/payment' element={<ProtectedRoute element={<Payment />} />} />
       </Routes>
 
