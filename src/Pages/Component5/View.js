@@ -71,16 +71,16 @@ const DesignTable = () => {
                         src={design.profile}
                         alt="Designer"
                       />
-                      {userType == 'business' ? design.first_name +' '+ design.last_name : design.company}
+                      {userType == 'business' ? design.first_name + ' ' + design.last_name : design.company}
                     </div>
                   </td>
                   <td>
                     <div className="designer00">
                       <img
-                        src={design.business_media[0]}
+                        src={design.business_media?.[0] || design.image[0]}
                         alt="Designer"
                       />
-                      {design.caption}
+                      {design.caption || 'Self Upload'}
                     </div>
                   </td>
                   <td>{design.status}</td>

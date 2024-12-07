@@ -40,8 +40,8 @@ Designs.getById = (id, callback) => {
     designer_user.company AS designer_company, 
     designer_user.profile AS designer_profile
 FROM designs
-JOIN business ON designs.ads_id = business.id
-JOIN users AS business_user ON business_user.id = business.user_id 
+LEFT JOIN business ON designs.ads_id = business.id
+LEFT JOIN users AS business_user ON business_user.id = business.user_id 
 JOIN users AS designer_user ON designer_user.id = designs.user_id
 WHERE designs.id = ?;
 
@@ -95,8 +95,8 @@ Designs.getByBusinessUser = (userId, limit, offset, callback) => {
     const query = `
         SELECT designs.*, business.caption, business.media AS business_media , users.first_name, users.last_name, users.profile
         FROM designs
-        JOIN business ON designs.ads_id = business.id JOIN users ON users.id = designs.user_id
-        WHERE business.user_id = ?
+        LEFT JOIN business ON designs.ads_id = business.id JOIN users ON users.id = designs.user_id
+        WHERE business.user_id = ? OR designs.user_id = ?
         ORDER BY designs.created_at DESC
         LIMIT ? OFFSET ?;
     `;
@@ -104,7 +104,7 @@ Designs.getByBusinessUser = (userId, limit, offset, callback) => {
     const countQuery = `
         SELECT COUNT(*) AS totalCount FROM designs JOIN business ON designs.ads_id = business.id WHERE business.user_id = ?`;
 
-    connection.query(query, [userId, limit, offset], (err, results) => {
+    connection.query(query, [userId,userId, limit, offset], (err, results) => {
         if (err) {
             console.error('Error fetching designs:', err.message);
             return callback(err);

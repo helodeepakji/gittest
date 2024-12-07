@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom" 
+import { Link } from "react-router-dom"
 import { useParams } from "react-router-dom";
 import { IoImageSharp } from "react-icons/io5";
 import { IoSend } from "react-icons/io5";
 import "./Productdesign.css";
+
 import Auto from "./pic/auto.png";
 import Train from "./pic/train.png";
 import Metro from "./pic/metro.png";
@@ -49,14 +50,35 @@ const Product = () => {
   const [senderId, setSenderId] = useState(0);
   const [media, setMedia] = useState(null);
 
-  const [quantity, setQuantity] = useState(1);
+  const [quantities, setQuantities] = useState({});
+  const [categories, setCategories] = useState([]);
 
-  const incrementQuantity = () => {
-    setQuantity((prevQuantity) => prevQuantity + 1);
+  useEffect(() => {
+    axios.get('/api/products')
+      .then(response => {
+        const categoryArray = Object.values(response.data);
+        setCategories(categoryArray); // Set categories as an array
+      })
+      .catch(err => {
+        setError(err);
+      });
+  }, []);
+  
+
+  // Increment quantity for a specific item
+  const incrementQuantity = (itemId) => {
+    setQuantities((prev) => ({
+      ...prev,
+      [itemId]: (prev[itemId] || 0) + 1,
+    }));
   };
 
-  const decrementQuantity = () => {
-    setQuantity((prevQuantity) => (prevQuantity > 1 ? prevQuantity - 1 : 1));
+  // Decrement quantity for a specific item
+  const decrementQuantity = (itemId) => {
+    setQuantities((prev) => ({
+      ...prev,
+      [itemId]: Math.max((prev[itemId] || 0) - 1, 0),
+    }));
   };
 
   const toggleModal = () => {
@@ -237,8 +259,8 @@ const Product = () => {
               </div>
             </div>
             <div class="requirement-details-33">
-              <h2>Company Name: {data.business_company}</h2>
-              <p>Caption: {data.caption}</p>
+              <h2>Company Name: {data.business_company || 'Self Design'}</h2>
+              <p>Caption: {data.caption || 'Self Design'}</p>
               <div class="user-info-33">
                 <div className="profile-pic-33">
                   <img
@@ -270,14 +292,14 @@ const Product = () => {
                 </div>
               </div>
               {data.status === "pending" && userType == "business" ? (
-                <div class="actions-33">
-                 
-                  <button class="btn btn-danger" onClick={toggleModal}>
-                    {" "}
-                    Not Satisfied
-                  </button>
-                  <button class="chat-33">Chat</button>
-                </div>
+                data.business_first_name ? (
+                  <div class="actions-33">
+                    <button class="btn btn-danger" onClick={toggleModal}>
+                      Not Satisfied
+                    </button>
+                    <button class="chat-33">Chat</button>
+                  </div>
+                ) : (null)
               ) : (
                 <div class="actions-33">
                   <button class="chat-33">{data.status}</button>
@@ -285,348 +307,104 @@ const Product = () => {
                 </div>
               )}
             </div>
-            <div className="custom-chat-section">
-              <div className="custom-chat-header">
-                <div className="custom-chat-info">
-                  <div className="custom-profile-picture">
-                    <img src={data.designer_profile} alt="pic" />
-                  </div>
-                  <div className="custom-designer-name">
-                    <h3>
-                      {data.designer_first_name + " " + data.designer_last_name}
-                    </h3>{" "}
+            {data.business_first_name ? (
+              <div className="custom-chat-section">
+                <div className="custom-chat-header">
+                  <div className="custom-chat-info">
+                    <div className="custom-profile-picture">
+                      <img src={data.designer_profile} alt="pic" />
+                    </div>
+                    <div className="custom-designer-name">
+                      <h3>
+                        {data.designer_first_name + " " + data.designer_last_name}
+                      </h3>{" "}
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              <div className="custom-chat-msg">
-                {messages.map((message) => (
-                  <div
-                    key={message.id}
-                    className={`custom-msg ${
-                      message.sender === senderId
+
+                <div className="custom-chat-msg">
+                  {messages.map((message) => (
+                    <div
+                      key={message.id}
+                      className={`custom-msg ${message.sender === senderId
                         ? "custom-msg-sender"
                         : "custom-msg-receiver"
-                    }`}
-                  >
-                    <p>{message.msg}</p>
-                    {message.media && <img src={message.media} alt="Media" />}
-                  </div>
-                ))}
-              </div>
+                        }`}
+                    >
+                      <p>{message.msg}</p>
+                      {message.media && <img src={message.media} alt="Media" />}
+                    </div>
+                  ))}
+                </div>
 
-              <div className="custom-chat-footer">
-                <div className="custom-footer-icon">
-                  <IoImageSharp fontSize={20} style={{ color: "#0b5258" }} />
-                </div>
-                <div className="custom-input-sec">
-                  <input
-                    type="text"
-                    placeholder="message"
-                    value={newMessage}
-                    onChange={(e) => setNewMessage(e.target.value)}
-                  />
-                  <IoSend
-                    className="custom-thumb"
-                    fontSize={20}
-                    style={{ color: "#0b5258" }}
-                    onClick={handleSendMessage}
-                  />
+                <div className="custom-chat-footer">
+                  <div className="custom-footer-icon">
+                    <IoImageSharp fontSize={20} style={{ color: "#0b5258" }} />
+                  </div>
+                  <div className="custom-input-sec">
+                    <input
+                      type="text"
+                      placeholder="message"
+                      value={newMessage}
+                      onChange={(e) => setNewMessage(e.target.value)}
+                    />
+                    <IoSend
+                      className="custom-thumb"
+                      fontSize={20}
+                      style={{ color: "#0b5258" }}
+                      onClick={handleSendMessage}
+                    />
+                  </div>
                 </div>
               </div>
-            </div>
+            ) : (null)}
           </section>
 
           {userType == "business" ? (
             <section class="advertisement-categories-33">
               <h2>Advertisement Categories</h2>
 
-              <div class="category transport-33">
-                <h3>Transport</h3>
-                <div class="items-33">
-                  <div class="item-33">
-                    {" "}
-                    <img src={Auto} />
-                    <br />
-                    <p>Auto Rickshaw</p>
-                    <div class="counter-container-11">
-                      <img src={minus} onClick={decrementQuantity} />
-                      <span id="counter-value" class="counter-value-11">
-                        {quantity}
-                      </span>
-                      <img src={Add} onClick={incrementQuantity} />
+              {categories.length !== 0 ? (
+                categories.map((category, categoryIndex) => (
+                  <div className={`category ${category.category_name.toLowerCase()}-33`} key={categoryIndex}>
+                    <h3>{category.category_name}</h3>
+                    <div className="items-33">
+                      {category.items.length === 0 ? (
+                        <p>No items available</p>
+                      ) : (
+                        category.items.map((item, itemIndex) => (
+                          <div className="item-33" key={itemIndex}>
+                            <img src={item.image} alt={item.name} />
+                            <br />
+                            <p>{item.name}</p>
+                            <div className="counter-container-11">
+                              <img
+                                src={minus}
+                                onClick={() => decrementQuantity(item.id)} // Pass item id
+                                alt="decrement"
+                              />
+                              <span id="counter-value" className="counter-value-11">
+                                {quantities[item.id] || 0} {/* Show the quantity for the specific item */}
+                              </span>
+                              <img
+                                src={Add}
+                                onClick={() => incrementQuantity(item.id)} // Pass item id
+                                alt="increment"
+                              />
+                            </div>
+                          </div>
+                        ))
+                      )}
                     </div>
                   </div>
-                  <div class="item-33">
-                    {" "}
-                    <img src={Train} />
-                    <br />
-                    <p>Railway Train</p> 
-                    <div class="counter-container-11">
-                      <img src={minus} onClick={decrementQuantity} />
-                      <span id="counter-value" class="counter-value-11">
-                        {quantity}
-                      </span>
-                      <img src={Add} onClick={incrementQuantity} />
-                    </div>
-                  </div>
-                  <div class="item-33">
-                    <img src={Metro} />
-                    <br />
-                    <p>Metro</p>
-                    <div class="counter-container-11">
-                      <img src={minus} onClick={decrementQuantity} />
-                      <span id="counter-value" class="counter-value-11">
-                        {quantity}
-                      </span>
-                      <img src={Add} onClick={incrementQuantity} />
-                    </div>
-                  </div>
-                  <div class="item-33">
-                    {" "}
-                    <img src={Plane} />
-                    <br />
-                    <p>Air Plane</p>
-                    <div class="counter-container-11">
-                      <img src={minus} onClick={decrementQuantity} />
-                      <span id="counter-value" class="counter-value-11">
-                        {quantity}
-                      </span>
-                      <img src={Add} onClick={incrementQuantity} />
-                    </div>
-                  </div>
-                </div>
-              </div>
+                ))
+              ) : (
+                  <p>No Category available</p>
+                )}
 
-              <div class="category disposables-33">
-                <h3>Disposables</h3>
-                <div class="items-33">
-                  <div class="item-33">
-                    {" "}
-                    <img src={Papercup} />
-                    <br />
-                    <p>Paper Cup</p> 
-                    <div class="counter-container-11">
-                      <img src={minus} onClick={decrementQuantity} />
-                      <span id="counter-value" class="counter-value-11">
-                        {quantity}
-                      </span>
-                      <img src={Add} onClick={incrementQuantity} />
-                    </div>
-                  </div>
-                  <div class="item-33">
-                    <img src={Paperbag} />
-                    <br />
-                    <p>Paper Bag</p> 
-                    <div class="counter-container-11">
-                      <img src={minus} onClick={decrementQuantity} />
-                      <span id="counter-value" class="counter-value-11">
-                        {quantity}
-                      </span>
-                      <img src={Add} onClick={incrementQuantity} />
-                    </div>
-                  </div>
-                  <div class="item-33">
-                    <img src={Paperplate} />
-                    <br />
-                    <p>Paper Plate</p>
-                    <div class="counter-container-11">
-                      <img src={minus} onClick={decrementQuantity} />
-                      <span id="counter-value" class="counter-value-11">
-                        {quantity}
-                      </span>
-                      <img src={Add} onClick={incrementQuantity} />
-                    </div>
-                  </div>
-                  <div class="item-33">
-                    <img src={Pizza} />
-                    <br />
-                    <p>Pizza Box</p>
-                    <div class="counter-container-11">
-                      <img src={minus} onClick={decrementQuantity} />
-                      <span id="counter-value" class="counter-value-11">
-                        {quantity}
-                      </span>
-                      <img src={Add} onClick={incrementQuantity} />
-                    </div>
-                  </div>
-                  <div class="item-33">
-                    <img src={Plus} />
-                    <br />
-                    For Special Request
-                  </div>
-                </div>
-              </div>
-
-              <div class="category clothing-33">
-                <h3>Clothing</h3>
-                <div class="items-33">
-                  <div class="item-33">
-                    <img src={Half} />
-                    <br />
-                    <p>Half Sleeves T-shirt</p>
-                    <div class="counter-container-11">
-                      <img src={minus} onClick={decrementQuantity} />
-                      <span id="counter-value" class="counter-value-11">
-                        {quantity}
-                      </span>
-                      <img src={Add} onClick={incrementQuantity} />
-                    </div>
-                  </div>
-                  <div class="item-33">
-                    <img src={Full} />
-                    <br />
-                    <p>Full Sleeves T-shirt</p>
-                    <div class="counter-container-11">
-                      <img src={minus} onClick={decrementQuantity} />
-                      <span id="counter-value" class="counter-value-11">
-                        {quantity}
-                      </span>
-                      <img src={Add} onClick={incrementQuantity} />
-                    </div>
-                  </div>
-                  <div class="item-33">
-                    <img src={Hoddies} />
-                    <br />
-                    <p>Hoodie's</p>
-                    <div class="counter-container-11">
-                      <img src={minus} onClick={decrementQuantity} />
-                      <span id="counter-value" class="counter-value-11">
-                        {quantity}
-                      </span>
-                      <img src={Add} onClick={incrementQuantity} />
-                    </div>
-                  </div>
-                  <div class="item-33">
-                    <img src={Jackets} />
-                    <br />
-                    <p>Jacket's</p>
-                    <div class="counter-container-11">
-                      <img src={minus} onClick={decrementQuantity} />
-                      <span id="counter-value" class="counter-value-11">
-                        {quantity}
-                      </span>
-                      <img src={Add} onClick={incrementQuantity} />
-                    </div>
-                  </div>
-                  <div class="item-33">
-                    <img src={Cap} />
-                    <br />
-                    <p>Cap</p>
-                    <div class="counter-container-11">
-                      <img src={minus} onClick={decrementQuantity} />
-                      <span id="counter-value" class="counter-value-11">
-                        {quantity}
-                      </span>
-                      <img src={Add} onClick={incrementQuantity} />
-                    </div>
-                  </div>
-                  <div class="item-33">
-                    <img src={Handkerchiefs} />
-                    <br />
-                    <p>Handkerchiefs</p>
-                    <div class="counter-container-11">
-                      <img src={minus} onClick={decrementQuantity} />
-                      <span id="counter-value" class="counter-value-11">
-                        {quantity}
-                      </span>
-                      <img src={Add} onClick={incrementQuantity} />
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="category billboards-33">
-                <h3>Bill Board</h3>
-                <div class="items-33">
-                  <div class="item-33">
-                    <img src={City} />
-                    <br />
-                    <p> Holdings in City</p>
-                    <div class="counter-container-11">
-                      <img src={minus} onClick={decrementQuantity} />
-                      <span id="counter-value" class="counter-value-11">
-                        {quantity}
-                      </span>
-                      <img src={Add} onClick={incrementQuantity} />
-                    </div>
-                  </div>
-                  <div class="item-33">
-                    <img src={Buildings} />
-                    <br />
-                    <p>Holdings on Buildings</p> 
-                    <div class="counter-container-11">
-                      <img src={minus} onClick={decrementQuantity} />
-                      <span id="counter-value" class="counter-value-11">
-                        {quantity}
-                      </span>
-                      <img src={Add} onClick={incrementQuantity} />
-                    </div>
-                  </div>
-                  <div class="item-33">
-                    <img src={Markets} />
-                    <br />
-                    <p>Holdings on Buildings</p>
-                    <div class="counter-container-11">
-                      <img src={minus} onClick={decrementQuantity} />
-                      <span id="counter-value" class="counter-value-11">
-                        {quantity}
-                      </span>
-                      <img src={Add} onClick={incrementQuantity} />
-                    </div>
-                  </div>
-                  <div class="item-33">
-                    <img src={Mall} />
-                    <br />
-                    <p>Inside Malls</p>
-                    <div class="counter-container-11">
-                      <img src={minus} onClick={decrementQuantity} />
-                      <span id="counter-value" class="counter-value-11">
-                        {quantity}
-                      </span>
-                      <img src={Add} onClick={incrementQuantity} />
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="category water-bottles-33">
-                <h3>Water Bottles</h3>
-                <div class="items-33">
-                  <div class="item-33">
-                    <img src={Water} />
-                    <br />
-                    <p>Water Bottles</p>
-                    <div class="counter-container-11">
-                      <img src={minus} onClick={decrementQuantity} />
-                      <span id="counter-value" class="counter-value-11">
-                        {quantity}
-                      </span>
-                      <img src={Add} onClick={incrementQuantity} />
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="category walls-33">
-                <h3>Walls</h3>
-                <div class="items-33">
-                  <div class="item-33">
-                    <img src={Wall} />
-                    <br />
-                    <p>Walls</p>
-                    <div class="counter-container-11">
-                      <img src={minus} onClick={decrementQuantity} />
-                      <span id="counter-value" class="counter-value-11">
-                        {quantity}
-                      </span>
-                      <img src={Add} onClick={incrementQuantity} />
-                    </div>
-                  </div>
-                </div>
-              </div>
               <Link to="./payment">
-              <button class="approved-333">Approved</button>
+                <button class="approved-333">Approved</button>
               </Link>
             </section>
           ) : (

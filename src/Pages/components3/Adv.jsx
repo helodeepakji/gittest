@@ -1,10 +1,12 @@
 import React, {useState, useRef} from "react";
+import { useNavigate } from 'react-router-dom';
 import './adv.css'; 
 import axios from 'axios';
 import UploadDesign from "./Image upload-bro 1.png"
 
 
 const Adv = () => {
+  const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [image, setImage] = useState("");
   const [error, setError] = useState(null);
@@ -24,49 +26,48 @@ const Adv = () => {
     setImage(e.target.files[0]);
   };
 
-  const handleSubmit = async (ads_id) => {
-    if (!ads_id) {
-      alert("Please provide an image.");
-      return;
-    }
-  
-    if (files.length === 0) {
-      alert("Please upload at least one design to submit.");
-      return;
-    }
+  const [isLoading, setIsLoading] = useState(false);
 
+  const handleSubmit = async () => {
+    var ads_id = 0;
+    if (files.length === 0) {
+      alert("All fields are required.");
+      return;
+    }
     const token = localStorage.getItem('token');
     if (!token) {
       setError('Authentication token is missing');
       return;
     }
-
+    setIsLoading(true);
     try {
       const formData = new FormData();
       formData.append('ads_id', ads_id);
-      files.forEach((file) => {
-        formData.append("media[]", file);
-      });
-
+      files.forEach(file => formData.append('media[]', file));
+  
       const response = await axios.post('/api/uploadDesign', formData, {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'multipart/form-data',
         },
       });
-
+  
       if (response.status === 200) {
         alert('Project submitted successfully!');
-        setFiles([])
-        setImage(""); // Reset the image state
+        setFiles([]);
+        setImage("");
         closeModal();
+        navigate('/business/view');
       } else {
         alert(`Submission failed: ${response.statusText}`);
       }
     } catch (err) {
       alert(`An error occurred: ${err.message}`);
+    } finally {
+      setIsLoading(false);
     }
   };
+  
 
     return (
       <> 

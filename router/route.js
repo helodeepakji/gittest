@@ -7,6 +7,7 @@ const User = require('../modal/User');
 const Business = require('../modal/Business');
 const Designs = require('../modal/Designs');
 const RejectDesign = require('../modal/RejectDesign');
+const Product = require('../modal/Product');
 const Chat = require('../modal/Chat');
 const JWT_SECRET = 'your_jwt_secret_key';
 
@@ -213,9 +214,9 @@ route.post('/uploadDesign', authenticateToken, upload.array('media[]', 10), (req
     const ads_id = req.body.ads_id;
     const user_type = req.user.user_type;
 
-    if (user_type != 'designer') {
-        return res.status(400).json({ message: 'This is only for Designer User' });
-    }
+    // if (user_type != 'designer') {
+    //     return res.status(400).json({ message: 'This is only for Designer User' });
+    // }
 
     if (!req.files || req.files.length === 0) {
         return res.status(400).json({ message: 'At least one file is required' });
@@ -400,6 +401,13 @@ route.get('/chat/history/:id', authenticateToken, (req, res) => {
     });
 });
 
-
+route.get('/products', (req, res) => {
+    Product.getAllProduct((error, data) => {
+      if (error) {
+        return res.status(500).json({ error: 'Database query failed.' });
+      }
+      res.status(200).json(data);
+    });
+  });
 
 module.exports = route;
