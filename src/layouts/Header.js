@@ -48,59 +48,71 @@ const Header = () => {
 
         <div className="d-flex justify-content-center gap-5">
           <ul className="navbar-nav d-flex flex-row gap-5">
-          {user ? (
+            {user ? (
+              <li className="nav-item">
+                <Link to={`/${user.user_type}/home`} className="nav-link text-white">
+                  Dashboard
+                </Link>
+              </li>
+            ) : (
+              <li className="nav-item">
+                <Link to="/" className="nav-link text-white">
+                  Home
+                </Link>
+              </li>
+            )}
             <li className="nav-item">
-              <Link to={`/${user.user_type}/home`} className="nav-link text-white">
-                Dashboard
+              <Link to="/about" className="nav-link text-white">
+                About Us
               </Link>
             </li>
-          ) : (
             <li className="nav-item">
-              <Link to="/" className="nav-link text-white">
-                Home
+              <Link to="/contact" className="nav-link text-white">
+                Contact Us
               </Link>
             </li>
-          )}          
-          <li className="nav-item">
-            <Link to="/about" className="nav-link text-white">
-              About Us
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link to="/contact" className="nav-link text-white">
-              Contact Us
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link to="/adv" className="nav-link text-white">
-              Wallet Page
-            </Link>
-          </li>
-        </ul>
-      </div>
+            {user ? (
+              user.user_type == 'business' ? (
+                <li className="nav-item">
+                  <Link to="/order" className="nav-link text-white">
+                    Order
+                  </Link>
+                </li>
+              ) : (
+                <li className="nav-item">
+                  <Link to="/wallet" className="nav-link text-white">
+                    Wallet
+                  </Link>
+                </li>
+              )
+            ) : (
+              null
+            )}
+          </ul>
+        </div>
 
-      {user ? (
-        <div className="d-flex gap-4 align-items-center">
-          <span>Welcome, {user.email}</span>
-          <Link to="/profile" className="text-white align-self-center">
-            Profile
-          </Link>
-          <button onClick={handleLogout} className="btn btn-info text-white px-3xl">
-            Logout
-          </button>
-        </div>
-      ) : (
-        <div className="d-flex gap-4 align-items-center">
-          <Link to="/login" className="text-white align-self-center">
-            Login
-          </Link>
-        
-          <Link to="/proceed" className="btn btn-info text-white px-3xl">
-            Join Now
-          </Link>
-        </div>
-      )}
-    </div>
+        {user ? (
+          <div className="d-flex gap-4 align-items-center">
+            <span>Welcome, {user.email}</span>
+            <Link to="/profile" className="text-white align-self-center">
+              Profile
+            </Link>
+            <button onClick={handleLogout} className="btn btn-info text-white px-3xl">
+              Logout
+            </button>
+          </div>
+        ) : (
+          <div className="d-flex gap-4 align-items-center">
+            <Link to="/login" className="text-white align-self-center">
+              Login
+            </Link>
+
+            <Link to="/proceed" className="btn btn-info text-white px-3xl">
+              Join Now
+            </Link>
+          </div>
+        )}
+      </div>
     </nav >
   );
 };

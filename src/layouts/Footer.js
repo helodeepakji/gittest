@@ -58,7 +58,7 @@ const Footer = () => {
 
         
         <div className="d-flex justify-content-between mt-4">
-          <p className="text-muted">&copy; 2023 Protech, Inc. All rights reserved.</p>
+          <p className="text-muted">&copy; 2025 Adjerry, Inc. All rights reserved. Made By SoftAir Technology</p>
           <div className="d-flex gap-2">
             <a href="#" className="text-muted text-decoration-none">
               <i className="fab fa-facebook-f"></i>
