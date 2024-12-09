@@ -54,7 +54,7 @@ Product.getAllProduct = (callback) => {
 };
 
 Product.getSelectedItems = (selectedItems, callback) => {
-  const itemIds = selectedItems.map(item => item.itemId);
+  const itemIds = selectedItems.map(item => item.id);
   
   // SQL query to get the selected products' details
   const sql = `

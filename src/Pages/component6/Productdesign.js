@@ -390,7 +390,7 @@ const Product = () => {
                   <p>No Category available</p>
                 )}
 
-              <Link to="/checkout" state={{ selectedItems: handleApprove() }}>
+              <Link to="/checkout" state={{ selectedItems: handleApprove() , design : data }}>
                 <button class="approved-333">Approved</button>
               </Link>
             </section>
