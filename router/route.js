@@ -9,7 +9,9 @@ const Designs = require('../modal/Designs');
 const RejectDesign = require('../modal/RejectDesign');
 const Product = require('../modal/Product');
 const Chat = require('../modal/Chat');
+const Order = require('../modal/Order');
 const JWT_SECRET = 'your_jwt_secret_key';
+const axios = require('axios');
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -425,6 +427,47 @@ route.post('/selected-items', (req, res) => {
 
         return res.status(200).json(detailedItems);
     });
+});
+
+route.post('/booking', authenticateToken, (req, res) => {
+    const user_id = req.user.id;
+    const { items, order_id, design_id, amount, pay_amount, coupen } = req.body;
+
+    Order.booking({ items, order_id, design_id, amount, pay_amount, coupen }, user_id, (err, result) => {
+        if (err) {
+            return res.status(500).json({
+                message: 'Error creating booking',
+                error: err.message,
+            });
+        }
+
+        res.status(201).json({
+            message: 'Booking created successfully',
+            data: result,
+        });
+    });
+});
+
+route.post('/phonepe-payment', async (req, res) => {
+    try {
+        const { payload, xVerifyHeader } = req.body;
+
+        const response = await axios.post(
+            'https://api.phonepe.com/apis/hermes/pg/v1/pay',
+            { request: payload },
+            {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-VERIFY': xVerifyHeader,
+                },
+            }
+        );
+
+        res.json(response.data); // Send back PhonePe API response to the frontend
+    } catch (error) {
+        console.error('Error in PhonePe Payment:', error.message);
+        res.status(500).json({ error: 'Payment failed', details: error.message });
+    }
 });
 
 module.exports = route;

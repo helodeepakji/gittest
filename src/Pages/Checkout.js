@@ -149,7 +149,7 @@ const Checkout = () => {
               Billing address is same as shipping
             </label>
           </div>
-          <Link to="/payment" state={{ selectedItems: selectedItems, design: design, amount: total - discountAmount }} class="pay-button-30">Pay &#8377; {total - discountAmount}</Link>
+          <Link to="/payment" state={{ selectedItems: selectedItems, design: design, coupen: discountCode, pay_amount: total - discountAmount , amount :  total}} class="pay-button-30">Pay &#8377; {total - discountAmount}</Link>
           <div class="footer-30">
             Safe and Secure Payments. Easy returns. 100% Authentic products.
           </div>
