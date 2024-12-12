@@ -16,6 +16,7 @@ import Contactpage from './layouts/Contactpage';
 
 // business user page
 import Bussiness from './Pages/Business';
+import Orders from './Pages/Orders';
 import View from "./Pages/Component5/View"
 import Productdesign from './Pages/component6/Productdesign';
 import Payment from "./Pages/component6/Payment"
@@ -72,6 +73,7 @@ function App() {
         <Route path='/business/home' element={<ProtectedRoute element={<Bussiness />} />} />
         <Route path='/business/view' element={<ProtectedRoute element={<View />} />} />
         <Route path='/business/wallet' element={<ProtectedRoute element={<Wallet />} />} />
+        <Route path='/business/orders' element={<ProtectedRoute element={<Orders />} />} />
         
         <Route path='/designer/home' element={<ProtectedRoute element={<Designerpage />} />} />
         <Route path='/designer/view' element={<ProtectedRoute element={<View />} />} />
