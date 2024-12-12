@@ -2,27 +2,30 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./Order.css";
 
+
 const OrderPage = () => {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-    useEffect(() => {
-        // Fetch orders on component mount
-        const fetchOrders = async () => {
-            try {
-                const response = await axios.get('/api/getAllOrders', {
-                    headers: {
-                        Authorization: `Bearer ${localStorage.getItem('token')}`,
-                    },
-                });
-                setOrders(response.data.orders);
-            } catch (err) {
-                setError(err.response ? err.response.data.message : 'Error fetching orders');
-            } finally {
-                setLoading(false);
-            }
-        };
+  useEffect(() => {
+    // Fetch orders on component mount
+    const fetchOrders = async () => {
+      try {
+        const response = await axios.get("/api/getAllOrders", {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        });
+        setOrders(response.data.orders);
+      } catch (err) {
+        setError(
+          err.response ? err.response.data.message : "Error fetching orders"
+        );
+      } finally {
+        setLoading(false);
+      }
+    };
 
     fetchOrders();
   }, []);
@@ -39,13 +42,12 @@ const OrderPage = () => {
     <div className="order-container">
       <h1>Your Orders</h1>
       {orders && orders.length !== 0 ? (
-        <ul>
-          <div className="order-img">
-            <img src={Auto} alt="" />
-          </div>
-          {orders.map((order) => (
+        orders.map((order) => (
+          <ul>
+            <div className="order-img">
+              <img src={order.image} alt="" />
+            </div>
             <li key={order.id}>
-              <img src={order.image} alt={order.name} />
               <p>
                 <strong>Order ID:</strong> {order.id}
               </p>
@@ -66,8 +68,8 @@ const OrderPage = () => {
                 </span>
               </p>
             </li>
-          ))}
-        </ul>
+          </ul>
+        ))
       ) : (
         <p className="no-orders">No orders found.</p>
       )}
