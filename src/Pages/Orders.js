@@ -7,24 +7,22 @@ const OrderPage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    // Fetch orders on component mount
-    const fetchOrders = async () => {
-      try {
-        const response = await axios.get("/api/getAllOrders", {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`, // Ensure the token is stored in localStorage
-          },
-        });
-        setOrders(response.data.orders);
-      } catch (err) {
-        setError(
-          err.response ? err.response.data.message : "Error fetching orders"
-        );
-      } finally {
-        setLoading(false);
-      }
-    };
+    useEffect(() => {
+        // Fetch orders on component mount
+        const fetchOrders = async () => {
+            try {
+                const response = await axios.get('/api/getAllOrders', {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem('token')}`,
+                    },
+                });
+                setOrders(response.data.orders);
+            } catch (err) {
+                setError(err.response ? err.response.data.message : 'Error fetching orders');
+            } finally {
+                setLoading(false);
+            }
+        };
 
     fetchOrders();
   }, []);
