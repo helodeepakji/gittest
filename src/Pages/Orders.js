@@ -11,7 +11,7 @@ const OrderPage = () => {
         // Fetch orders on component mount
         const fetchOrders = async () => {
             try {
-                const response = await axios.get('/getAllOrders', {
+                const response = await axios.get('api/getAllOrders', {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem('token')}`, // Ensure the token is stored in localStorage
                     },
