@@ -44,4 +44,14 @@ Orders.status = (amount, transaction_id, status, order_id,callback) => {
     });
 };
 
+Orders.getAllOrders = (user_id,callback) => {
+    const sql = `SELECT * FROM orders WHERE user_id = ? ORDER BY orders.created_at DESC`;
+    connection.query(sql, user_id, (error, results) => {
+        if (error) {
+            return callback(error, null);
+        }
+        callback(null, results);
+    });
+};
+
 module.exports = Orders;

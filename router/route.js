@@ -552,4 +552,19 @@ route.post('/payment-status/:order_id', async (req, res) => {
     }
 });
 
+route.get('getAllOrders',authenticateToken , (req,res) => {
+    const user_id = req.user.id;
+    Orders.getAllOrders(user_id, (error, results) => {
+        if (error) {
+            console.error('Error fetching orders:', error);
+            return res.status(500).json({ message: 'Failed to fetch orders' });
+        }
+
+        res.status(200).json({
+            message: 'Orders fetched successfully',
+            orders: results,
+        });
+    });
+});
+
 module.exports = route;
