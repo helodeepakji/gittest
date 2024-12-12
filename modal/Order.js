@@ -26,5 +26,22 @@ Orders.booking = (data, user_id, callback) => {
     });
 };
 
+Orders.status = (amount, transaction_id, status, order_id,callback) => {
+    const sql = `
+        UPDATE orders 
+        SET pay_amount = ?, status = ?, transaction_id = ?, updated_at = NOW() 
+        WHERE order_id = ?`;
+
+    // Parameters for the query
+    const values = [amount, status, transaction_id, order_id];
+
+    // Execute the query
+    connection.query(sql, values, (error, results) => {
+        if (error) {
+            return callback(error, null);
+        }
+        callback(null, results);
+    });
+};
 
 module.exports = Orders;

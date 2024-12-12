@@ -12,6 +12,7 @@ const Chat = require('../modal/Chat');
 const Order = require('../modal/Order');
 const JWT_SECRET = 'your_jwt_secret_key';
 const axios = require('axios');
+const { log } = require('console');
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -451,9 +452,10 @@ route.post('/booking', authenticateToken, (req, res) => {
 route.post('/phonepe-payment', async (req, res) => {
     try {
         const { payload, xVerifyHeader } = req.body;
-
+        // const url = 'https://api.phonepe.com/apis/hermes/pg/v1/pay';
+        const url = 'https://api-preprod.phonepe.com/apis/pg-sandbox/pg/v1/pay';
         const response = await axios.post(
-            'https://api.phonepe.com/apis/hermes/pg/v1/pay',
+            url,
             { request: payload },
             {
                 headers: {
@@ -467,6 +469,86 @@ route.post('/phonepe-payment', async (req, res) => {
     } catch (error) {
         console.error('Error in PhonePe Payment:', error.message);
         res.status(500).json({ error: 'Payment failed', details: error.message });
+    }
+});
+
+route.post('/payment-status/:order_id', async (req, res) => {
+    try {
+        const order_id = req.params.order_id;
+        const {
+            code,
+            transactionId,
+            amount,
+        } = req.body;
+
+        console.log('Payment Status Callback:', req.body);
+
+        // Determine payment status
+        let status = code === 'PAYMENT_SUCCESS' ? 'success' : 'failed';
+        const pay_amount = parseFloat(amount) / 100;
+
+        // Update order in the database
+        Order.status(
+            pay_amount,
+            transactionId,
+            status,
+            order_id,
+            (error, result) => {
+
+                if (error) {
+                    console.error('Error updating payment status:', error);
+                    return res.status(500).send(`
+                            <html>
+                                <body>
+                                    <h1>Payment Failed</h1>
+                                    <p>We couldn't process your payment at this time. Please try again.</p>
+                                    <a href="/business/orders">Return to Orders</a>
+                                </body>
+                            </html>
+                        `);
+                }
+
+                if (status === 'success') {
+                    console.log('Payment status updated successfully:', result);
+                    res.send(`
+                            <html>
+                                <body>
+                                    <h1>Payment Successful</h1>
+                                    <p>Your payment was successful. Transaction ID: ${transactionId}</p>
+                                    <a href="/orders">View Orders</a>
+                                    <script>
+                                        setTimeout(() => {
+                                            window.location.href = '/business/orders';
+                                        }, 5000); // Redirect after 5 seconds
+                                    </script>
+                                </body>
+                            </html>
+                        `);
+                } else {
+                    console.log('Payment status update failed:', result);
+                    // Display failure message and provide option to retry
+                    res.send(`
+                            <html>
+                                <body>
+                                    <h1>Payment Failed</h1>
+                                    <p>We couldn't process your payment. Please try again.</p>
+                                    <a href="/business/orders">Return to Orders</a>
+                                </body>
+                            </html>
+                        `);
+                }
+            });
+    } catch (error) {
+        console.error('Error handling payment status callback:', error);
+        res.status(500).send(`
+                    <html>
+                        <body>
+                            <h1>Internal Server Error</h1>
+                            <p>Something went wrong. Please try again later.</p>
+                            <a href="/business/orders">Return to Orders</a>
+                        </body>
+                    </html>
+                `);
     }
 });
 

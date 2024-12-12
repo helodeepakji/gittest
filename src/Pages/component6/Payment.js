@@ -37,22 +37,22 @@ const Payment = () => {
 
          // PhonePe payment details
          const KEYINDEX = "1";
-         const MERCHANTID = "DEEPAKMONLINE";
-         const APIKEY = "043c8c98-630b-4552-84f0-700041c6a44c";
-         const APIURL = "https://api.phonepe.com/apis/hermes/pg/v1/pay";
+        //  const MERCHANTID = "DEEPAKMONLINE";
+        //  const APIKEY = "043c8c98-630b-4552-84f0-700041c6a44c";
+        //  const APIURL = "https://api.phonepe.com/apis/hermes/pg/v1/pay";
 
-        //  const MERCHANTID = "PGTESTPAYUAT86";
-        //  const APIKEY = "96434309-7796-489d-8924-ab56988a6076";
-        //  const APIURL = "https://api-preprod.phonepe.com/apis/pg-sandbox/pg/v1/pay"
+         const MERCHANTID = "PGTESTPAYUAT86";
+         const APIKEY = "96434309-7796-489d-8924-ab56988a6076";
+         const APIURL = "https://api-preprod.phonepe.com/apis/pg-sandbox/pg/v1/pay"
 
          const paymentData = {
           merchantId: MERCHANTID,
           merchantTransactionId: `MUID${Math.random().toString(36).substr(2, 9)}`,
           merchantUserId: "USER_ID",
           amount: pay_amount * 100, // Convert to paise
-          redirectUrl: `${window.location.origin}/status/${order_id}`,
+          redirectUrl: `${window.location.origin}/api/payment-status/${order_id}`,
           redirectMode: "POST",
-          callbackUrl: `${window.location.origin}/status/${order_id}`,
+          callbackUrl: `${window.location.origin}/api/payment-status/${order_id}`,
           merchantOrderId: order_id,
           first_name: design.first_name || "User",
           last_name: design.last_name || "Name",
