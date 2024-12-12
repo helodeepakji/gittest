@@ -74,7 +74,7 @@ const Header = () => {
             {user ? (
               user.user_type == 'business' ? (
                 <li className="nav-item">
-                  <Link to="/order" className="nav-link text-white">
+                  <Link to="/business/orders" className="nav-link text-white">
                     Order
                   </Link>
                 </li>

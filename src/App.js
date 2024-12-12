@@ -23,7 +23,6 @@ import Payment from "./Pages/component6/Payment"
 
 
 
-
 // designer user page
 import Designerpage from "./Pages/Designer";
 import Wallet from './layouts/Wallet';
@@ -69,12 +68,14 @@ function App() {
         <Route path='/proceed' element={<Join />} />
         <Route path='/contact' element={<Contactpage />} />
 
-
+        
         <Route path='/business/home' element={<ProtectedRoute element={<Bussiness />} />} />
         <Route path='/business/view' element={<ProtectedRoute element={<View />} />} />
         <Route path='/business/wallet' element={<ProtectedRoute element={<Wallet />} />} />
         <Route path='/business/orders' element={<ProtectedRoute element={<Orders />} />} />
         
+
+
         <Route path='/designer/home' element={<ProtectedRoute element={<Designerpage />} />} />
         <Route path='/designer/view' element={<ProtectedRoute element={<View />} />} />
         <Route path='/designer/wallet' element={<ProtectedRoute element={<Wallet />} />} />

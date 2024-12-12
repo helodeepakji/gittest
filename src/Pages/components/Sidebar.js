@@ -23,10 +23,10 @@ function Sidebar() {
         <span className="menu-text">Transactions</span>
       </div>
 
-      <Link to="/viewpost" className="menu-item">
+      <div className="menu-item">
         <img src={Chart} alt="Completed Designs Icon" className="menu-icon" />
         <span className="menu-text">View Post</span>
-      </Link>
+      </div>
 
       <div className="menu-item">
         <img src={Category} alt="Messaging Icon" className="menu-icon" />
