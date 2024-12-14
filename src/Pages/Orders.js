@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import "./Order.css";
-
+import "./Order.css";  
 
 const OrderPage = () => {
   const [orders, setOrders] = useState([]);
@@ -42,29 +41,35 @@ const OrderPage = () => {
     <div className="order-container">
       <h1>Your Orders</h1>
       {orders && orders.length !== 0 ? (
-        orders.map((order) => (
+        orders.map((item,index) => (
           <ul>
-            <div className="order-img">
-              <img src={order.image} alt="" />
+            <div className="order-img d-flex">
+           { item.item.map((product,index) => (
+              <img src={product.image} alt={product.name} />
+  
+            ))}
             </div>
-            <li key={order.id}>
+          
+            <li key={index}>
               <p>
-                <strong>Order ID:</strong> {order.id}
+                <strong>Order ID:</strong> {item.order_id}
               </p>
+
               <p>
-                <strong>Item:</strong> {order.item_name}
-              </p>
-              <p>
-                <strong>Quantity:</strong> {order.quantity}
+                <strong>Item:</strong>  { item.item.map((product,index) => (
+    
+                    product.name +  " x " + product.quantity + " , "
+            ))}
               </p>
               <p>
                 <strong>Price:</strong>{" "}
-                <span className="price">${order.price}</span>
+                <span className="price">Rs.{item.pay_amount}</span>
+
               </p>
               <p>
                 <strong>Status:</strong>{" "}
-                <span className={`status ${order.status.toLowerCase()}`}>
-                  {order.status}
+                <span className={`status ${item.status.toLowerCase()}`}>
+                  {item.status}
                 </span>
               </p>
             </li>
@@ -78,3 +83,10 @@ const OrderPage = () => {
 };
 
 export default OrderPage;
+
+
+
+
+
+
+
