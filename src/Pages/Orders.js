@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./Order.css";  
+import { Link, useNavigate } from "react-router-dom";
 
 const OrderPage = () => {
+  const navigate = useNavigate()
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -42,7 +44,8 @@ const OrderPage = () => {
       <h1>Your Orders</h1>
       {orders && orders.length !== 0 ? (
         orders.map((item,index) => (
-          <ul>
+          // <link to='/orders/invoice'>
+          <ul onClick={()=>navigate('/orders/invoice')}>
             <div className="order-img d-flex">
            { item.item.map((product,index) => (
               <img src={product.image} alt={product.name} />
@@ -74,6 +77,7 @@ const OrderPage = () => {
               </p>
             </li>
           </ul>
+          // </link>
         ))
       ) : (
         <p className="no-orders">No orders found.</p>

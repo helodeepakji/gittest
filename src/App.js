@@ -30,6 +30,7 @@ import Adv from './Pages/components3/Adv';
 import Retailer from './Pages/Component4/Retailer';
 import EditProfile from './Pages/Component5/EditProfile';
 import Profile from './Pages/Component5/Profile/Profile';
+import Invoicepage from './Pages/Invoicepage';
 
 
 
@@ -59,6 +60,7 @@ function App() {
   return (
     <div>
       <Header />
+    
       
       <Routes>
         <Route path='/' element={<Home />} />
@@ -73,6 +75,8 @@ function App() {
         <Route path='/business/view' element={<ProtectedRoute element={<View />} />} />
         <Route path='/business/wallet' element={<ProtectedRoute element={<Wallet />} />} />
         <Route path='/business/orders' element={<ProtectedRoute element={<Orders />} />} />
+        <Route path='/orders/invoice' element={<ProtectedRoute element={<Invoicepage />} />} />
+        
         
 
 
