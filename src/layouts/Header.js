@@ -80,7 +80,7 @@ const Header = () => {
                 </li>
               ) : (
                 <li className="nav-item">
-                  <Link to="/wallet" className="nav-link text-white">
+                  <Link to="/designer/wallet" className="nav-link text-white">
                     Wallet
                   </Link>
                 </li>

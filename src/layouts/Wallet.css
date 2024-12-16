@@ -1,140 +1,173 @@
- .wallet-container-all{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    margin: 0;
-    background-color: #f4f4f4;
-  }
-  
-  .wallet-container {
-    width: 60%;
-    padding: 0px;
-    background: white;
-    border-radius: 10px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    position: relative;
-    height: 600px;
-    background-image: url("./images/diamond.png"), url("./images/triangle.png");
-    background-size: 200px, 200px;
-    background-position: 290px center, 520px 410px;
-    background-repeat: no-repeat;
-  }
-  
-  .wallet-header {
-    display: flex;
-    flex-direction: column;
-    margin: 20px 60px;
-  }
-  
-  .wallet-search-bar {
-    display: flex;
-    align-items: center;
-    padding: 8px 12px;
-    border: 1px solid black;
-    border-radius: 5px;
-    width: 100%;
-  }
-  
-  .wallet-search-bar input {
-    border: none;
-    outline: none;
-    width: 100%;
-    font-size: 14px;
-  }
-  
-  .wallet-columns {
-    display: flex;
-    text-align: center;
-    align-items: center;
-    justify-content: space-around;
-  }
-  
-  .wallet-column {
-    padding: 15px;
-    border-radius: 10px;
-    text-align: center;
-    align-items: center;
-    justify-content: center;
-    color: white;
-  }
-  
-  .wallet-project-column {
-    background-color: #b3e5fc;
-    width: 30%;
-    box-shadow: 8px 8px 10px rgba(0, 0, 0, 0.1);
-    height: 400px;
-  }
-  
-  .wallet-column h3 {
-    margin: 10px;
-  }
-  
-  .wallet-project-item {
-    display: flex;
-    align-items: center;
-    margin: 10px 0;
-    color: black;
-    padding: 6px;
-  }
-  
-  .wallet-project-item i {
-    background-color: #29b6f6;
-    border-radius: 50%;
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 50px;
-    height: 20px;
-    margin-right: 10px;
-  }
-  
-  .wallet-budget-column {
-    background-color: #ff8a80;
-    width: 15%;
-    box-shadow: 8px 8px 10px rgba(0, 0, 0, 0.1);
-    height: 400px;
-    color: black;
-  }
-  
-  .wallet-budget-column p {
-    padding: 20px;
-  }
-  
-  .wallet-spend-column {
-    background-color: #a5d6a7;
-    position: relative;
-    width: 15%;
-    box-shadow: 8px 8px 10px rgba(0, 0, 0, 0.1);
-    height: 400px;
-    color: black;
-  }
-  
-  .wallet-spend-column p {
-    padding: 20px;
-  }
-  
-  .wallet-dropdown {
-    display: flex;
-    flex-direction: row;
-    gap: 20px;
-    width: 110%;
-    margin: 5px;
-    color: black;
-    background-color: white;
-    padding: 8px;
-    border-radius: 5px;
-    border: 2px solid black;
-    position: absolute;
-    top: 25%;
-    left: 15%;
-    transform: translate(-50%, -50%);
-    box-shadow: 8px 8px 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  .wallet-dropdown span {
-    display: block;
-    gap: 20px;
-  }
-  
+/* General Reset */
+
+.wallet-management-sec-0 {
+  margin:  0px 20px;
+ }
+   .wallet-management-sec
+   {
+     display: flex;
+   }
+   /* Top Bar */
+   .top-bar-sec {
+     display: flex;
+     gap: 10px;
+     margin-bottom: 20px;
+     flex-direction: column;
+   }
+   .top-in-bar-sec{
+     display: flex;
+     flex-direction: row;
+     gap: 500px;
+   }
+   
+   .wallet-search-bar-sec {
+     display: flex;
+     align-items: center;
+     padding: 8px 12px;
+     border: 1px solid black;
+     border-radius: 20px;
+    
+   }
+   
+   .wallet-search-bar-sec input {
+     border: none;
+     outline: none;
+     width: 90%;
+     font-size: 14px;
+   }
+   .filter-btn-sec, .statement-btn-sec {
+     padding: 8px 12px;
+     background-color: #fff;
+     border: 2px solid black;
+     border-radius: 10px;
+     cursor: pointer;
+     margin: 5px;
+    
+   }
+   
+   /* Project Section */
+   .project-container-sec {
+     flex:1.7;
+     background-color: #fff;
+     border-radius: 10px;
+     padding: 20px;
+     width: 50%;
+ 
+   }
+   
+   .project-header-sec, .transaction-header-sec {
+     border: 1px solid #ddd;
+     border-radius: 5px;
+     background-color: rgb(236, 242, 245);
+     display: flex;
+     justify-content: space-around;
+     font-weight: bold;
+     margin-bottom: 10px;  
+   }
+   
+   
+   .project-card-sec {
+     display: flex;
+     align-items: center;
+     border: 1px solid #ddd;
+     border-radius: 5px;
+     margin-bottom: 10px;
+     padding: 10px;
+    
+   }
+   .project-card-sec .amount-sec{
+     margin: 0px 50px;
+ 
+ }
+ .project-card-sec .status-1{
+   margin: 0 0 0 150px ;
+ }
+   
+   .project-details-sec {
+     width: 47%;
+     display: flex;
+     border: 1px solid #ddd;
+     border-radius: 5px;
+     gap: 10px;
+   }
+   
+   .project-img-sec {
+     width: 100px;
+     height: 100px;
+     border-radius: 5px;
+     background-color: #ddd;
+   }
+   .view-post-btn-sec{
+     border: none;
+     float: right;
+     border: 1px solid black;
+     border-radius: 5%;
+     margin: 10px;
+     padding: 2px;
+ 
+   }
+   .status-sec{
+     display: flex;
+     flex-direction: row;
+     gap:10px;
+ }
+   .amount-sec {
+     font-weight: bold;
+   }
+   
+   .status-sec {
+     font-weight: bold;
+   }
+   
+   .completed { color: green; }
+   .pending { color: orange; }
+   .success { color: green; }
+   .cancel { color: red; }
+   
+   /* Sidebar */
+   .sidebar-sec {
+     flex: 1;
+     background-color: #fff;
+     border-radius: 10px;
+     padding: 20px;
+   }
+   
+   .withdraw-btn-sec {
+     width: 50%;
+     padding: 10px;
+     background-color: #008f4e;
+     color: #fff;
+     border: none;
+     border-radius: 5px;
+     cursor: pointer;
+     font-weight: bold;
+   }
+   
+   .balance-sec {
+     width: 70% ;
+     display: flex;
+     gap: 100px;
+     margin: 20px 0;
+     border: 2px solid black;
+     border-radius: 5px;
+     padding: 25px;
+   }
+   
+   .transaction-history-sec input {
+     width: 100%;
+     padding: 8px;
+     margin-bottom: 10px;
+     border: 1px solid #ccc;
+     border-radius: 5px;
+   }
+   
+   .transaction-row-sec {
+     display: flex;
+     justify-content: space-between;
+     margin-bottom: 8px;
+   }
+   .trans-row{
+     padding: 10px;
+     border: 2px solid #ddd;
+     border-radius: 5px;
+   }
