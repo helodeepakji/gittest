@@ -6,23 +6,37 @@ const Transaction = {};
 Transaction.create = (data, callback) => {
     const { design_id, user_id, amount, type, remarks } = data;
 
-    const sql = `
+    // Check if a transaction with design_id and type 'credit' already exists
+    const checkSql = `SELECT * FROM transactions WHERE design_id = ? AND type = 'credit'`;
+    const insertSql = `
         INSERT INTO transactions 
         (design_id, user_id, amount, type, remarks, created_at) 
         VALUES (?, ?, ?, ?, ?, NOW())
     `;
 
-    // Parameters for the query
-    const values = [design_id, user_id, amount, type, remarks];
-
-    // Execute the query
-    connection.query(sql, values, (error, results) => {
-        if (error) {
-            return callback(error, null);
+    // Check for existing transaction
+    connection.query(checkSql, [design_id], (checkError, checkResults) => {
+        if (checkError) {
+            console.error("Error checking transaction existence:", checkError.message);
+            return callback(checkError, null);
         }
-        callback(null, results);
+
+        // If a transaction already exists, skip the insert
+        if (checkResults.length == 0) {
+            const values = [design_id, user_id, amount, type, remarks];
+            connection.query(insertSql, values, (insertError, insertResults) => {
+                if (insertError) {
+                    console.error("Error inserting transaction:", insertError.message);
+                    return callback(insertError, null);
+                }
+                callback(null, insertResults);
+            });
+        }
+
+        callback(null, checkResults);
     });
 };
+
 
 // 2. Update transaction type and remarks
 Transaction.update = (id, type, remarks, callback) => {
