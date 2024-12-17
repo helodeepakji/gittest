@@ -26,23 +26,39 @@ Orders.booking = (data, user_id, callback) => {
     });
 };
 
-Orders.status = (amount, transaction_id, status, order_id,callback) => {
-    const sql = `
-        UPDATE orders 
-        SET pay_amount = ?, status = ?, transaction_id = ?, updated_at = NOW() 
-        WHERE order_id = ?`;
+Orders.status = (amount, transaction_id, status, order_id, callback) => {
+    // Step 1: Check if the order exists before updating
+    const checkSql = `SELECT * FROM orders WHERE order_id = ? LIMIT 1`;
 
-    // Parameters for the query
-    const values = [amount, status, transaction_id, order_id];
-
-    // Execute the query
-    connection.query(sql, values, (error, results) => {
-        if (error) {
-            return callback(error, null);
+    connection.query(checkSql, [order_id], (checkError, checkResults) => {
+        if (checkError) {
+            return callback(checkError, null);
         }
-        callback(null, results);
+
+        // If no order is found
+        if (checkResults.length === 0) {
+            return callback(new Error(`Order with ID ${order_id} not found`), null);
+        }
+
+        // Step 2: Proceed to update the order if it exists
+        const updateSql = `
+            UPDATE orders 
+            SET pay_amount = ?, status = ?, transaction_id = ?, updated_at = NOW() 
+            WHERE order_id = ?
+        `;
+
+        const values = [amount, status, transaction_id, order_id];
+
+        connection.query(updateSql, values, (updateError, updateResults) => {
+            if (updateError) {
+                return callback(updateError, null);
+            }
+
+            callback(null, checkResults[0]);
+        });
     });
 };
+
 
 Orders.getAllOrders = (user_id,callback) => {
     const sql = `SELECT * FROM orders WHERE user_id = ? ORDER BY orders.created_at DESC`;

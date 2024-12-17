@@ -8,11 +8,11 @@ const Business = require('../modal/Business');
 const Designs = require('../modal/Designs');
 const RejectDesign = require('../modal/RejectDesign');
 const Product = require('../modal/Product');
+const Transaction = require('../modal/Transaction');
 const Chat = require('../modal/Chat');
 const Order = require('../modal/Order');
 const JWT_SECRET = 'your_jwt_secret_key';
 const axios = require('axios');
-const { log } = require('console');
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -494,63 +494,117 @@ route.post('/payment-status/:order_id', async (req, res) => {
             status,
             order_id,
             (error, result) => {
-
                 if (error) {
                     console.error('Error updating payment status:', error);
                     return res.status(500).send(`
-                            <html>
-                                <body>
-                                    <h1>Payment Failed</h1>
-                                    <p>We couldn't process your payment at this time. Please try again.</p>
-                                    <a href="/business/orders">Return to Orders</a>
-                                </body>
-                            </html>
-                        `);
+                        <html>
+                            <body>
+                                <h1>Payment Failed</h1>
+                                <p>We couldn't process your payment at this time. Please try again.</p>
+                                <a href="/business/orders">Return to Orders</a>
+                            </body>
+                        </html>
+                    `);
                 }
 
                 if (status === 'success') {
-                    console.log('Payment status updated successfully:', result);
-                    res.send(`
-                            <html>
-                                <body>
-                                    <h1>Payment Successful</h1>
-                                    <p>Your payment was successful. Transaction ID: ${transactionId}</p>
-                                    <a href="/business/orders">View Orders</a>
-                                    <script>
-                                        setTimeout(() => {
-                                            window.location.href = '/business/orders';
-                                        }, 5000); // Redirect after 5 seconds
-                                    </script>
-                                </body>
-                            </html>
-                        `);
+                    console.log('Order updated successfully, fetching design...');
+                    
+                    // Fetch design details using design_id
+                    Designs.getById(result.design_id, (err, designResult) => {
+
+                        if (err) {
+                            console.error('Error fetching design:', err);
+                            return res.status(500).send(`
+                                <html>
+                                    <body>
+                                        <h1>Payment Successful</h1>
+                                        <p>But we encountered an issue processing further details.</p>
+                                        <a href="/business/orders">Return to Orders</a>
+                                    </body>
+                                </html>
+                            `);
+                        }
+
+                        if (designResult && designResult.designer_id && result.design_id) {
+                            // Credit transaction to designer
+                            Transaction.create({
+                                design_id: result.design_id,
+                                user_id: designResult.designer_id,
+                                amount: 50, // Assuming fixed credit amount
+                                type: 'credit',
+                                remarks: 'Design is selected',
+                            }, (tranErr, tranResult) => {
+                                if (tranErr) {
+                                    console.error('Error creating transaction:', tranErr);
+                                    return res.status(500).send(`
+                                        <html>
+                                            <body>
+                                                <h1>Payment Successful</h1>
+                                                <p>However, an issue occurred with crediting the designer.</p>
+                                                <a href="/business/orders">Return to Orders</a>
+                                            </body>
+                                        </html>
+                                    `);
+                                }
+
+                                console.log('Transaction created successfully:', tranResult);
+                                res.send(`
+                                    <html>
+                                        <body>
+                                            <h1>Payment Successful</h1>
+                                            <p>Your payment was successful. Transaction ID: ${transactionId}</p>
+                                            <a href="/orders">View Orders</a>
+                                            <script>
+                                                setTimeout(() => {
+                                                    window.location.href = '/business/orders';
+                                                }, 5000); // Redirect after 5 seconds
+                                            </script>
+                                        </body>
+                                    </html>
+                                `);
+                            });
+                        } else {
+                            console.error('Design details incomplete or missing.');
+                            res.send(`
+                                <html>
+                                    <body>
+                                        <h1>Payment Successful</h1>
+                                        <p>But we could not process designer credit at this time.</p>
+                                        <a href="/business/orders">Return to Orders</a>
+                                    </body>
+                                </html>
+                            `);
+                        }
+                    });
                 } else {
                     console.log('Payment status update failed:', result);
-                    // Display failure message and provide option to retry
                     res.send(`
-                            <html>
-                                <body>
-                                    <h1>Payment Failed</h1>
-                                    <p>We couldn't process your payment. Please try again.</p>
-                                    <a href="/business/orders">Return to Orders</a>
-                                </body>
-                            </html>
-                        `);
+                        <html>
+                            <body>
+                                <h1>Payment Failed</h1>
+                                <p>We couldn't process your payment. Please try again.</p>
+                                <a href="/business/orders">Return to Orders</a>
+                            </body>
+                        </html>
+                    `);
                 }
-            });
+            }
+        );
     } catch (error) {
         console.error('Error handling payment status callback:', error);
         res.status(500).send(`
-                    <html>
-                        <body>
-                            <h1>Internal Server Error</h1>
-                            <p>Something went wrong. Please try again later.</p>
-                            <a href="/business/orders">Return to Orders</a>
-                        </body>
-                    </html>
-                `);
+            <html>
+                <body>
+                    <h1>Internal Server Error</h1>
+                    <p>Something went wrong. Please try again later.</p>
+                    <a href="/business/orders">Return to Orders</a>
+                </body>
+            </html>
+        `);
     }
 });
+
 
 route.get('/getAllOrders', authenticateToken, (req, res) => {
     const user_id = req.user.id;
