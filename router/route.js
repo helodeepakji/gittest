@@ -513,6 +513,8 @@ route.post('/payment-status/:order_id', async (req, res) => {
                     // Fetch design details using design_id
                     Designs.getById(result.design_id, (err, designResult) => {
 
+                        Designs.approve(result.design_id,(err, designResult));
+
                         if (err) {
                             console.error('Error fetching design:', err);
                             return res.status(500).send(`
@@ -623,6 +625,73 @@ route.get('/getAllOrders', authenticateToken, (req, res) => {
             message: 'Orders fetched successfully',
             orders: results,
         });
+    });
+});
+
+
+route.get('/getAllTansaction', authenticateToken, (req, res) => {
+    const user_id = req.user.id;
+
+    Transaction.getAllByUser(user_id, (error, results) => {
+        if (error) {
+            console.error('Error fetching orders:', error);
+            return res.status(500).json({ message: 'Failed to fetch Transaction' });
+        }
+
+        res.status(200).json({
+            message: 'Transaction fetched successfully',
+            orders: results,
+        });
+    });
+});
+
+route.get('/getAllWithdrawl', authenticateToken, (req, res) => {
+    const user_id = req.user.id;
+
+    Transaction.getAllWithdrawl(user_id, (error, results) => {
+        if (error) {
+            console.error('Error fetching orders:', error);
+            return res.status(500).json({ message: 'Failed to fetch Transaction' });
+        }
+
+        res.status(200).json({
+            message: 'Transaction fetched successfully',
+            orders: results,
+        });
+    });
+});
+
+route.get('/totalWithdral', authenticateToken, (req, res) => {
+    const user_id = req.user.id;
+
+    Transaction.totalWithdral(user_id, (error, results) => {
+        if (error) {
+            console.error('Error fetching orders:', error);
+            return res.status(500).json({ message: 'Failed to fetch Transaction' });
+        }
+
+        if (!results || results.length === 0) {
+            return res.status(404).json({ message: 'No Transaction found for this user' });
+        }
+
+        res.status(200).json(results);
+    });
+});
+
+route.get('/avaBalance', authenticateToken, (req, res) => {
+    const user_id = req.user.id;
+
+    Transaction.avaBalance(user_id, (error, results) => {
+        if (error) {
+            console.error('Error fetching orders:', error);
+            return res.status(500).json({ message: 'Failed to fetch Transaction' });
+        }
+
+        if (!results || results.length === 0) {
+            return res.status(404).json({ message: 'No Transaction found for this user' });
+        }
+
+        res.status(200).json(results);
     });
 });
 

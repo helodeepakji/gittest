@@ -153,6 +153,20 @@ Designs.reject = (id , callback) => {
     });
 };
 
+Designs.approve = (id , callback) => {
+    const query = `
+        UPDATE designs 
+        SET status = ? WHERE id = ?;
+    `;
+    connection.query(query, ['accept', id], (err, results) => {
+        if (err) {
+            console.error('Error updating design:', err.message);
+            return callback(err);
+        }
+        callback(null, results);
+    });
+};
+
 // Delete a design by ID
 Designs.delete = (id, callback) => {
     const query = `

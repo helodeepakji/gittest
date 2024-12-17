@@ -46,17 +46,54 @@ Transaction.update = (id, type, remarks, callback) => {
 
 // 3. Get all transactions for a specific user
 Transaction.getAllByUser = (user_id, callback) => {
+    // SQL query to fetch transactions with related design details
     const sql = `
-        SELECT * FROM transactions 
-        WHERE user_id = ? 
-        ORDER BY created_at DESC
+        SELECT 
+            transactions.*, 
+            designs.image, 
+            designs.status ,
+            business.caption
+        FROM transactions 
+        JOIN designs ON designs.id = transactions.design_id 
+        JOIN business ON designs.ads_id = business.id
+        WHERE transactions.user_id = ?  AND transactions.type = 'credit'
+        ORDER BY transactions.created_at DESC
     `;
 
-    // Execute the query
+    // Execute the query with parameterized input
     connection.query(sql, [user_id], (error, results) => {
         if (error) {
+            console.error("Error fetching transactions for user:", error.message);
             return callback(error, null);
         }
+
+        // Return the fetched results
+        callback(null, results);
+    });
+};
+
+Transaction.getAllWithdrawl = (user_id, callback) => {
+    // SQL query to fetch transactions with related design details
+    const sql = `
+        SELECT 
+            transactions.*, 
+            designs.image, 
+            designs.status ,
+            business.caption
+        FROM transactions 
+        JOIN designs ON designs.id = transactions.design_id 
+        JOIN business ON designs.ads_id = business.id
+        WHERE transactions.user_id = ?  AND transactions.type = 'debit'
+        ORDER BY transactions.created_at DESC
+    `;
+
+    // Execute the query with parameterized input
+    connection.query(sql, [user_id], (error, results) => {
+        if (error) {
+            console.error("Error fetching transactions for user:", error.message);
+            return callback(error, null);
+        }
+        // Return the fetched results
         callback(null, results);
     });
 };
@@ -90,6 +127,36 @@ Transaction.delete = (id, callback) => {
             return callback(error, null);
         }
         callback(null, results);
+    });
+};
+
+Transaction.totalWithdral = (user_id, callback) => {
+    const sql = `SELECT SUM(amount) as total_withral FROM transactions WHERE user_id = ? AND type = 'debit' `;
+
+    // Execute the query
+    connection.query(sql, [user_id], (error, results) => {
+        if (error) {
+            return callback(error, null);
+        }
+        callback(null, results[0]);
+    });
+};
+
+Transaction.avaBalance = (user_id, callback) => {
+    const sql = `SELECT SUM(amount) as total_withral FROM transactions WHERE user_id = ? AND type = 'debit' `;
+    const sql2 = `SELECT SUM(amount) as total_withral FROM transactions WHERE user_id = ? AND type = 'credit' `;
+
+    // Execute the query
+    connection.query(sql, [user_id], (error, results) => {
+        if (error) {
+            return callback(error, null);
+        }
+        connection.query(sql2, [user_id], (error2, results2) => {
+            if (error2) {
+                return callback(error2, null);
+            }
+            callback(null, results2[0].total_withral - results[0].total_withral);
+        });
     });
 };
 
