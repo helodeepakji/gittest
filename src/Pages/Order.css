@@ -8,8 +8,13 @@
     border-radius: 10px;
 }
 .order-container img{
-    height: 200px;
-    width: auto;
+    /* height: 200px; */
+    width: 100px;
+    object-fit: contain;
+    aspect-ratio: 1;
+}
+.order-img{
+    flex-wrap: wrap;
 }
 .order-design-images {
     display: flex;
@@ -36,8 +41,7 @@
 
 .order-container ul {
     list-style: none;
-    padding: 0;
-    margin: 0;
+   border: 1px solid #ddd;
       display: flex;
       flex-direction: row;
       gap:10px;

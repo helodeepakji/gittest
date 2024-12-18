@@ -33,11 +33,6 @@ function Sidebar() {
         <span className="menu-text">Messaging</span>
       </div>
 
-      <Link to="/wallet" className="menu-item">
-        <img src={Discovery} alt="Wallet Icon" className="menu-icon" />
-        <span className="menu-text">Wallet</span>
-      </Link>
-
       <div className="sidebar-image">
         <img
           src={Experience}

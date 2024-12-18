@@ -1,5 +1,5 @@
 import React, {useState, useRef} from "react";
-import { useNavigate } from 'react-router-dom';
+import { Link,useNavigate } from 'react-router-dom';
 import './adv.css'; 
 import axios from 'axios';
 import UploadDesign from "./Image upload-bro 1.png"
@@ -118,7 +118,7 @@ const Adv = () => {
                 </div>
               </div>
             </div>
-            <div className="col-md-4 mb-3">
+            <Link to="/business/view" className="col-md-4 mb-3">
               <div className="p-3 scard border round">
               <div className='d-flex justify-content-between'>
                 <h3>Design Selection</h3>
@@ -128,7 +128,7 @@ const Adv = () => {
                   A gallery to view and select designs submitted by designers.
                 </div>
               </div>
-            </div>
+            </Link>
             <div className="col-md-4 mb-3">
               <div className="p-3 scard border round">
               <div className='d-flex justify-content-between'>
@@ -160,30 +160,6 @@ const Adv = () => {
           </div>
     
       
-          <div className="row">
-            <div className="col">
-              <h4 className='text-dark order mb-4'>Recent Orders</h4>
-              <table className="table table-bordered-none table-hover">
-                <tbody>
-                  <tr >
-                    <td>#968659684</td>
-                    <td>Cup Design</td>
-                    <td>Aug 30, 2023</td>
-                    <td>$4345</td>
-                    <td><a href="#">Delivered</a></td>
-                  </tr>
-                  <tr>
-                    <td>#968659684</td>
-                    <td>Cup Design</td>
-                    <td>Aug 30, 2023</td>
-                    <td>$4345</td>
-                    <td><a href="#">Delivered</a></td>
-                  </tr>
-                </tbody>
-              </table>
-              <a href="#" className="float-end text-info">See All</a>
-            </div>
-          </div>
         </div>
       </>
      
