@@ -2,8 +2,8 @@
     background-color: #f8f8f8;
     color: #333;
     line-height: 1.6;
-    height: 1800px;
-
+    height: auto;
+    overflow: auto;
     background-image: 
     url('./pic/abstract_green_1.png'), 
     url('./pic/Greengroup.png'), 
@@ -35,7 +35,10 @@ background-repeat: no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-rep
 /* Ensure background is scrollable */
 background-attachment: scroll;
 }
-
+.service-9451::-webkit-scrollbar {
+    width: 0px;
+    display: none;
+  }
 
 
 .service-header-9451 {
