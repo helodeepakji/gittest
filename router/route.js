@@ -313,6 +313,34 @@ route.get('/getAllDesigns', authenticateToken, (req, res) => {
     }
 });
 
+route.get('/getAllDesigns/:ads_id', authenticateToken, (req, res) => {
+    const userId = req.user.id;
+    const ads_id = req.params.ads_id;
+    const page = parseInt(req.query.page) || 1; // Default to page 1
+    const limit = parseInt(req.query.limit) || 5; // Default to 5 items per page
+    const offset = (page - 1) * limit;
+
+    Designs.getByAdsId(ads_id , userId , limit, offset, (err, result) => {
+        if (err) {
+            return res.status(500).json({
+                message: 'Error fetching designs',
+                error: err.message,
+            });
+        }
+
+        const { results, totalCount } = result;
+
+        res.json({
+            page,
+            limit,
+            totalCount,
+            totalPages: Math.ceil(totalCount / limit),
+            data: results,
+        });
+    });
+
+});
+
 route.get('/getDesign/:id', authenticateToken, (req, res) => {
     const id = req.params.id;
     Designs.getById(id, (err, result) => {
@@ -509,7 +537,7 @@ route.post('/payment-status/:order_id', async (req, res) => {
 
                 if (status === 'success') {
                     console.log('Order updated successfully, fetching design...');
-                    
+
                     // Fetch design details using design_id
                     Designs.getById(result.design_id, (err, designResult) => {
 
@@ -637,7 +665,7 @@ route.get('/getOrder/:order_id', authenticateToken, (req, res) => {
     const user_id = req.user.id;
     const order_id = req.params.order_id;
 
-    Order.getOrder(user_id,order_id, (error, results) => {
+    Order.getOrder(user_id, order_id, (error, results) => {
         if (error) {
             console.error('Error fetching orders:', error);
             return res.status(500).json({ message: 'Failed to fetch orders' });

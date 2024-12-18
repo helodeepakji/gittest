@@ -85,7 +85,7 @@ const ProjectCard = () => {
       <div className="project-card-new">
         {/* Input Section */}
         <div className="message-container-new">
-          <Link to ="/editprofile" className="profile-container-new">
+          <Link to="/editprofile" className="profile-container-new">
             <img src={Profile} alt="Profile Picture" className="profile-pic-new" />
             <div className="camera-icon-new">
               <img src={Camera} alt="Camera Icon" />
@@ -146,12 +146,12 @@ const ProjectCard = () => {
                     <div>25 Nov at 12:44 PM</div>
                   </div>
                 </div>
-                
-         <Link to="/view">      
-    <button className="button view-button-view">
-        View Proposal
-      </button>
-      </Link> 
+
+                <Link to={`/business/view/${req.id}`}>
+                  <button className="button view-button-view">
+                    View Proposal
+                  </button>
+                </Link>
               </div>
               <div className="project-description-new">
                 <p>{req.caption}</p>
@@ -185,7 +185,7 @@ const ProjectCard = () => {
 
         {/* Pagination Controls */}
         <div className="pagination">
-          <button 
+          <button
             onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
             disabled={page === 1}
           >

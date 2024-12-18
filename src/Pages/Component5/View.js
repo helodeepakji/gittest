@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import "./View.css";
 import { Link } from "react-router-dom";
 import axios from 'axios';
 
 const DesignTable = () => {
+  const { ads_id } = useParams();
   // State to store data
   const [designs, setDesigns] = useState([]);
   const [userType, setUserType] = useState("");
@@ -20,9 +22,9 @@ const DesignTable = () => {
 
     const decodedToken = JSON.parse(atob(token.split(".")[1]));
     setUserType(decodedToken.user_type);
-
+    const conditions = ads_id != '' ? '/'+ads_id : '';
     try {
-      const response = await axios.get(`/api/getAllDesigns?page=${currentPage}&limit=5`, {
+      const response = await axios.get(`/api/getAllDesigns${conditions}?page=${currentPage}&limit=5`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
