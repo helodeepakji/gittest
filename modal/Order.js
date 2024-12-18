@@ -70,4 +70,14 @@ Orders.getAllOrders = (user_id,callback) => {
     });
 };
 
+Orders.getOrder = (user_id , order_id ,callback) => {
+    const sql = `SELECT orders.* , users.first_name , users.last_name , users.email  FROM orders JOIN users ON orders.user_id = users.id WHERE user_id = ? AND order_id = ? ORDER BY orders.created_at DESC`;
+    connection.query(sql, [user_id , order_id], (error, results) => {
+        if (error) {
+            return callback(error, null);
+        }
+        callback(null, results[0]);
+    });
+};
+
 module.exports = Orders;

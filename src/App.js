@@ -74,10 +74,12 @@ function App() {
         
         <Route path='/business/home' element={<ProtectedRoute element={<Bussiness />} />} />
         <Route path='/business/view' element={<ProtectedRoute element={<View />} />} />
+        <Route path='/business/view/:ads_id' element={<ProtectedRoute element={<View />} />} />
         <Route path='/business/wallet' element={<ProtectedRoute element={<Wallet />} />} />
         <Route path='/business/orders' element={<ProtectedRoute element={<Orders />} />} />
-        <Route path='/orders/invoice' element={<ProtectedRoute element={<Invoicepage />} />} />
+        <Route path='/orders/invoice/:order_id' element={<ProtectedRoute element={<Invoicepage />} />} />
         <Route path='/business/service' element={<ProtectedRoute element={<Service />} />} />
+        
         
 
 

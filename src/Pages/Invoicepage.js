@@ -1,9 +1,45 @@
-import React from "react";
-import "./Invoicepage.css"; 
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import "./Invoicepage.css";
 import Logo from './ADJERRY SVG LOGO 2 1.png';
 import invoicepic from './/image 2.png'
+import axios from "axios";
 
 const Invoicepage = () => {
+  const { order_id } = useParams();
+  const [order, setOrder] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchOrders = async () => {
+      try {
+        const response = await axios.get("/api/getOrder/" + order_id, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        });
+        setOrder(response.data.orders);
+      } catch (err) {
+        setError(
+          err.response ? err.response.data.message : "Error fetching orders"
+        );
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchOrders();
+  }, []);
+
+  if (loading) {
+    return <div>Loading orders...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+
   return (
     <div className="invoice-container">
       {/* Header Section */}
@@ -19,15 +55,27 @@ const Invoicepage = () => {
       {/* Invoice Details */}
       <div className="invoice-details">
         <div className="customer-details">
-            <h4>Invoice to:</h4>
-          <h2>Dev Gautam</h2>
+          <h4>Invoice to:</h4>
+          <h2> {order.first_name}  {order.last_name}</h2>
+          <h2> {order.email}</h2>
           <p>Customer</p>
           <p>123 Anywhere St.<br /> Any City, ST 1245</p>
         </div>
         <div className="invoice-meta">
-          <p><strong>Invoice Number:</strong> #233221</p>
-          <p><strong>Due Date:</strong> 16 Dec, 2024</p>
-          <p><strong>Invoice Date:</strong> 16 Dec, 2024</p>
+          <p><strong>Invoice No: </strong> {order.order_id}</p>
+          <p><strong>Transaction Id: </strong> {order.transaction_id}</p>
+          <p> <strong> Payment Status : </strong>  {order.status} </p>
+          <p><strong>Invoice Date: </strong>{new Date(order.created_at).toLocaleDateString('en-US', {
+            day: 'numeric',
+            month: 'long',
+            year: 'numeric'
+          })}
+            ,
+            {new Date(order.created_at).toLocaleTimeString('en-US', {
+              hour: '2-digit',
+              minute: '2-digit',
+              hour12: true
+            })}</p>
         </div>
       </div>
 
@@ -35,19 +83,19 @@ const Invoicepage = () => {
       <table className="invoice-table">
         <thead>
           <tr>
-            <th>ITEM NO.</th>
-            <th>ITEM DESCRIPTION</th>
+            <th>ITEM Name.</th>
             <th>QTY.</th>
-            <th>AMOUNT</th>
+            <th>Price</th>
+            <th>Total AMOUNT</th>
           </tr>
         </thead>
         <tbody>
-          {[1, 2, 3, 4, 5].map((item) => (
-            <tr key={item}>
-              <td>{item}</td>
-              <td>WATER BOTTLE ADVERTISEMENT</td>
-              <td>100</td>
-              <td>$200.00</td>
+          {order.item.map((data) => (
+            <tr key={data.id}>
+              <td>{data.name} <img src={data.image} /></td>
+              <td>{data.quantity}</td>
+              <td>Rs. {data.price}</td>
+              <td>Rs. {data.price * data.quantity}</td>
             </tr>
           ))}
         </tbody>
@@ -55,12 +103,10 @@ const Invoicepage = () => {
 
       {/* Payment Section */}
       <div className="payment-section">
-        <p><strong>Payment Method:</strong> 🏦</p>
-        <p><strong>Account Name:</strong></p>
-        <p><strong>Bank/Credit Card:</strong></p>
-        <p><strong>Online Payment / UPI:</strong></p>
-        <p><strong>SUBTOTAL:</strong> $1000</p>
-        <p><strong>TAX:</strong> $10</p>
+        <p><strong>SUBTOTAL:</strong> Rs. {order.amount}</p>
+        <p><strong>Coupen Code:  {order.coupen}</strong></p>
+        <p><strong>Discount:</strong> Rs. {order.amount - order.pay_amount}</p>
+        <p><strong>Pay Amount:</strong> Rs. {order.pay_amount}</p>
       </div>
 
       {/* Terms and Conditions */}
@@ -80,7 +126,7 @@ const Invoicepage = () => {
 
       {/* Signature Section */}
       <div className="signature-section">
-        <p>Epetsa Darcy<br />Administrator</p>
+        <p>Adjerry India<br />Administrator</p>
         <img
           src={invoicepic}
           alt="Signature"

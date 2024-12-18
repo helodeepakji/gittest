@@ -122,6 +122,37 @@ Designs.getByBusinessUser = (userId, limit, offset, callback) => {
     });
 };
 
+Designs.getByAdsId = (ads_id , userId, limit, offset, callback) => {
+    const query = `
+        SELECT designs.*, business.caption, business.media AS business_media , users.first_name, users.last_name, users.profile
+        FROM designs
+        LEFT JOIN business ON designs.ads_id = business.id JOIN users ON users.id = designs.user_id
+        WHERE business.user_id = ? AND designs.ads_id = ?
+        ORDER BY designs.created_at DESC
+        LIMIT ? OFFSET ?;
+    `;
+
+    const countQuery = `
+        SELECT COUNT(*) AS totalCount FROM designs JOIN business ON designs.ads_id = business.id WHERE business.user_id = ? AND ads_id = ?`;
+
+    connection.query(query, [userId,ads_id, limit, offset], (err, results) => {
+        if (err) {
+            console.error('Error fetching designs:', err.message);
+            return callback(err);
+        }
+
+        connection.query(countQuery, [userId , ads_id], (countErr, countResults) => {
+            if (countErr) {
+                console.error('Error fetching design count:', countErr.message);
+                return callback(countErr);
+            }
+
+            const totalCount = countResults[0].totalCount;
+            callback(null, { results, totalCount });
+        });
+    });
+};
+
 // Update a design by ID
 Designs.update = (id, adsId, userId, images, callback) => {
     const query = `

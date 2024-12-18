@@ -158,8 +158,11 @@ const Adv = () => {
               <img src="Objects.png" alt="Cup Design" className="img-fluid" />
             </div>
           </div>
+<<<<<<< HEAD
     
       
+=======
+>>>>>>> f2458658e785539c736bacd9ff231e617aad5dcc
         </div>
       </>
      

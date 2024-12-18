@@ -20,6 +20,13 @@ const ProjectCard = () => {
   const [totalPages, setTotalPages] = useState(1);
   const [error, setError] = useState(null);
 
+  const token = localStorage.getItem("token");
+  if (!token) {
+    setError("Authentication token is missing");
+    return;
+  }
+  const decodedToken = JSON.parse(atob(token.split(".")[1]));
+
   const handleFileChange = (event) => {
     setFiles([...event.target.files]);
   };
@@ -85,8 +92,8 @@ const ProjectCard = () => {
       <div className="project-card-new">
         {/* Input Section */}
         <div className="message-container-new">
-          <Link to ="/editprofile" className="profile-container-new">
-            <img src={Profile} alt="Profile Picture" className="profile-pic-new" />
+          <Link to="/editprofile" className="profile-container-new">
+            <img src={decodedToken.profile} alt="Profile Picture" className="profile-pic-new" />
             <div className="camera-icon-new">
               <img src={Camera} alt="Camera Icon" />
             </div>
@@ -139,19 +146,19 @@ const ProjectCard = () => {
             <div className="project-card-new" key={req.id}>
               <div className="project-header-new">
                 <div className="profile-info-new">
-                  <img src={Profile} alt="Profile Picture" />
+                  <img src={req.profile} alt="Profile Picture" />
                   <div className="profile-details-new">
-                    <div className="name-new">Mickelson Klus</div>
+                    <div className="name-new">{req.first_name} {req.last_name}</div>
                     <div>Business owner of D House</div>
                     <div>25 Nov at 12:44 PM</div>
                   </div>
                 </div>
-                
-         <Link to="/view">      
-    <button className="button view-button-view">
-        View Proposal
-      </button>
-      </Link> 
+
+                <Link to={`/business/view/${req.id}`}>
+                  <button className="button view-button-view">
+                    View Proposal
+                  </button>
+                </Link>
               </div>
               <div className="project-description-new">
                 <p>{req.caption}</p>
@@ -185,7 +192,7 @@ const ProjectCard = () => {
 
         {/* Pagination Controls */}
         <div className="pagination">
-          <button 
+          <button
             onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
             disabled={page === 1}
           >

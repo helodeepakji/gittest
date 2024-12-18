@@ -107,7 +107,7 @@ route.post('/login', (req, res) => {
         }
 
         // Generate JWT token
-        const token = jwt.sign({ id: user.id, email: user.email, user_type: user.user_type }, JWT_SECRET, {
+        const token = jwt.sign({ id: user.id, email: user.email, name: user.first_name+' '+user.last_name, profile : user.profile , user_type: user.user_type }, JWT_SECRET, {
             expiresIn: '1h'
         });
 
@@ -313,6 +313,34 @@ route.get('/getAllDesigns', authenticateToken, (req, res) => {
     }
 });
 
+route.get('/getAllDesigns/:ads_id', authenticateToken, (req, res) => {
+    const userId = req.user.id;
+    const ads_id = req.params.ads_id;
+    const page = parseInt(req.query.page) || 1; // Default to page 1
+    const limit = parseInt(req.query.limit) || 5; // Default to 5 items per page
+    const offset = (page - 1) * limit;
+
+    Designs.getByAdsId(ads_id , userId , limit, offset, (err, result) => {
+        if (err) {
+            return res.status(500).json({
+                message: 'Error fetching designs',
+                error: err.message,
+            });
+        }
+
+        const { results, totalCount } = result;
+
+        res.json({
+            page,
+            limit,
+            totalCount,
+            totalPages: Math.ceil(totalCount / limit),
+            data: results,
+        });
+    });
+
+});
+
 route.get('/getDesign/:id', authenticateToken, (req, res) => {
     const id = req.params.id;
     Designs.getById(id, (err, result) => {
@@ -509,11 +537,16 @@ route.post('/payment-status/:order_id', async (req, res) => {
 
                 if (status === 'success') {
                     console.log('Order updated successfully, fetching design...');
-                    
+
                     // Fetch design details using design_id
                     Designs.getById(result.design_id, (err, designResult) => {
 
-                        Designs.approve(result.design_id,(err, designResult));
+                        Designs.approve(result.design_id, (approveErr, approveResult) => {
+                            if (approveErr) {
+                                console.error('Error approving design:', approveErr);
+                            }
+                            console.log('Design approved successfully:', approveResult);
+                        });
 
                         if (err) {
                             console.error('Error fetching design:', err);
@@ -556,7 +589,7 @@ route.post('/payment-status/:order_id', async (req, res) => {
                                         <body>
                                             <h1>Payment Successful</h1>
                                             <p>Your payment was successful. Transaction ID: ${transactionId}</p>
-                                            <a href="/orders">View Orders</a>
+                                            <a href="/business/orders">View Orders</a>
                                             <script>
                                                 setTimeout(() => {
                                                     window.location.href = '/business/orders';
@@ -607,11 +640,32 @@ route.post('/payment-status/:order_id', async (req, res) => {
     }
 });
 
-
 route.get('/getAllOrders', authenticateToken, (req, res) => {
     const user_id = req.user.id;
 
     Order.getAllOrders(user_id, (error, results) => {
+        if (error) {
+            console.error('Error fetching orders:', error);
+            return res.status(500).json({ message: 'Failed to fetch orders' });
+        }
+
+        if (!results || results.length === 0) {
+            return res.status(404).json({ message: 'No orders found for this user' });
+        }
+
+        res.status(200).json({
+            message: 'Orders fetched successfully',
+            orders: results,
+        });
+    });
+});
+
+
+route.get('/getOrder/:order_id', authenticateToken, (req, res) => {
+    const user_id = req.user.id;
+    const order_id = req.params.order_id;
+
+    Order.getOrder(user_id, order_id, (error, results) => {
         if (error) {
             console.error('Error fetching orders:', error);
             return res.status(500).json({ message: 'Failed to fetch orders' });

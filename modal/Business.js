@@ -24,10 +24,10 @@ Business.getMediaByUserId = (userId, callback) => {
 
 Business.getMediaByUserIdPaginated = (userId, limit, offset, callback) => {
     const query = `
-        SELECT * 
-        FROM business 
-        WHERE user_id = ? 
-        ORDER BY created_at DESC 
+        SELECT business.* , users.first_name , users.last_name , users.profile
+        FROM business JOIN users ON business.user_id = users.id
+        WHERE business.user_id = ? 
+        ORDER BY business.created_at DESC 
         LIMIT ? OFFSET ?;
     `;
     const countQuery = `
