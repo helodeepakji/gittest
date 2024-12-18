@@ -248,6 +248,7 @@ const Product = () => {
             <div class="requirement-details-33">
               <h2>Company Name: {data.business_company || 'Self Design'}</h2>
               <p>Caption: {data.caption || 'Self Design'}</p>
+              <img src={data.business_media[0] || data.image[0]} width={'100px'} />
               <div class="user-info-33">
                 <div className="profile-pic-33">
                   <img
