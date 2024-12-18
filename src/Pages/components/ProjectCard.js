@@ -83,9 +83,9 @@ const ProjectCard = () => {
     }
   };
 
-  useEffect(() => {
-    fetchRequirements(page);
-  }, [page]);
+  // useEffect(() => {
+  //   fetchRequirements(page);
+  // }, [page]);
 
   return (
     <div className="project-card-new0">

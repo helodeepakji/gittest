@@ -13,7 +13,7 @@ const Service = () => {
   {/* <!-- Header --> */}
   <header className='service-header'>
       <div className="header-img-8452">
-          <img src={Souvenir} className=".header-img-8450"/>
+          <img src={Souvenir} className="header-img-8450"/>
       </div>
   </header>  
 
