@@ -20,6 +20,13 @@ const ProjectCard = () => {
   const [totalPages, setTotalPages] = useState(1);
   const [error, setError] = useState(null);
 
+  const token = localStorage.getItem("token");
+  if (!token) {
+    setError("Authentication token is missing");
+    return;
+  }
+  const decodedToken = JSON.parse(atob(token.split(".")[1]));
+
   const handleFileChange = (event) => {
     setFiles([...event.target.files]);
   };
@@ -86,7 +93,7 @@ const ProjectCard = () => {
         {/* Input Section */}
         <div className="message-container-new">
           <Link to="/editprofile" className="profile-container-new">
-            <img src={Profile} alt="Profile Picture" className="profile-pic-new" />
+            <img src={decodedToken.profile} alt="Profile Picture" className="profile-pic-new" />
             <div className="camera-icon-new">
               <img src={Camera} alt="Camera Icon" />
             </div>

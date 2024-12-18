@@ -107,7 +107,7 @@ route.post('/login', (req, res) => {
         }
 
         // Generate JWT token
-        const token = jwt.sign({ id: user.id, email: user.email, user_type: user.user_type }, JWT_SECRET, {
+        const token = jwt.sign({ id: user.id, email: user.email, name: user.first_name+' '+user.last_name, profile : user.profile , user_type: user.user_type }, JWT_SECRET, {
             expiresIn: '1h'
         });
 
