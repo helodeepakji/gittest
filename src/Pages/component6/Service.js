@@ -12,7 +12,7 @@ const Service = () => {
 
   useEffect(() => {
     // Fetch orders on component mount
-    const fetchOrders = async () => {
+    const fetchProducts = async () => {
       try {
         const response = await axios.get("/api/products", {
           headers: {
@@ -29,7 +29,7 @@ const Service = () => {
       }
     };
 
-    fetchOrders();
+    fetchProducts();
   }, []);
 
   if (loading) {
