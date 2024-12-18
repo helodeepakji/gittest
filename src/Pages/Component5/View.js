@@ -22,7 +22,7 @@ const DesignTable = () => {
 
     const decodedToken = JSON.parse(atob(token.split(".")[1]));
     setUserType(decodedToken.user_type);
-    const conditions = ads_id != '' ? '/'+ads_id : '';
+    const conditions = ads_id ? `/${ads_id}` : '';
     try {
       const response = await axios.get(`/api/getAllDesigns${conditions}?page=${currentPage}&limit=5`, {
         headers: {
