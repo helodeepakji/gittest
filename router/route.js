@@ -561,7 +561,7 @@ route.post('/payment-status/:order_id', async (req, res) => {
                                         <body>
                                             <h1>Payment Successful</h1>
                                             <p>Your payment was successful. Transaction ID: ${transactionId}</p>
-                                            <a href="/orders">View Orders</a>
+                                            <a href="/business/orders">View Orders</a>
                                             <script>
                                                 setTimeout(() => {
                                                     window.location.href = '/business/orders';
@@ -611,7 +611,6 @@ route.post('/payment-status/:order_id', async (req, res) => {
         `);
     }
 });
-
 
 route.get('/getAllOrders', authenticateToken, (req, res) => {
     const user_id = req.user.id;
