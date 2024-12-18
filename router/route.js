@@ -513,7 +513,12 @@ route.post('/payment-status/:order_id', async (req, res) => {
                     // Fetch design details using design_id
                     Designs.getById(result.design_id, (err, designResult) => {
 
-                        Designs.approve(result.design_id,(err, designResult));
+                        Designs.approve(result.design_id, (approveErr, approveResult) => {
+                            if (approveErr) {
+                                console.error('Error approving design:', approveErr);
+                            }
+                            console.log('Design approved successfully:', approveResult);
+                        });
 
                         if (err) {
                             console.error('Error fetching design:', err);
