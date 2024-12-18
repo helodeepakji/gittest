@@ -139,9 +139,9 @@ const ProjectCard = () => {
             <div className="project-card-new" key={req.id}>
               <div className="project-header-new">
                 <div className="profile-info-new">
-                  <img src={Profile} alt="Profile Picture" />
+                  <img src={req.profile} alt="Profile Picture" />
                   <div className="profile-details-new">
-                    <div className="name-new">Mickelson Klus</div>
+                    <div className="name-new">{req.first_name} {req.last_name}</div>
                     <div>Business owner of D House</div>
                     <div>25 Nov at 12:44 PM</div>
                   </div>

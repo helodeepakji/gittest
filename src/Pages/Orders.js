@@ -45,7 +45,7 @@ const OrderPage = () => {
       {orders && orders.length !== 0 ? (
         orders.map((item,index) => (
           // <link to='/orders/invoice'>
-          <ul onClick={()=>navigate('/orders/invoice')}>
+          <ul onClick={()=>navigate('/orders/invoice/'+item.order_id)}>
             <div className="order-img d-flex">
            { item.item.map((product,index) => (
               <img src={product.image} alt={product.name} />

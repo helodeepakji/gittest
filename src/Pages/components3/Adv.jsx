@@ -158,32 +158,6 @@ const Adv = () => {
               <img src="Objects.png" alt="Cup Design" className="img-fluid" />
             </div>
           </div>
-    
-      
-          <div className="row">
-            <div className="col">
-              <h4 className='text-dark order mb-4'>Recent Orders</h4>
-              <table className="table table-bordered-none table-hover">
-                <tbody>
-                  <tr >
-                    <td>#968659684</td>
-                    <td>Cup Design</td>
-                    <td>Aug 30, 2023</td>
-                    <td>$4345</td>
-                    <td><a href="#">Delivered</a></td>
-                  </tr>
-                  <tr>
-                    <td>#968659684</td>
-                    <td>Cup Design</td>
-                    <td>Aug 30, 2023</td>
-                    <td>$4345</td>
-                    <td><a href="#">Delivered</a></td>
-                  </tr>
-                </tbody>
-              </table>
-              <a href="#" className="float-end text-info">See All</a>
-            </div>
-          </div>
         </div>
       </>
      
