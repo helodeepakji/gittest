@@ -19,7 +19,7 @@ const Service = () => {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
         });
-        setProducts(response.data.products);
+        setProducts(response.data);
       } catch (err) {
         setError(
           err.response ? err.response.data.message : "Error fetching orders"
@@ -60,19 +60,33 @@ const Service = () => {
         {/* <!-- Services Section --> */}
         <h2 className="services-5340">Services near you ✨</h2>
         {products && products.length !== 0 ? (
-          <section className="services-5342">
-            {products.map((product) => (
-              <div className="card-9231" key={product.id}>
-                <img src={product.image} alt={product.name} />
-                <div className="card-content-4913">
-                  <p className="price-1342">Starting at Rs {product.price}</p>
-                  <h3>{product.name}</h3>
+          <div className="categories-container">
+            {Object.entries(products).map(([categoryId, category]) => (
+              <section className="category-section" key={categoryId}>
+                <h2 className="category-title">{category.category_name}</h2>
+                <div className="products-grid">
+                  {category.items.map((product) => (
+                    <div className="card-9231" key={product.id}>
+                      <img
+                        src={product.image}
+                        alt={product.name}
+                        width="100"
+                        height="100"
+                        className="product-image"
+                      />
+                      <div className="card-content-4913">
+                        <h3 className="product-name">{product.name}</h3>
+                        <p className="product-description">{product.description}</p>
+                        <p className="price-1342">Starting at Rs {product.price}</p>
+                      </div>
+                    </div>
+                  ))}
                 </div>
-              </div>
+              </section>
             ))}
-          </section>
+          </div>
         ) : (
-          <p className="no-orders">No Products found.</p>
+        <p className="no-orders">No Products found.</p>
         )}
 
         {/* <!-- Suggestion Section --> */}
