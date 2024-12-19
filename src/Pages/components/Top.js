@@ -27,11 +27,13 @@ const Top = () => {
                 </div>
 
                 <div class="card">
-                    <div class="icon">
-                        <span> <h3>Post Management</h3></span>   <img src={Post} alt="Post Icon" />
-                    </div>
+                    <Link to="/uploadDesign" className='card-1'>
+                        <div class="icon">
+                            <span> <h3>Upload Design</h3></span>   <img src={Post} alt="Post Icon" />
+                        </div>
 
-                    <p>Tools to create, edit, and delete posts.</p>
+                        <p>If you have already design for ads then upload it.</p>
+                    </Link>
                 </div>
             </div>
         </>

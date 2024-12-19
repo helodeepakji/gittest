@@ -81,7 +81,7 @@ const Login = () => {
                     </form>
                     <div className="dont-have-account">
                         <span>Don't have an account?</span>
-                        <NavLink to="/signup" className="create-account">Create</NavLink>
+                        <NavLink to="/proceed" className="create-account">Create</NavLink>
 
                     </div>
                 </div>

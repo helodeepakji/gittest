@@ -67,7 +67,7 @@ function App() {
         <Route path='/' element={<Home />} />
         <Route path='/login' element={<Login />} />
         <Route path='/profile' element={<Profile />} />
-        <Route path='/signup' element={<Signup />} />
+        <Route path='/signup/:type' element={<Signup />} />
         <Route path='/proceed' element={<Join />} />
         <Route path='/contact' element={<Contactpage />} />
 
@@ -81,8 +81,6 @@ function App() {
         <Route path='/business/service' element={<ProtectedRoute element={<Service />} />} />
         
         
-
-
         <Route path='/designer/home' element={<ProtectedRoute element={<Designerpage />} />} />
         <Route path='/designer/view' element={<ProtectedRoute element={<View />} />} />
         <Route path='/designer/wallet' element={<ProtectedRoute element={<Wallet />} />} />

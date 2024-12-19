@@ -31,7 +31,7 @@ const Join = () => {
           <li>Manage your budget and payment via wallet section</li>
         </ul>
         <h5>Select and Proceed as Business User </h5>
-        <NavLink to="/signup">
+        <NavLink to="/signup/business">
           <button>
             Proceed <i className="fa-solid fa-right-long"></i>
           </button>
@@ -50,7 +50,7 @@ const Join = () => {
           <li>Track your earnings in the wallet section</li>
         </ul>
         <h5>Select and Proceed as Designer</h5>
-        <NavLink to="/signup">
+        <NavLink to="/signup/designer">
           <button>
             Proceed <i className="fa-solid fa-right-long"></i>
           </button>
@@ -69,7 +69,7 @@ const Join = () => {
           <li>Track payments through the wallet section</li>
         </ul>
         <h5>Select and Proceed as Retailer</h5>
-        <NavLink to="/signup">
+        <NavLink to="/signup/retailer">
           <button>
             Proceed <i className="fa-solid fa-right-long"></i>
           </button>
