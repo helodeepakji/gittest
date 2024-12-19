@@ -18,7 +18,7 @@ background-position:
     0px calc(75% - 50px), /* Second image: center-left with vertical margin */
     calc(100% - 0px) 100px, /* Third image: top-right with horizontal and vertical margins */
     calc(100% - 0px) calc(50% - 150px), /* Fourth image: center-right with margins */
-    calc(100% - 0px) calc(100% - 550px), /* Fifth image: bottom-right with margins */
+    calc(100% - 0px) calc(100% - 450px), /* Fifth image: bottom-right with margins */
     calc(100% - 0px)calc(100% - 150px) ; /* Sixth image: bottom-left with margins */
 
     background-size: 
