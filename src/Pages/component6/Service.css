@@ -98,8 +98,8 @@ background-attachment: scroll;
     border-radius: 20px;
 }
 .services-5340{
-    margin: 2rem 0 0 20rem;
-    font-size: 1.3rem;
+    margin: 2rem 0 0 40rem;
+
 }  
 .services-5341{
     margin: 2rem  24rem;
@@ -193,6 +193,10 @@ background-color: whitesmoke;
 
 .categories-container {
     margin: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
   }
   
   .category-section {
