@@ -20,6 +20,7 @@ import Orders from './Pages/Orders';
 import View from "./Pages/Component5/View"
 import Productdesign from './Pages/component6/Productdesign';
 import Payment from "./Pages/component6/Payment"
+import Service from "./Pages/component6/Service"
 
 
 
@@ -77,6 +78,7 @@ function App() {
         <Route path='/business/wallet' element={<ProtectedRoute element={<Wallet />} />} />
         <Route path='/business/orders' element={<ProtectedRoute element={<Orders />} />} />
         <Route path='/orders/invoice/:order_id' element={<ProtectedRoute element={<Invoicepage />} />} />
+        <Route path='/business/service' element={<ProtectedRoute element={<Service />} />} />
         
         
         <Route path='/designer/home' element={<ProtectedRoute element={<Designerpage />} />} />

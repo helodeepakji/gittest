@@ -10,17 +10,16 @@ import Experience from "./images/experience-1.png";
 import Profile from "./images/profile-picture.webp";
 
 function Sidebar() {
-  const token = localStorage.getItem("token");
-  if (!token) {
-    setError("Authentication token is missing");
-    return;
-  }
-  const decodedToken = JSON.parse(atob(token.split(".")[1]));
+  // const token = localStorage.getItem("token");
+  // if (!token) {
+  //   setError("Authentication token is missing");
+  //   return;
+  // }
+  // const decodedToken = JSON.parse(atob(token.split(".")[1]));
 
   return (
     <div className="menu-sidebar">
-
-      <Link to="/uploadDesign"className="menu-item">
+      <Link to="/uploadDesign" className="menu-item">
         <img src={Graph} alt="Projects Icon" className="menu-icon" />
         <span className="menu-text">Upload Design</span>
       </Link>
@@ -36,10 +35,8 @@ function Sidebar() {
       </div>
 
       <Link to="/business/view" className="menu-item">
-      <div className="menu-item">
         <img src={Category} alt="All Designs" className="menu-icon" />
         <span className="menu-text">All Designs</span>
-      </div>
       </Link>
 
       <Link to="/business/orders" className="menu-item">
@@ -55,8 +52,8 @@ function Sidebar() {
         />
       </div>
       <div className="user-card">
-        <img src={decodedToken.profile} alt="Profile Picture" />
-        <div className="user-name">{decodedToken.name}</div>
+        <img src="./" alt="Profile Picture" />
+        <div className="user-name">hi</div>
         <button className="user-button">Business Profile</button>
       </div>
     </div>

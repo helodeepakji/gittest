@@ -10,12 +10,12 @@ const Top = () => {
     return (
         <>
             <div class="card-container">
-                <div class="card">
+                <Link to="/business/service" class="card">
                     <div class="icon">
-                        <span> <h3>Wallet</h3>  </span>  <img src={Wallet} alt="Wallet Icon" />
+                        <span> <h3>Service & Products </h3>  </span>  <img src={Wallet} alt="Wallet Icon" />
                     </div>
                     <p>A detailed overview of the budget allocation and transaction history.</p>
-                </div>
+                </Link>
 
                 <div class="card">
                     <Link to="/business/view" className='card-1'>

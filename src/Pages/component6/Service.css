@@ -1,0 +1,191 @@
+.service-9451 {
+    background-color: #f8f8f8;
+    color: #333;
+    line-height: 1.6;
+    height: auto;
+    overflow: auto;
+    background-image: 
+    url('./pic/abstract_green_1.png'), 
+    url('./pic/Greengroup.png'), 
+    url('./pic/abstract_green_2.png'),
+    url('./pic/Greengroup_1.png'),
+    url('./pic/Greengroup_2.png'), 
+    url('./pic/abstract_green_3.png');
+
+/* Set positions for each image with margins */
+background-position: 
+    0px 200px,         /* First image: top-left with margin */
+    0px calc(75% - 50px), /* Second image: center-left with vertical margin */
+    calc(100% - 0px) 100px, /* Third image: top-right with horizontal and vertical margins */
+    calc(100% - 0px) calc(50% - 150px), /* Fourth image: center-right with margins */
+    calc(100% - 0px) calc(100% - 550px), /* Fifth image: bottom-right with margins */
+    calc(100% - 0px)calc(100% - 150px) ; /* Sixth image: bottom-left with margins */
+
+    background-size: 
+    70px 90px,  /* First image: 100px by 100px */
+    70px 100px,  /* Second image: 150px by 150px */
+    70px 90px,  /* Third image: 200px by 200px */
+    50px 30px,  /* Fourth image: 250px by 250px */
+    70px 80px,  /* Fifth image: 300px by 300px */
+    50px 100px;  /* Sixth image: 350px by 350px */
+
+/* Prevent images from repeating */
+background-repeat: no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat;
+
+/* Ensure background is scrollable */
+background-attachment: scroll;
+}
+.service-9451::-webkit-scrollbar {
+    width: 0px;
+    display: none;
+  }
+
+
+.service-header-9451 {
+    color: white;
+    padding: 1.5rem;
+    text-align: center;
+}
+
+.header-img-8452  {
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+.header-img-8450{
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.search-box-7850{
+    margin: 1rem 2rem;
+    display: flex;
+    justify-content: center;
+}
+.search-box-7851 {
+    width: 55%;
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    padding: 0.1rem;
+    border-radius: 20px;
+    justify-content: center;
+}
+
+.search-box-7851 input {
+    width: 710px;
+    padding: 0.5rem;
+    border: none;
+    border-radius: 20px 0 0 20px;
+    outline: none;
+}
+
+.search-box-7851 button {
+    background-color: #086f33;
+    color: #fff;
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    border-radius: 20px;
+}
+.services-5340{
+    margin: 2rem 0 0 20rem;
+    font-size: 1.3rem;
+}  
+.services-5341{
+    margin: 2rem  24rem;
+}
+
+.services-5342 {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin: 1rem 2rem;
+}
+
+.card-9231 {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    width: 280px;
+    transition: transform 0.2s;
+}
+
+.card-9231:hover {
+    transform: scale(1.03);
+}
+
+.card-9231 img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+}
+
+.card-content-4913 {
+    padding: 1rem;
+    text-align: center;
+}
+.card-content-4913 h3{
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+} 
+
+.price-1342 {
+    color: #2ecc71;
+    font-weight: bold;
+}
+
+.suggestion-boxes-7824 {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin: 2rem;
+}
+.services-5343{
+    margin: 0 4rem;
+}
+
+.suggestion-6734 {
+    background-color: #fff;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 400px;
+}
+
+.suggestion-6734 img{
+    height: 100px;
+    width: 100px;
+    margin: 0px 135px;
+}
+
+.suggestion-6734 textarea {
+    width: 100%;
+    height: 50%;
+    padding: 0.5rem;
+    margin: 1rem 0;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+background-color: whitesmoke;
+}
+
+.suggestion-6734 button {
+    background-color: #08893e;
+    color: #fff;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    cursor: pointer;
+    width: 100%;
+}  
