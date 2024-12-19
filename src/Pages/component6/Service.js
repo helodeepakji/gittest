@@ -22,7 +22,7 @@ const Service = () => {
         setProducts(response.data);
       } catch (err) {
         setError(
-          err.response ? err.response.data.message : "Error fetching orders"
+          err.response ? err.response.data.message : "Error fetching Products"
         );
       } finally {
         setLoading(false);
