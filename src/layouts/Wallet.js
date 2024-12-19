@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import "./Wallet.css"
-import Cupy from "./images/Cupy.png";
+import "./Wallet.css";
 import Search from "./images/search.jpeg";
 import axios from "axios";
 
