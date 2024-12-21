@@ -24,7 +24,7 @@ import Service from "./Pages/component6/Service"
 
 
 
-// designer user page
+
 import Designerpage from "./Pages/Designer";
 import Wallet from './layouts/Wallet';
 import Adv from './Pages/components3/Adv';
